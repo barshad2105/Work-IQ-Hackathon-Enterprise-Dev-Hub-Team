@@ -1,0 +1,23 @@
+{
+  "_comment": "Assurance-of-learning (AoL) action table — the closed-loop assessment actions across the two committees, surfaced via Tools. Round-trips on fetch/create/update like any Tools table. Rows are acl='all' (administrative governance).",
+  "aol_table": [
+    {
+      "id": "AOL-001",
+      "program": "B.B.A.",
+      "action": "Written-communication rubric closed-loop evidence",
+      "committee": "Curriculum",
+      "owner": "PPL-005",
+      "status": "Open",
+      "acl": ["all"]
+    },
+    {
+      "id": "AOL-002",
+      "program": "B.B.A.",
+      "action": "Course-sequence change reflected in catalog",
+      "committee": "Program-Review",
+      "owner": "PPL-008",
+      "status": "Open",
+      "acl": ["all"]
+    }
+  ]
+}

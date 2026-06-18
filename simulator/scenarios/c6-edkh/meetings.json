@@ -1,0 +1,47 @@
+{
+  "_comment": "Synthetic incident-bridge meeting recaps + transcript excerpts + action items for the Atlas payments Sev-1 outage (2026-06-11). MTG-002 is the FIRST bridge call (10:00), MTG-001 is the LAST/latest bridge call (14:00) referenced by 'last bridge call' questions. MTG-003 is a restricted exec briefing. action_items carry their own ids, owners (people ids), due times, status.",
+  "meetings": [
+    {
+      "id": "MTG-002",
+      "title": "Atlas Incident Bridge Call #1",
+      "date": "2026-06-11T10:00:00Z",
+      "organizer": "PPL-006",
+      "attendees": ["PPL-001", "PPL-002", "PPL-003", "PPL-006", "PPL-008"],
+      "acl": ["all"],
+      "recap": "First incident bridge call (11-JUN 10:00). The bridge DECLARED a Sev-1 outage of the Atlas payments service after payment error rates spiked to 38%. Suspected root cause discussed: the v4.7 Atlas payments deploy introduced a connection-pool leak. Decision: prepare an immediate rollback of v4.7 to v4.6 and stand up a customer-comms workstream.",
+      "transcript_excerpt": "Helen Cho: 'Declaring Sev-1 on Atlas payments — error rate is 38%.' Priya Nair: 'Strongly suspect the v4.7 deploy — connection-pool leak signature.' Marco Reyes: 'Roll back to v4.6 now; I'll own the bridge.'",
+      "action_items": [
+        {"id": "AI-201", "text": "Execute rollback of Atlas payments v4.7 to v4.6", "owner": "PPL-008", "due": "2026-06-11T11:00:00Z", "status": "done"},
+        {"id": "AI-202", "text": "Stand up customer-communications workstream for affected merchants", "owner": "PPL-004", "due": "2026-06-11T12:00:00Z", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-001",
+      "title": "Atlas Incident Bridge Call #2 (latest)",
+      "date": "2026-06-11T14:00:00Z",
+      "organizer": "PPL-006",
+      "attendees": ["PPL-001", "PPL-002", "PPL-003", "PPL-005", "PPL-006", "PPL-008"],
+      "acl": ["all"],
+      "recap": "Latest incident bridge call (11-JUN 14:00) for the Atlas payments outage. The bridge DECIDED that the rollback to v4.6 is complete and the error rate has recovered to baseline; the incident moves to monitoring before all-clear. Actions assigned: continue monitoring the error rate for two hours, and confirm the customer-communications commitment to affected merchants. Root cause confirmed as the v4.7 connection-pool leak.",
+      "transcript_excerpt": "Liam Foster: 'Rollback to v4.6 complete at 11:05, error rate back to baseline.' Marco Reyes: 'Good — we stay in monitoring for two hours before all-clear.' Helen Cho: 'Confirm the customer-comms commitment with Dana before we close.'",
+      "action_items": [
+        {"id": "AI-101", "text": "Monitor Atlas payments error rate for two hours and report before all-clear", "owner": "PPL-005", "due": "2026-06-11T16:00:00Z", "status": "open"},
+        {"id": "AI-102", "text": "Confirm and publish the customer-communications commitment to affected merchants", "owner": "PPL-004", "due": "2026-06-11T15:00:00Z", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Atlas Outage — Executive Briefing (closed)",
+      "date": "2026-06-11T15:30:00Z",
+      "organizer": "PPL-006",
+      "attendees": ["PPL-006", "PPL-001"],
+      "acl": ["oncall_lead", "incident_commander"],
+      "sensitivity": "restricted",
+      "recap": "Closed executive briefing on the Atlas payments outage. Reviewed commercial exposure and the confidential customer-communications commitment. (Restricted: exec-confidential.)",
+      "transcript_excerpt": "Helen Cho: 'This commercial-impact number stays in this room.' Marco Reyes: 'Understood — exec-confidential.'",
+      "action_items": [
+        {"id": "AI-090", "text": "Prepare confidential commercial-impact summary for the executive team", "owner": "PPL-001", "due": "2026-06-12T09:00:00Z", "status": "open"}
+      ]
+    }
+  ]
+}

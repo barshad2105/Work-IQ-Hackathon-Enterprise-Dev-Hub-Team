@@ -1,0 +1,105 @@
+{
+  "_comment": "Synthetic people directory / org chart for the 45621-B program (Contoso Precision Parts). acl='all' means visible to every persona. Stable ids are cited by golden answers.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Dana Whitfield",
+      "title": "Program Manager, 45621-B (outgoing)",
+      "email": "dana.whitfield@contoso-precision.com",
+      "department": "Program Management",
+      "manager": "PPL-006",
+      "expertise": ["program management", "customer relationship", "milestone planning"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "Sam Ortiz",
+      "title": "Program Manager, 45621-B (incoming)",
+      "email": "sam.ortiz@contoso-precision.com",
+      "department": "Program Management",
+      "manager": "PPL-006",
+      "expertise": ["program management"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Elena Cho",
+      "title": "Engineering Lead, Precision Machining",
+      "email": "elena.cho@contoso-precision.com",
+      "department": "Engineering",
+      "manager": "PPL-006",
+      "expertise": ["part design", "qualification testing", "CNC machining"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Raj Patel",
+      "title": "Senior Quality Engineer",
+      "email": "raj.patel@contoso-precision.com",
+      "department": "Quality",
+      "manager": "PPL-007",
+      "expertise": ["quality assurance", "supplier quality", "FAI", "risk analysis"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Priya Nair",
+      "title": "Materials Engineer (Materials & Metallurgy)",
+      "email": "priya.nair@contoso-precision.com",
+      "department": "Engineering",
+      "manager": "PPL-003",
+      "expertise": ["Inconel 718 machining", "hardness testing", "supplier qualification", "superalloy metallurgy"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "Marcus Reed",
+      "title": "Director, Aerospace Machining Programs",
+      "email": "marcus.reed@contoso-precision.com",
+      "department": "Program Management",
+      "manager": null,
+      "expertise": ["program portfolio", "executive escalation"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Lena Brandt",
+      "title": "Director, Quality",
+      "email": "lena.brandt@contoso-precision.com",
+      "department": "Quality",
+      "manager": null,
+      "expertise": ["quality systems", "AS9100"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Tom Iverson",
+      "title": "Supply Chain Manager",
+      "email": "tom.iverson@contoso-precision.com",
+      "department": "Supply Chain",
+      "manager": "PPL-006",
+      "expertise": ["supplier management", "procurement", "Apex Alloys account"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Karen Vance",
+      "title": "Program Office Lead (Customer: Aeronix)",
+      "email": "karen.vance@aeronix-defense.com",
+      "department": "Customer (Aeronix Defense)",
+      "manager": null,
+      "expertise": ["customer program office"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Diego Salas",
+      "title": "Contract Test Engineer (vendor)",
+      "email": "diego.salas@contractors.contoso-precision.com",
+      "department": "Engineering (Contractor)",
+      "manager": "PPL-003",
+      "expertise": ["environmental testing", "vibration"],
+      "acl": ["all"]
+    }
+  ]
+}

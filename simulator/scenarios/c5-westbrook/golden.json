@@ -1,0 +1,90 @@
+{
+  "_comment": "Golden answers for the 8 C5 (Westbrook University / B.B.A. AACSB reaffirmation, academic governance) compound questions. The engine keyword-scores the incoming question against 'keywords', then returns 'answer' with citations resolved+persona-trimmed. 'restricted_citations' are the subset trimmed for personas lacking access. 'tool' (optional) signals a Tools/write action. Hero action: create_entity (tracked tasks) on the accreditation tracker. Administrative governance only — no FERPA-protected student records.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the curriculum committee decide about the revised B.B.A. assessment plan in its last meeting, and who owns the follow-up?",
+      "keywords": ["curriculum committee", "assessment plan", "follow-up"],
+      "answer": "At its last meeting (04-JUN-2026, chaired by Dr. Mark Feldman), the curriculum committee DECIDED to approve the revised B.B.A. assessment plan, adopting new written-communication and analytical-reasoning learning outcomes with updated rubrics. Follow-up was assigned: AI-101 — close the assurance-of-learning loop on the written-communication rubric using current cycle data — owner Dr. Ada Okonkwo, due 20-JUN; AI-102 — publish the approved revised assessment plan to the program SharePoint — owner Dr. Mark Feldman, due 12-JUN. Ada Okonkwo owns the assurance-of-learning gap closure, which the associate dean flagged as the biggest AACSB risk.",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What did the accreditation liaison email us about the AACSB site-visit timeline, and what evidence did they ask us to prepare?",
+      "keywords": ["accreditation liaison", "site-visit timeline", "evidence"],
+      "answer": "In the confidential accreditation thread (09-JUN), the AACSB liaison (Dr. Paul Greer) advised that the peer-review team has set the site visit for the week of 12-OCT, and asked us to prepare: (1) closed-loop assurance-of-learning evidence for the revised B.B.A. assessment plan, and (2) documentation that the program-review committee approved the related course-sequence change. The liaison flagged the assurance-of-learning gap as the single biggest risk to reaffirmation. In reply (10-JUN), Dr. Laura Simmons committed to close the AoL loop and produce the sign-off evidence ahead of the visit.",
+      "trimmed_answer": "The accreditation-liaison correspondence on the AACSB site-visit timeline is leadership-confidential, so its specific dates and evidence requests cannot be shown to the active persona. At a non-restricted level: an AACSB site visit is being planned and the college is preparing assurance-of-learning and program-review evidence.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "What is the current status of the B.B.A. program review — combine the program channel updates with the last program-review committee meeting?",
+      "keywords": ["program review", "status", "channel", "committee meeting"],
+      "answer": "Current B.B.A. program-review status, consistent across two signals. From the last program-review committee meeting (06-JUN): the proposed course-sequence change (moving the statistics prerequisite earlier) was conditionally approved, NOT yet signed off — sign-off is deferred pending a catalog comparison and alignment with the new assessment plan. From the B.B.A. program review Teams channel: the assessment plan is approved by the curriculum committee, the course-sequence change is conditionally approved pending the catalog comparison, and two assurance-of-learning actions remain open. Net: on track for the site visit provided the AoL loop closes and the sign-off vote is held.",
+      "citations": ["MTG-002", "MSG-001", "MSG-002"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "Which assurance-of-learning actions from the last two committee meetings are still open, and what do the email threads say about why they're stalled?",
+      "keywords": ["assurance-of-learning", "open", "stalled"],
+      "answer": "Two assurance-of-learning actions from the last two committee meetings are still open. From the curriculum committee (04-JUN): close the loop on the written-communication rubric (AI-101, owner Ada Okonkwo, due 20-JUN). From the program-review committee (06-JUN): confirm the course-sequence change is reflected in the catalog (AI-103, owner Ravi Krishnan, due 13-JUN). The email threads say both are stalled waiting on the institutional-research assessment data pull, which Ravi Krishnan expects this Friday; once it lands, Ada can close the rubric loop and the catalog comparison goes to the program-review committee. Net: blocked on one data dependency, not on a decision.",
+      "citations": ["MTG-001", "MTG-002", "EML-003", "EML-004"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "Prep me for the AACSB site visit: what did the curriculum committee decide on the assessment plan, who owns the assurance-of-learning gap, did the program-review committee sign off the course-sequence change, and what's outstanding?",
+      "keywords": ["aacsb site visit", "sign off", "outstanding"],
+      "answer": "AACSB site-visit prep for the B.B.A.:\n\n1. Curriculum committee decision (04-JUN): approved the revised B.B.A. assessment plan (new written-communication and analytical-reasoning outcomes with updated rubrics).\n\n2. Assurance-of-learning gap owner: Dr. Ada Okonkwo owns closing the written-communication AoL loop (the liaison's flagged top risk), due 20-JUN, pending the assessment data pull.\n\n3. Program-review sign-off: NOT yet signed off — the course-sequence change was conditionally approved (06-JUN) pending a catalog comparison and alignment with the assessment plan; the sign-off vote has not yet been held — scheduling it is an open action due 18-JUN (AI-104).\n\n4. Outstanding (per the accreditation tracker and liaison): close the AoL written-communication loop, obtain the program-review sign-off, and assemble the self-study evidence — all ahead of the 12-OCT visit the liaison confirmed.",
+      "trimmed_answer": "AACSB site-visit prep for the B.B.A. (redacted for the active persona — accreditation-confidential items withheld):\n\n1. Curriculum committee decision (04-JUN): approved the revised B.B.A. assessment plan with updated rubrics.\n\n2. Assurance-of-learning gap owner: Dr. Ada Okonkwo owns closing the written-communication AoL loop, due 20-JUN.\n\n3. Program-review sign-off: NOT yet signed off — the course-sequence change is conditionally approved pending a catalog comparison; the sign-off vote has not yet been held (scheduling it is an open action due 18-JUN).\n\n4. Outstanding: close the AoL loop and obtain the program-review sign-off. (Confidential liaison timeline and self-study draft withheld — restricted to leadership.)",
+      "citations": ["MTG-001", "MTG-002", "EML-001", "EML-003", "FILE-001", "FILE-002", "ACC-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002", "FILE-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Give me a cross-committee view of everything touching the B.B.A. program this academic year — decisions, open actions, accreditation commitments, and the people accountable.",
+      "keywords": ["cross-committee", "academic year", "accountable"],
+      "answer": "Cross-committee view of the B.B.A. program this academic year:\n\nDecisions: curriculum committee approved the revised assessment plan (04-JUN); program-review committee conditionally approved the course-sequence change (06-JUN, sign-off pending).\n\nOpen actions: AOL-001 written-communication AoL loop (owner Ada Okonkwo); AOL-002 course-sequence change reflected in catalog (owner Ravi Krishnan); accreditation tracker ACC-001 (AoL loop, Ada Okonkwo), ACC-002 (program-review sign-off, Nadia Rahman), ACC-003 (publish assessment plan, Mark Feldman).\n\nAccreditation commitments: close the assurance-of-learning loop and produce program-review sign-off evidence ahead of the AACSB reaffirmation.\n\nPeople accountable: Ada Okonkwo (AoL closure), Nadia Rahman (program-review sign-off), Mark Feldman (assessment-plan publication), Laura Simmons (overall site-visit readiness).",
+      "citations": ["MTG-001", "MTG-002", "ACC-001", "ACC-002", "ACC-003", "AOL-001", "AOL-002"],
+      "restricted_citations": [],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "For every open assurance-of-learning action from the curriculum committee, create a tracked task in the accreditation tracker with owner and due date.",
+      "keywords": ["create", "tracked task", "accreditation tracker"],
+      "answer": "Open assurance-of-learning action from the curriculum committee (04-JUN): close the written-communication AoL loop using current cycle data (AOL-001 / AI-101, owner Dr. Ada Okonkwo, due 20-JUN). Proposed Tools action: create a tracked task in the accreditation_tracker capturing this assurance-of-learning action with its owner (Ada Okonkwo) and due date (20-JUN), tied to AACSB Standard 5. Use create_entity against the accreditation_tracker table; do not duplicate the existing row ACC-001 if it already covers this item.",
+      "citations": ["MTG-001", "AOL-001", "ACC-001"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "create_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the site-visit readiness summary for the dean's office pulling decisions, open actions, and owners across both committees.",
+      "keywords": ["draft", "site-visit readiness", "both committees"],
+      "answer": "Draft — B.B.A. AACSB Site-Visit Readiness Summary (for the dean's office, for review):\n\nDecisions across both committees: curriculum committee approved the revised assessment plan (04-JUN); program-review committee conditionally approved the course-sequence change (06-JUN), sign-off pending.\n\nOpen actions and owners: close the written-communication assurance-of-learning loop — Dr. Ada Okonkwo (due 20-JUN); provide the catalog comparison for the course-sequence change — Dr. Ravi Krishnan (due 13-JUN); hold the program-review sign-off vote — Dr. Nadia Rahman (due 18-JUN); publish the approved assessment plan — Dr. Mark Feldman (due 12-JUN).\n\nReadiness: on track provided the AoL loop closes and the sign-off vote is held before the site visit. Self-study draft is in progress.\n\n(Proposed Tools action: create the draft document for review.)",
+      "trimmed_answer": "The site-visit readiness summary cannot be fully drafted under the active persona because the accreditation-liaison commitment thread and the sensitivity-labelled self-study draft are restricted to leadership. Switch to a college-leadership persona to draft this. (Non-restricted facts available: both committees' decisions, the open assurance-of-learning actions, and their owners.)",
+      "citations": ["MTG-001", "MTG-002", "FILE-002", "EML-002"],
+      "restricted_citations": ["EML-002", "FILE-002"],
+      "required_sources": 3,
+      "tool": "draft_document"
+    }
+  ]
+}

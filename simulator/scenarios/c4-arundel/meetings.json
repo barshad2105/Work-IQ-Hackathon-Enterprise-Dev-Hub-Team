@@ -1,0 +1,47 @@
+{
+  "_comment": "Synthetic facilities coordination meeting recaps + transcript excerpts + action items for the Calder Tower chiller event. action_items carry their own ids, owners (people ids), due dates, status. MTG-003 is restricted (vendor commercial).",
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "Calder Tower Facilities Coordination Call",
+      "date": "2026-06-10T11:00:00Z",
+      "organizer": "PPL-001",
+      "attendees": ["PPL-001", "PPL-003", "PPL-004", "PPL-005", "PPL-007"],
+      "acl": ["all"],
+      "recap": "Latest coordination call (10-JUN) on the Calder Tower chiller failure. The call DECIDED: accept the suspected low-refrigerant leak as working cause, authorise Coolflow to pressure-test, braze the leak, recharge, and soak-test; deploy interim spot-cooling to floors 18-24 within 24 hours; and target cooling restored by 26-JUN. Tenant-notification commitment to be confirmed by leadership. Actions assigned to the named owners below.",
+      "transcript_excerpt": "Derek Owens: 'It's a low-refrigerant lockout — fix the leak before we trust the compressor.' Sam Whitford: 'We can be soak-verified by 26-JUN if parts land tomorrow.' Marco Reyes: 'Approved. Aisha, stand up interim spot-cooling on 18-24 today. Raj, hold the tenant note until Helen approves the commitment.'",
+      "action_items": [
+        {"id": "AI-101", "text": "Pressure-test, braze the suction-line leak, recharge and soak-test Chiller-2", "owner": "PPL-004", "due": "2026-06-26", "status": "open"},
+        {"id": "AI-102", "text": "Deploy interim spot-cooling to floors 18-24 within 24 hours", "owner": "PPL-005", "due": "2026-06-11", "status": "open"},
+        {"id": "AI-103", "text": "Confirm tenant-notification commitment with leadership approval", "owner": "PPL-007", "due": "2026-06-11", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-002",
+      "title": "Calder Tower Facilities Coordination Call",
+      "date": "2026-06-08T11:00:00Z",
+      "organizer": "PPL-001",
+      "attendees": ["PPL-001", "PPL-002", "PPL-003", "PPL-005"],
+      "acl": ["all"],
+      "recap": "Prior coordination call (08-JUN). The Chiller-2 trip was reported and the building put on interim measures. No confirmed cause yet; Derek assigned to analyse and Coolflow to be engaged. No restoration date committed at this point.",
+      "transcript_excerpt": "Janet Cole: 'Chiller-2 tripped overnight, building is warming on the high floors.' Derek Owens: 'Give me the fault log; I'll have a cause by tomorrow.'",
+      "action_items": [
+        {"id": "AI-095", "text": "Analyse Chiller-2 fault log and propose working cause", "owner": "PPL-003", "due": "2026-06-09", "status": "closed"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Coolflow Vendor Commercial Review (SLA / penalties)",
+      "date": "2026-06-05T14:00:00Z",
+      "organizer": "PPL-008",
+      "attendees": ["PPL-008", "PPL-006", "PPL-001"],
+      "acl": ["duty_manager", "director"],
+      "sensitivity": "restricted",
+      "recap": "Vendor commercial review with procurement and the director. Reviewed Coolflow SLA response targets and service-credit penalties relevant to the Calder Tower exposure. (Restricted: vendor commercial / penalty terms.)",
+      "transcript_excerpt": "Mei Lin: 'Coolflow's SLA credit applies if restoration exceeds the agreed window.' Helen Stamos: 'Then 26-JUN is the line; document the exposure.'",
+      "action_items": [
+        {"id": "AI-090", "text": "Document Coolflow SLA credit exposure for the Calder Tower event", "owner": "PPL-008", "due": "2026-06-12", "status": "open"}
+      ]
+    }
+  ]
+}

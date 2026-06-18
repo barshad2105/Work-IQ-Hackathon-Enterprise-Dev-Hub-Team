@@ -1,0 +1,47 @@
+{
+  "_comment": "Synthetic committee meeting recaps + transcript excerpts + action items for the B.B.A. AACSB reaffirmation, across TWO distinct committees (curriculum, program-review). action_items carry their own ids, owners (people ids), due dates, status. MTG-003 is a restricted personnel session.",
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "Curriculum Committee — B.B.A. Assessment Plan",
+      "date": "2026-06-04T14:00:00Z",
+      "organizer": "PPL-002",
+      "attendees": ["PPL-001", "PPL-002", "PPL-005", "PPL-007"],
+      "acl": ["all"],
+      "recap": "Latest curriculum committee meeting (04-JUN). The committee DECIDED to approve the revised B.B.A. assessment plan, adopting the new written-communication and analytical-reasoning learning outcomes with updated rubrics. It assigned the assurance-of-learning follow-up: close the loop on the written-communication rubric using the current assessment cycle data. Ada Okonkwo owns the assurance-of-learning gap closure.",
+      "transcript_excerpt": "Dr. Mark Feldman: 'The revised assessment plan is approved — written communication and analytical reasoning with the new rubrics.' Dr. Ada Okonkwo: 'I'll close the assurance-of-learning loop on written communication once the data pull is in.' Dr. Laura Simmons: 'Good — that's our biggest AACSB risk, so it has to be documented.'",
+      "action_items": [
+        {"id": "AI-101", "text": "Close the assurance-of-learning loop on the written-communication rubric using current cycle data", "owner": "PPL-005", "due": "2026-06-20", "status": "open"},
+        {"id": "AI-102", "text": "Publish the approved revised B.B.A. assessment plan to the program SharePoint", "owner": "PPL-002", "due": "2026-06-12", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-002",
+      "title": "Program-Review Committee — B.B.A. Course Sequence",
+      "date": "2026-06-06T14:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-001", "PPL-003", "PPL-007", "PPL-009"],
+      "acl": ["all"],
+      "recap": "Latest program-review committee meeting (06-JUN). The committee reviewed the proposed B.B.A. course-sequence change (moving the statistics prerequisite earlier). It did NOT yet sign off — it conditionally approved pending confirmation that the catalog and the curriculum committee's assessment plan are aligned. Sign-off deferred to the next meeting once the catalog comparison is provided.",
+      "transcript_excerpt": "Dr. Nadia Rahman: 'I'm comfortable with the sequence change in principle, but I won't sign off until the catalog reflects it and it aligns with the new assessment plan.' Dr. Laura Simmons: 'We'll get you the catalog comparison this week.'",
+      "action_items": [
+        {"id": "AI-103", "text": "Provide catalog comparison confirming the B.B.A. course-sequence change", "owner": "PPL-008", "due": "2026-06-13", "status": "open"},
+        {"id": "AI-104", "text": "Schedule program-review committee sign-off vote on the course-sequence change", "owner": "PPL-003", "due": "2026-06-18", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Faculty Personnel Review (closed session)",
+      "date": "2026-06-05T16:00:00Z",
+      "organizer": "PPL-006",
+      "attendees": ["PPL-006", "PPL-001"],
+      "acl": ["associate_dean", "provost"],
+      "sensitivity": "restricted",
+      "recap": "Closed personnel session with the provost. Reviewed a faculty reappointment matter related to the B.B.A. program staffing. (Restricted: personnel-confidential.)",
+      "transcript_excerpt": "Dr. Gloria Hahn: 'This stays in closed session.' Dr. Laura Simmons: 'Understood — personnel-confidential.'",
+      "action_items": [
+        {"id": "AI-090", "text": "Prepare personnel recommendation memo (confidential)", "owner": "PPL-001", "due": "2026-06-15", "status": "open"}
+      ]
+    }
+  ]
+}

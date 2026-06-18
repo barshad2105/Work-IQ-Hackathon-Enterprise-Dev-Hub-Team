@@ -1,0 +1,91 @@
+{
+  "_comment": "Golden answers for the 8 C3 (Meridian Group / Brightwater engagement 360) compound questions. The engine keyword-scores the incoming question against 'keywords' (all-or-threshold match), then returns 'answer' with citations resolved+persona-trimmed. 'citations' are fixture ids; the engine looks them up across all fixture files. 'restricted_citations' are the subset trimmed for personas lacking access — when trimmed, the engine appends a governance note. 'tool' (optional) signals a Tools/write action the agent is expected to take.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the last Brightwater standup cover, and what did the team commit to for this sprint?",
+      "keywords": ["last", "brightwater", "standup", "sprint"],
+      "answer": "The most recent Brightwater standup (11-JUN-2026, sprint 14, organised by Priya Deshmukh) committed the team to: (1) close the two open integration defects and complete the data migration cutover by the recovery date of 26-JUN — owner Priya Deshmukh (AI-101); (2) deliver the Brightwater integration test report this week — owner Amir Haddad (AI-102, due 13-JUN); and (3) raise a change request for the out-of-scope reporting module with an effort estimate — owner Priya Deshmukh (AI-103, due 12-JUN). The reporting module was explicitly noted as out-of-scope until a change request is approved.",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What did the Brightwater client last escalate over email, and what did we commit to in response?",
+      "keywords": ["client", "escalate", "email", "commit"],
+      "answer": "In the last escalation thread (09-JUN-2026), the Brightwater client program lead (Helen Okafor) formally escalated that the committed data migration cutover was slipping and putting their board demo at risk. She demanded (1) a committed recovery date, (2) confirmation the integration defects are contained, and (3) a written status by Thursday. In our reply (10-JUN), Nina Alvarez committed to a cutover recovery date of 26-JUN, a contained test plan with daily defect burn-down, and a written status by 12-JUN, naming Priya Deshmukh as the recovery lead.",
+      "trimmed_answer": "The most recent Brightwater client escalation thread is client-confidential and restricted to engagement leadership, so its contents and our specific commitments cannot be shown to the active persona. At a non-restricted level: the client raised a concern about the cutover timeline, and the team has an internal recovery plan in progress.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "Is there an open scope-change discussion on Brightwater, and where does it stand across the team emails and the internal delivery channel?",
+      "keywords": ["open", "scope", "discussion", "stand"],
+      "answer": "Yes — there is one open scope-change discussion, consistent across two signals. From email (08-JUN): Priya Deshmukh flagged to the delivery distribution list that the client asked for a self-service reporting module that is NOT in the current SOW; Helen Okafor agreed it is new, paid scope and asked for a change request with an effort estimate. From the Brightwater delivery Teams channel (08-JUN): Priya posted that the reporting module is out of scope, nobody starts it until a change request is approved, and the team must not absorb new scope. Net: the scope change is acknowledged by both sides as out-of-scope and awaiting a formal change request — not yet started.",
+      "citations": ["EML-003", "EML-004", "MSG-002"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "What deliverables are due this week for Brightwater, and what do the team's chats say about whether we'll hit them?",
+      "keywords": ["deliverables", "due", "week", "chats"],
+      "answer": "Two Brightwater deliverables are due this week per the engagement tracker: the integration test report (ENG-002, owner Amir Haddad, due 13-JUN, On Track) and the cutover dry-run feeding the 26-JUN go-live (ENG-001, At Risk). The team's chats say: the integration test report is green for Friday (Amir), and the cutover is amber until the last integration defect closes — 1 of 2 defects already closed, the second in review (Priya / Amir on the delivery channel). Net: test report on track; cutover dependent on closing the final defect.",
+      "citations": ["ENG-001", "ENG-002", "MSG-001", "MSG-003"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "Give me a 360 on Brightwater: current sprint, last client escalation, deliverables due this week, the open scope change, and the budget status.",
+      "keywords": ["360", "brightwater", "current", "budget"],
+      "answer": "Brightwater account 360:\n\n1. Current sprint (14): committed to close the two integration defects and complete the migration cutover by 26-JUN, and deliver the integration test report this week (standup 11-JUN).\n\n2. Last client escalation (09-JUN): Helen Okafor escalated the cutover slip as a board-demo risk; we committed (10-JUN) to a 26-JUN recovery date, a contained test plan, and written status by 12-JUN.\n\n3. Deliverables due this week: integration test report (ENG-002, On Track, due 13-JUN); cutover dry-run feeding the 26-JUN go-live (ENG-001, At Risk until the last defect closes).\n\n4. Open scope change: the client's self-service reporting module is out of SOW (ENG-004, Proposed); logged pending a change request — not started.\n\n5. Budget status: Brightwater is over plan — 86% of budget consumed against 70% of timeline (FILE-002 / PSA-001), forecast to overrun if the cutover slips further or the reporting module is absorbed unfunded.",
+      "trimmed_answer": "Brightwater account 360 (redacted for the active persona — client-confidential and commercial items are withheld):\n\n1. Current sprint (14): committed to close the two integration defects and complete the migration cutover by 26-JUN, and deliver the integration test report this week (standup 11-JUN).\n\n2. Client escalation: withheld — restricted to engagement leadership.\n\n3. Deliverables due this week: integration test report (On Track, due 13-JUN); cutover dry-run feeding the 26-JUN go-live (At Risk until the last defect closes).\n\n4. Open scope change: the client's self-service reporting module is out of SOW (Proposed); logged pending a change request — not started.\n\n5. Budget status: withheld — commercial budget is restricted.",
+      "citations": ["MTG-001", "EML-001", "EML-002", "EML-003", "FILE-001", "FILE-002", "ENG-001", "ENG-004", "PSA-001", "MSG-003"],
+      "restricted_citations": ["EML-001", "EML-002", "FILE-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Across all my engagements, which clients have an open escalation, a deliverable at risk this week, or a budget overrun — and who owns each?",
+      "keywords": ["all my engagements", "open escalation", "budget overrun", "owns"],
+      "answer": "Portfolio scan across your engagements:\n\n- Brightwater — open escalation (cutover slip, raised by the client program office per the 09-JUN escalation thread); deliverable at risk this week: data migration cutover (ENG-001, At Risk, owner Priya Deshmukh); budget overrun risk: over plan at 86% consumed (PSA-001). Engagement covered by Nina Alvarez while Owen Brent is on leave.\n- Northwind — no open escalation; target-state roadmap workshop on track (ENG-003, owner Tom Becker); budget on plan at 72% (PSA-002).\n\nNet: Brightwater is the only engagement triggering all three risk flags (escalation + at-risk deliverable + budget pressure); Northwind is healthy. Owners: Priya Deshmukh (Brightwater cutover), Tom Becker (Northwind).",
+      "trimmed_answer": "Portfolio scan across your engagements (redacted for the active persona — client-escalation detail withheld):\n\n- Brightwater — deliverable at risk this week: data migration cutover (ENG-001, At Risk, owner Priya Deshmukh); budget overrun risk: over plan at 86% consumed (PSA-001); engagement covered by Nina Alvarez while Owen Brent is on leave. (Any client-escalation detail is restricted to engagement leadership.)\n- Northwind — no risk flags; target-state roadmap workshop on track (ENG-003, owner Tom Becker); budget on plan at 72% (PSA-002).\n\nNet: Brightwater carries the at-risk deliverable and budget pressure; Northwind is healthy. Owners: Priya Deshmukh (Brightwater cutover), Tom Becker (Northwind).",
+      "citations": ["ENG-001", "ENG-002", "ENG-003", "ENG-004", "PSA-001", "PSA-002", "EML-001", "EML-002", "MSG-004"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "Summarise the open reporting-module scope change for Brightwater and create a change-request record in the engagement tracker with the discussed scope and estimated effort, owned by the lead consultant.",
+      "keywords": ["create", "change-request", "engagement tracker", "effort"],
+      "answer": "Open scope change (from the 08-JUN scope email thread and the delivery channel): the Brightwater client requested a self-service reporting module that is NOT in the current SOW; both sides agree it is new, paid scope awaiting a formal change request (ENG-004 is the placeholder, status Proposed). Discussed scope: a self-service reporting module on top of the migrated data. Estimated effort: not yet costed (to be estimated for the change request). Proposed Tools action: create a change-request record in the engagement_tracker for Brightwater capturing the reporting-module scope and estimated effort, owned by the lead consultant Priya Deshmukh. Use create_entity against the engagement_tracker table; do not duplicate the existing placeholder row ENG-004.",
+      "citations": ["EML-003", "EML-004", "MSG-002", "ENG-004"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "create_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the Brightwater QBR status update covering delivered work, risks, and budget status for review.",
+      "keywords": ["draft", "qbr", "status update", "budget"],
+      "answer": "Draft — Brightwater QBR Status Update (for review, not sent):\n\nDelivered this quarter: integration test report on track for this week; data profiling complete; cutover dry-run underway.\n\nRisks: the data migration cutover slipped from 19-JUN to a recovery date of 26-JUN pending closure of the final integration defect (1 of 2 already closed). The client raised a formal escalation on the slip; we committed to the 26-JUN recovery, a contained test plan, and a written status by 12-JUN.\n\nBudget status: the engagement is over plan (86% of budget consumed against 70% of timeline); any unfunded reporting-module scope would push it into overrun, so the reporting module must be a paid change request.\n\nNext: confirm the change-request pricing and hold the 26-JUN cutover.\n\n(Proposed Tools action: create the draft document for review — do not send.)",
+      "trimmed_answer": "A Brightwater QBR status update cannot be fully drafted under the active persona because the client-commitment thread and the commercial budget are restricted to engagement leadership. Switch to a delivery-leadership persona to draft this. (Non-restricted facts available: sprint-14 deliverables, the cutover recovery to 26-JUN, and the out-of-scope reporting-module change request.)",
+      "citations": ["MTG-001", "ENG-001", "ENG-002", "FILE-002", "EML-002"],
+      "restricted_citations": ["EML-002", "FILE-002"],
+      "required_sources": 3,
+      "tool": "draft_document"
+    }
+  ]
+}

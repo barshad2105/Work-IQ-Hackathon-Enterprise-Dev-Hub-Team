@@ -1,0 +1,41 @@
+{
+  "_comment": "Synthetic facilities files (metadata + short content excerpt). FILE-002 (vendor SLA & penalty register) is restricted to leadership + the ops engineer; FILE-003 (vendor master agreement) is restricted to leadership only — both demonstrate file-level permission trimming.",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "Calder Tower Shared Works Log.xlsx",
+      "url": "https://arundelholdings.sharepoint.com/sites/CalderTower/Shared%20Documents/CalderTower-Works-Log.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-005",
+      "date": "2026-06-10T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "The shared Calder Tower works log. Records the Chiller-2 failure, the leak repair in progress with Coolflow, interim spot-cooling on floors 18-24, and the restored ETA of 26-JUN.",
+      "content_excerpt": "10-JUN: Chiller-2 down (low-refrigerant lockout). Repair: Coolflow brazing suction-line leak. Mitigation: interim spot-cooling floors 18-24 live. Restored ETA: 26-JUN pending soak test."
+    },
+    {
+      "id": "FILE-002",
+      "name": "Calder Tower Vendor SLA & Penalty Register.xlsx",
+      "url": "https://arundelholdings.sharepoint.com/sites/CalderTower/Shared%20Documents/CalderTower-SLA-Register.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-008",
+      "date": "2026-06-09T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["duty_manager", "director", "ops_engineer"],
+      "summary": "Vendor SLA and service-credit penalty register for Calder Tower. Records Coolflow's restoration SLA window and the service-credit exposure if cooling is not restored by the agreed date.",
+      "content_excerpt": "Coolflow | Calder Tower | SLA restore window: 14 days | Service-credit if missed: per clause 6.2 | Current event: Chiller-2, target 26-JUN, exposure flagged."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Coolflow Master Services Agreement (confidential).pdf",
+      "url": "https://arundelholdings.sharepoint.com/sites/Procurement/Restricted/Coolflow-MSA.pdf",
+      "type": "document",
+      "owner": "PPL-006",
+      "date": "2026-02-01T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["duty_manager", "director"],
+      "summary": "Confidential master services agreement with Coolflow including pricing and penalty clauses. Restricted to facilities leadership.",
+      "content_excerpt": "[RESTRICTED — commercial terms] Clause 6.2 service-credit schedule and clause 9 penalty terms."
+    }
+  ]
+}

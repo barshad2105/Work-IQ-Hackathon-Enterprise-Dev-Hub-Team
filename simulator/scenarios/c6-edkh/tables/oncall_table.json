@@ -1,0 +1,23 @@
+{
+  "_comment": "Simulated Jira / PagerDuty connector rows surfaced through Tools (Copilot connector). '_table' suffix => citation kind 'oncall'; rows carry a 'description' field for nice citation titles. Round-trips on fetch/create/update like any Tools table. Rows are acl='all' (operational).",
+  "oncall_table": [
+    {
+      "id": "ONC-001",
+      "source": "PagerDuty",
+      "description": "PagerDuty incident PD-8842 — Atlas payments Sev-1 paged on-call",
+      "service": "Atlas payments",
+      "status": "Acknowledged",
+      "owner": "PPL-001",
+      "acl": ["all"]
+    },
+    {
+      "id": "ONC-002",
+      "source": "Jira",
+      "description": "Jira ATLAS-4521 — permanent fix: connection-pool size cap + leak guard before v4.7 re-deploy",
+      "service": "Atlas payments",
+      "status": "In Progress",
+      "owner": "PPL-002",
+      "acl": ["all"]
+    }
+  ]
+}

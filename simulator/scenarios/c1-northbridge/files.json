@@ -1,0 +1,53 @@
+{
+  "_comment": "Synthetic administrative files (metadata + short content excerpt) for Northbridge Health Network. FILE-003 is restricted (HR-sensitive credentialing personnel matter) to demonstrate file-level permission trimming — visible only to the credentialing lead and operations director. Other files are staff-internal (not the external vendor). NO PHI.",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "Quality CAPA Tracker — Summary.xlsx",
+      "url": "https://northbridge-health.sharepoint.com/sites/Quality/Shared%20Documents/CAPA-Tracker-Summary.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-005",
+      "date": "2026-06-11T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "summary": "Shared corrective-action (CAPA) tracker summary for the quality and credentialing committees. Open items ahead of the Joint Commission readiness review: CAPA-001 medication-reconciliation policy finalisation (owner Angela Foster, past due), CAPA-004 Westgate environment-of-care documentation (owner Priya Raman, past due), CAPA-003 Westgate medication-list data migration validation (owner Greg Sullivan). Closed: CAPA-002 provider-onboarding gap (Credentialing Committee).",
+      "content_excerpt": "CAPA-001 | Revise medication-reconciliation policy | Quality Steering | Angela Foster | Past Due | due 09-JUN. CAPA-002 | Close provider-onboarding verification gap | Credentialing | Sandra Okafor | Closed. CAPA-004 | Westgate environment-of-care documentation | Quality Steering | Priya Raman | Past Due | due 06-JUN."
+    },
+    {
+      "id": "FILE-002",
+      "name": "Medication Reconciliation Policy — Draft Rev 3.docx",
+      "url": "https://northbridge-health.sharepoint.com/sites/Quality/Shared%20Documents/Med-Rec-Policy-Rev3.docx",
+      "type": "document",
+      "owner": "PPL-005",
+      "date": "2026-06-10T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "summary": "Draft revision 3 of the network medication-reconciliation policy, adopted in principle by the Quality Steering Committee on 10-JUN. Requires a documented reconciliation at every transition of care (admission, transfer, discharge). Pending workflow update (David Munoz) and compliance review (Priya Raman) before publication.",
+      "content_excerpt": "Section 2 Scope: medication reconciliation shall be performed and documented at every transition of care across all network clinics. Section 5 Responsibility: clinic operations leads ensure workflow compliance; Quality audits adherence quarterly."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Credentialing — Provider Onboarding Personnel Matter (CONFIDENTIAL).docx",
+      "url": "https://northbridge-health.sharepoint.com/sites/MedicalStaff/Restricted/CAPA-005-Personnel.docx",
+      "type": "document",
+      "owner": "PPL-003",
+      "date": "2026-06-05T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["credentialing_lead", "ops_director"],
+      "summary": "Confidential HR-sensitive credentialing personnel matter (CAPA-005) discussed in closed session of the Credentialing Committee. Restricted to the credentialing lead and operations director. Contains individual personnel detail and is excluded from general readiness-review materials.",
+      "content_excerpt": "[RESTRICTED — HR-sensitive personnel matter] Detail withheld. Closure of the related onboarding verification gap is tracked separately and non-confidentially as CAPA-002."
+    },
+    {
+      "id": "FILE-004",
+      "name": "Joint Commission Readiness Checklist.xlsx",
+      "url": "https://northbridge-health.sharepoint.com/sites/Compliance/Shared%20Documents/JC-Readiness-Checklist.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-007",
+      "date": "2026-06-11T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "summary": "Joint Commission readiness checklist maintained by Compliance. Tracks medication-management (med-reconciliation policy, CAPA-001), environment of care (CAPA-004), and human-resources/credentialing (provider-onboarding gap CAPA-002, now closed). Outstanding items before the review: CAPA-001 and CAPA-004.",
+      "content_excerpt": "Medication Management: revised reconciliation policy — OPEN (CAPA-001). Environment of Care: Westgate documentation — OPEN (CAPA-004). Human Resources/Credentialing: provider-onboarding verification — CLOSED (CAPA-002)."
+    }
+  ]
+}

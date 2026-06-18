@@ -1,0 +1,83 @@
+{
+  "_comment": "Synthetic program emails for 45621-B. 'restricted' sensitivity items are visible only to personas listed in acl (drives the permission-trimming governance demo). date format ISO. thread groups related mail.",
+  "emails": [
+    {
+      "id": "EML-001",
+      "thread_id": "THR-CUST-ESC",
+      "subject": "ESCALATION: 45621-B PPAP qualification slip — schedule risk to Aeronix flight test",
+      "from": "PPL-009",
+      "to": ["PPL-001"],
+      "cc": ["PPL-006"],
+      "date": "2026-06-08T14:20:00Z",
+      "sensitivity": "restricted",
+      "acl": ["new_pm", "director"],
+      "body": "Dana, the Aeronix program office is formally escalating. The 45621-B PPAP qualification was due to complete by 19-JUN and your last status showed it slipping to early July. This threatens our flight-test window. We need (1) a committed recovery date, (2) confirmation the material supplier issue is contained, and (3) a written risk summary by Friday. Please treat as priority.",
+      "attachments": []
+    },
+    {
+      "id": "EML-002",
+      "thread_id": "THR-CUST-ESC",
+      "subject": "RE: ESCALATION: 45621-B PPAP qualification slip",
+      "from": "PPL-001",
+      "to": ["PPL-009"],
+      "cc": ["PPL-006", "PPL-003"],
+      "date": "2026-06-09T09:05:00Z",
+      "sensitivity": "restricted",
+      "acl": ["new_pm", "director"],
+      "body": "Karen, acknowledged. We commit to: a recovery date of 03-JUL for qualification completion, contingent on closing the material hardness finding; containment plan in place with Apex Alloys; and a written risk summary to you by 12-JUN. Elena Cho (Engineering Lead) owns the qualification recovery plan.",
+      "attachments": ["FILE-002"]
+    },
+    {
+      "id": "EML-003",
+      "thread_id": "THR-MTL-SUP",
+      "subject": "Material hardness non-conformance (34 HRC vs 40-44 HRC) — Apex Alloys lot 24-118",
+      "from": "PPL-004",
+      "to": ["dl-45621b-program@contoso-precision.com"],
+      "cc": ["PPL-003", "PPL-005", "PPL-008"],
+      "date": "2026-06-05T16:40:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Program team — flagging an open risk to the program distribution list. During qualification hardness testing, the part showed material hardness non-conformance below the acceptance minimum on two of five units. Both failing units used Apex Alloys Inconel 718 material lot 24-118. Priya is investigating material lot variation. Until we have root cause, I am holding qualification sign-off. This is the top open risk on the program.",
+      "attachments": []
+    },
+    {
+      "id": "EML-004",
+      "thread_id": "THR-MTL-SUP",
+      "subject": "RE: Material hardness non-conformance (34 HRC vs 40-44 HRC) — Apex Alloys lot 24-118",
+      "from": "PPL-005",
+      "to": ["PPL-004"],
+      "cc": ["dl-45621b-program@contoso-precision.com"],
+      "date": "2026-06-06T11:15:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Raj — confirmed lot 24-118 is below spec on hardness (measured 34 HRC vs spec 40-44 HRC). I believe the non-conformance is a material lot issue, not a design issue. Recommend: (1) quarantine lot 24-118, (2) request a replacement lot from Apex Alloys with cert, (3) re-run the hardness acceptance test on units remachined with conforming material. I can have conforming material in 5 business days.",
+      "attachments": []
+    },
+    {
+      "id": "EML-005",
+      "thread_id": "THR-QTP-OWNER",
+      "subject": "PPAP Qualification Plan ownership — 45621-B",
+      "from": "PPL-003",
+      "to": ["PPL-001", "PPL-004"],
+      "cc": [],
+      "date": "2026-05-28T13:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Confirming for the record: I (Elena Cho) own the 45621-B PPAP Qualification Plan, document QTP-45621B rev D. Raj Patel owns quality sign-off / acceptance. Any change to acceptance criteria goes through Raj.",
+      "attachments": ["FILE-001"]
+    },
+    {
+      "id": "EML-006",
+      "thread_id": "THR-SCHED",
+      "subject": "45621-B weekly — milestone movement w/c 08-JUN",
+      "from": "PPL-001",
+      "to": ["dl-45621b-program@contoso-precision.com"],
+      "cc": [],
+      "date": "2026-06-08T08:30:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Weekly note: Qualification milestone moved from 19-JUN to 03-JUL pending material rework (see Raj's risk). Design freeze remains complete. First Article Inspection still scheduled 10-JUL. No other milestone movement this week.",
+      "attachments": []
+    }
+  ]
+}

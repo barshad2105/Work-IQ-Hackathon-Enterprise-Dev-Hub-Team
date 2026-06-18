@@ -1,0 +1,105 @@
+{
+  "_comment": "People directory for Westbrook University College of Business governance (Challenge 5 — academic governance, AACSB reaffirmation / B.B.A. program). Administrative governance only — no FERPA-protected student records. acl='all' means visible to every persona.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Dr. Laura Simmons",
+      "title": "Associate Dean, College of Business",
+      "email": "laura.simmons@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-006",
+      "expertise": ["accreditation", "AACSB reaffirmation", "program governance"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "Dr. Mark Feldman",
+      "title": "Chair, Curriculum Committee",
+      "email": "mark.feldman@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-001",
+      "expertise": ["curriculum design", "assessment plans", "B.B.A. program"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Dr. Nadia Rahman",
+      "title": "Chair, Program-Review Committee",
+      "email": "nadia.rahman@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-001",
+      "expertise": ["program review", "course sequencing", "quality assurance"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Dr. Paul Greer",
+      "title": "Accreditation Liaison (AACSB)",
+      "email": "paul.greer@westbrook.edu",
+      "department": "Provost's Office",
+      "manager": "PPL-006",
+      "expertise": ["AACSB liaison", "site-visit coordination", "accreditation evidence"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Dr. Ada Okonkwo",
+      "title": "Assessment Coordinator (Curriculum Committee member)",
+      "email": "ada.okonkwo@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-002",
+      "expertise": ["assurance of learning", "assessment", "rubrics"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "Dr. Gloria Hahn",
+      "title": "Provost (escalation)",
+      "email": "gloria.hahn@westbrook.edu",
+      "department": "Provost's Office",
+      "manager": null,
+      "expertise": ["institutional leadership", "accreditation oversight", "personnel"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Dr. Henry Voss",
+      "title": "Department Chair, Management (new)",
+      "email": "henry.voss@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-001",
+      "expertise": ["department administration"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Dr. Ravi Krishnan",
+      "title": "Institutional Research Analyst",
+      "email": "ravi.krishnan@westbrook.edu",
+      "department": "Institutional Research",
+      "manager": "PPL-006",
+      "expertise": ["assessment data", "reporting", "institutional research"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Dr. Erin Blake",
+      "title": "Chair, B.S. Accounting Program",
+      "email": "erin.blake@westbrook.edu",
+      "department": "College of Business",
+      "manager": "PPL-001",
+      "expertise": ["accounting program", "program review"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Dr. Sam Reyes",
+      "title": "Adjunct Faculty (least privilege)",
+      "email": "sam.reyes@adjunct.westbrook.edu",
+      "department": "College of Business (Adjunct)",
+      "manager": "PPL-007",
+      "expertise": ["teaching"],
+      "acl": ["all"]
+    }
+  ]
+}

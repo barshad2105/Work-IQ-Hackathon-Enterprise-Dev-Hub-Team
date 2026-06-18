@@ -1,0 +1,41 @@
+{
+  "_comment": "Synthetic engagement files (metadata + short content excerpt). FILE-002 (engagement budget) is restricted to leadership + the lead consultant; FILE-003 (commercial rate card) is restricted to leadership only — both demonstrate file-level permission trimming.",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "Brightwater Statement of Work (SOW) v3.docx",
+      "url": "https://meridiangroup.sharepoint.com/sites/Brightwater/Shared%20Documents/Brightwater-SOW-v3.docx",
+      "type": "document",
+      "owner": "PPL-002",
+      "date": "2026-04-10T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "The Brightwater statement of work, version 3. Defines the in-scope deliverables: data migration cutover, integration test report, and training. The self-service reporting module is NOT listed and is therefore out of scope.",
+      "content_excerpt": "Section 2 Deliverables: (D1) data migration cutover; (D2) integration test report; (D3) user training. Section 5: any work not listed in Section 2 requires an approved change request."
+    },
+    {
+      "id": "FILE-002",
+      "name": "Brightwater Engagement Budget & Utilisation.xlsx",
+      "url": "https://meridiangroup.sharepoint.com/sites/Brightwater/Shared%20Documents/Brightwater-Budget.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-007",
+      "date": "2026-06-07T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["delivery_principal", "director", "consultant"],
+      "summary": "Engagement budget and utilisation summary. Brightwater is over plan: budget consumed 86% against 70% of timeline; the cutover slip and any unfunded reporting-module scope would push it into overrun.",
+      "content_excerpt": "Brightwater | Budget 1.20M | Spent 1.03M (86%) | Forecast at completion 1.28M (over) | Status: Over plan. Note: reporting-module scope must be funded via change request."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Meridian Commercial Rate Card (confidential).pdf",
+      "url": "https://meridiangroup.sharepoint.com/sites/Commercial/Restricted/Meridian-Rate-Card.pdf",
+      "type": "document",
+      "owner": "PPL-006",
+      "date": "2026-01-15T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["delivery_principal", "director"],
+      "summary": "Confidential commercial rate card and margin floors used to price change requests. Restricted to delivery leadership.",
+      "content_excerpt": "[RESTRICTED — commercial terms] Blended day-rate and margin-floor table used to estimate change-request pricing."
+    }
+  ]
+}

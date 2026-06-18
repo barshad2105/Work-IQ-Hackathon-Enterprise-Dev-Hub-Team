@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming. A persona sees a fixture if the fixture acl contains the persona id OR 'all'. duty_manager = full facilities view incl tenant-confidential commitments + vendor SLA/penalties; ops_engineer = internal ops + the SLA register but NOT tenant-confidential commitment threads or the master agreement; contractor = least privilege; director = sees everything.",
+  "personas": [
+    {
+      "id": "duty_manager",
+      "label": "Marco Reyes — Facilities Duty Manager (covering)",
+      "person_id": "PPL-001",
+      "description": "Full facilities leadership view including tenant-confidential notification commitments and vendor commercial terms.",
+      "groups": ["facilities_leadership", "director"]
+    },
+    {
+      "id": "ops_engineer",
+      "label": "Derek Owens — Mechanical Engineer",
+      "person_id": "PPL-003",
+      "description": "Sees all internal operations, work orders, and the vendor SLA/penalty register, but NOT tenant-confidential commitment threads or the vendor master agreement.",
+      "groups": ["engineering", "operations"]
+    },
+    {
+      "id": "contractor",
+      "label": "Victor Hale — Subcontractor Technician (vendor)",
+      "person_id": "PPL-010",
+      "description": "Least-privilege vendor. Sees only non-sensitive operational signals; cannot see tenant commitments, the SLA/penalty register, or the master agreement.",
+      "groups": ["contractor"]
+    },
+    {
+      "id": "director",
+      "label": "Helen Stamos — Director, Portfolio Operations (escalation)",
+      "person_id": "PPL-006",
+      "description": "Executive escalation view. Sees everything duty_manager sees.",
+      "groups": ["facilities_leadership", "director"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "Dataverse-style accreditation/action tracker for the B.B.A. AACSB reaffirmation. This is the create_entity / update_entity / fetch write target for the 'Agent with MCP / Tools' tier (the create-tracked-task hero action). Rows have stable ids; writes append or patch here at runtime (in-memory unless persisted).",
+  "accreditation_tracker": [
+    {
+      "id": "ACC-001",
+      "program": "B.B.A.",
+      "description": "Close assurance-of-learning loop on written-communication rubric",
+      "requirement": "AACSB Standard 5 (Assurance of Learning)",
+      "owner": "PPL-005",
+      "due_date": "2026-06-20",
+      "status": "Open"
+    },
+    {
+      "id": "ACC-002",
+      "program": "B.B.A.",
+      "description": "Obtain program-review committee sign-off on the course-sequence change",
+      "requirement": "AACSB Standard 4 (Curriculum)",
+      "owner": "PPL-003",
+      "due_date": "2026-06-18",
+      "status": "Open"
+    },
+    {
+      "id": "ACC-003",
+      "program": "B.B.A.",
+      "description": "Publish approved revised assessment plan to program SharePoint",
+      "requirement": "AACSB Standard 5 (Assurance of Learning)",
+      "owner": "PPL-002",
+      "due_date": "2026-06-12",
+      "status": "Open"
+    }
+  ]
+}

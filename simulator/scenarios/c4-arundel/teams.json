@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams building-ops channel posts for Calder Tower. Used for the open-work-orders (tracker+chat) multi-signal question and the synthesis.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "Calder Tower / Building Ops",
+      "author": "PPL-004",
+      "date": "2026-06-10T13:22:00Z",
+      "acl": ["all"],
+      "text": "Coolflow on site. Victor located the suction-line leak, brazing now. Parts (refrigerant + drier) confirmed for tomorrow AM. Soak test starts once recharged — tracking to 26-JUN restored."
+    },
+    {
+      "id": "MSG-002",
+      "channel": "Calder Tower / Building Ops",
+      "author": "PPL-005",
+      "date": "2026-06-10T13:40:00Z",
+      "acl": ["all"],
+      "text": "Work order status: WO-001 (Chiller-2 leak repair) in progress with Coolflow; WO-002 (interim spot-cooling floors 18-24) deployed and running. Both open until soak-verified. Logging both against the Calder Tower coordination call."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "Calder Tower / Building Ops",
+      "author": "PPL-005",
+      "date": "2026-06-10T16:05:00Z",
+      "acl": ["all"],
+      "text": "Interim spot-cooling confirmed on floors 18-24, anchor tenant comfortable for now. Restoration of full cooling still pending the chiller soak test."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "Calder Tower / Building Ops",
+      "author": "PPL-001",
+      "date": "2026-06-10T16:30:00Z",
+      "acl": ["all"],
+      "text": "Thanks all. I'm covering this event — the work-order tracker is the single source of truth for open work orders, owners, and due dates. Keep it current; I'm reporting from it."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "Calder Tower / Building Ops",
+      "author": "PPL-009",
+      "date": "2026-06-10T17:00:00Z",
+      "acl": ["all"],
+      "text": "Unrelated heads-up from Bishop House: this month's planned-maintenance window slipped and is now overdue — WO-003 needs rebooking with the vendor."
+    }
+  ]
+}

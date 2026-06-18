@@ -1,0 +1,105 @@
+{
+  "_comment": "People directory / org chart for the Meridian Group Brightwater engagement (Challenge 3 — engagement 360). acl='all' means visible to every persona. Stable ids are cited by golden answers.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Nina Alvarez",
+      "title": "Delivery Principal (covering Brightwater)",
+      "email": "nina.alvarez@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": "PPL-006",
+      "expertise": ["engagement leadership", "client relationship", "delivery assurance"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "Owen Brent",
+      "title": "Engagement Manager, Brightwater (on leave)",
+      "email": "owen.brent@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": "PPL-006",
+      "expertise": ["engagement management", "Brightwater account", "scope management"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Priya Deshmukh",
+      "title": "Lead Consultant, Brightwater",
+      "email": "priya.deshmukh@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": "PPL-002",
+      "expertise": ["data migration", "solution design", "Brightwater delivery"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Gerald Mosby",
+      "title": "Partner, Client Relationship (Brightwater)",
+      "email": "gerald.mosby@meridiangroup.com",
+      "department": "Partnership",
+      "manager": null,
+      "expertise": ["client partnership", "QBR", "commercial"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Amir Haddad",
+      "title": "Senior Analyst, Brightwater",
+      "email": "amir.haddad@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": "PPL-003",
+      "expertise": ["integration testing", "reporting", "analysis"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "Sofia Marin",
+      "title": "Director, Consulting Delivery (escalation)",
+      "email": "sofia.marin@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": null,
+      "expertise": ["portfolio leadership", "executive escalation", "commercial"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Ravi Menon",
+      "title": "Finance Controller (PSA / utilisation)",
+      "email": "ravi.menon@meridiangroup.com",
+      "department": "Finance",
+      "manager": null,
+      "expertise": ["PSA", "budget", "utilisation", "billing"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Helen Okafor",
+      "title": "Client Program Lead (Brightwater)",
+      "email": "helen.okafor@brightwater-client.com",
+      "department": "Client (Brightwater)",
+      "manager": null,
+      "expertise": ["client program office"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Tom Becker",
+      "title": "Engagement Manager, Northwind",
+      "email": "tom.becker@meridiangroup.com",
+      "department": "Consulting Delivery",
+      "manager": "PPL-006",
+      "expertise": ["engagement management", "Northwind account"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Lena Frost",
+      "title": "Subcontractor Consultant (vendor)",
+      "email": "lena.frost@contractors.meridiangroup.com",
+      "department": "Consulting Delivery (Contractor)",
+      "manager": "PPL-003",
+      "expertise": ["data profiling"],
+      "acl": ["all"]
+    }
+  ]
+}

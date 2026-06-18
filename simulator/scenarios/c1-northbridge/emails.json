@@ -1,0 +1,83 @@
+{
+  "_comment": "Synthetic administrative emails for Northbridge Health Network. 'restricted' sensitivity items are visible only to personas listed in acl (drives the permission-trimming governance demo). The Lumina vendor go-live thread (EML-001/002) is visible to the external vendor persona; the leadership commercial-penalty thread (EML-003/004) is restricted to operations leadership + quality PM. Internal corrective-action threads are staff-only (not the vendor). NO PHI.",
+  "emails": [
+    {
+      "id": "EML-001",
+      "thread_id": "THR-WESTGATE-GOLIVE",
+      "subject": "Westgate go-live readiness — Lumina status and date",
+      "from": "PPL-008",
+      "to": ["PPL-004"],
+      "cc": ["PPL-002"],
+      "date": "2026-06-08T13:10:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Robert — Lumina's view on the Westgate go-live: the build is configured and our trainers have completed ~80% of end-user sessions. We are holding the 22-JUN target. The one remaining item on our side is your team's sign-off on the medication-list data migration validation. Can you confirm (1) the migration validation will be complete by 13-JUN and (2) training sign-off so we can issue a written go-live confirmation? — Tom, Lumina Health Systems.",
+      "attachments": []
+    },
+    {
+      "id": "EML-002",
+      "thread_id": "THR-WESTGATE-GOLIVE",
+      "subject": "RE: Westgate go-live readiness — Lumina status and date",
+      "from": "PPL-004",
+      "to": ["PPL-008"],
+      "cc": ["PPL-002"],
+      "date": "2026-06-09T08:45:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Tom — thanks. We are asking Lumina to confirm in writing: (1) the medication-list data migration validation is complete and signed off, and (2) the final go-live date of 22-JUN. On our side Greg Sullivan owns the migration validation, due 13-JUN. Once both are confirmed we will issue the go-live notice to Westgate staff.",
+      "attachments": []
+    },
+    {
+      "id": "EML-003",
+      "thread_id": "THR-LUMINA-COMMERCIAL",
+      "subject": "CONFIDENTIAL: Lumina contract — service-credit clause if Westgate slips",
+      "from": "PPL-002",
+      "to": ["PPL-001"],
+      "cc": [],
+      "date": "2026-06-09T18:30:00Z",
+      "sensitivity": "restricted",
+      "acl": ["ops_director", "quality_pm"],
+      "body": "Maria — leadership-only. If Westgate go-live slips past 22-JUN due to Lumina-side delays, our MSA clause 7.4 entitles us to a service credit of 8% of the implementation fee per week of delay. Do not raise this with the vendor yet; I want it in our back pocket for the readiness-review escalation if the migration validation slips. Keep this off the committee channels.",
+      "attachments": []
+    },
+    {
+      "id": "EML-004",
+      "thread_id": "THR-LUMINA-COMMERCIAL",
+      "subject": "RE: CONFIDENTIAL: Lumina contract — service-credit clause if Westgate slips",
+      "from": "PPL-001",
+      "to": ["PPL-002"],
+      "cc": [],
+      "date": "2026-06-10T07:55:00Z",
+      "sensitivity": "restricted",
+      "acl": ["ops_director", "quality_pm"],
+      "body": "Understood, James — I'll keep the commercial terms out of the committee notes. I'll flag to you privately if the 13-JUN migration validation looks like it will miss.",
+      "attachments": []
+    },
+    {
+      "id": "EML-005",
+      "thread_id": "THR-CAPA-STALLED",
+      "subject": "Open corrective actions — why CAPA-001 and CAPA-004 are stalled",
+      "from": "PPL-005",
+      "to": ["PPL-001"],
+      "cc": ["PPL-006", "PPL-007"],
+      "date": "2026-06-11T11:20:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "body": "Maria — status on our two open quality corrective actions: CAPA-001 (medication-reconciliation policy finalisation) is past due — I have the draft but I'm waiting on David Munoz's updated workflow steps before compliance review can start. CAPA-004 (Westgate environment-of-care documentation) is also past due — Priya is blocked waiting on a facilities vendor quote for the signage update. Both are on the readiness-review critical path; flagging so we can unblock before Joint Commission.",
+      "attachments": ["FILE-001"]
+    },
+    {
+      "id": "EML-006",
+      "thread_id": "THR-CRED-CLOSURE",
+      "subject": "Provider-onboarding gap (CAPA-002) closed",
+      "from": "PPL-003",
+      "to": ["PPL-001"],
+      "cc": ["PPL-002", "PPL-007"],
+      "date": "2026-06-06T09:30:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "body": "Maria — confirming for the readiness review: the Credentialing Committee closed the provider-onboarding gap on 05-JUN. The primary-source verification backlog is cleared and the onboarding checklist updated (CAPA-002 is Closed). This was the credentialing item the Quality Steering Committee flagged as related to the medication-reconciliation readiness work.",
+      "attachments": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_comment": "Simulated ServiceNow/Maximo CMMS connector table — incident and planned-maintenance rows surfaced via Tools. Round-trips on fetch/create/update like any Tools table. Rows are acl='all' (operational).",
+  "cmms_table": [
+    {
+      "id": "CMMS-001",
+      "system": "ServiceNow",
+      "building": "Calder Tower",
+      "record": "INC-44821 Chiller-2 cooling outage",
+      "priority": "P1",
+      "status": "In Progress",
+      "vendor": "Coolflow Mechanical",
+      "acl": ["all"]
+    },
+    {
+      "id": "CMMS-002",
+      "system": "Maximo",
+      "building": "Bishop House",
+      "record": "PM-10233 monthly AHU planned maintenance",
+      "priority": "P3",
+      "status": "Overdue",
+      "vendor": "Coolflow Mechanical",
+      "acl": ["all"]
+    }
+  ]
+}

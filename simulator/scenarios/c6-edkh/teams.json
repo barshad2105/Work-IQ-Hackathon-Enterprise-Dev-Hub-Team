@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams #atlas-incident channel posts for the Atlas payments outage. Used for the mitigation (channel + action tracker) multi-signal question and the chronological timeline synthesis.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "#atlas-incident",
+      "author": "PPL-008",
+      "date": "2026-06-11T11:05:00Z",
+      "acl": ["all"],
+      "text": "Mitigation rolled out: rolled back Atlas payments from v4.7 to v4.6. Rollback completed at 11:05. This is the mitigation that cleared the connection-pool leak. — Liam"
+    },
+    {
+      "id": "MSG-002",
+      "channel": "#atlas-incident",
+      "author": "PPL-005",
+      "date": "2026-06-11T11:30:00Z",
+      "acl": ["all"],
+      "text": "Post-rollback error rate dropping fast — 38% down to 2% and falling. Monitoring continues. The mitigation (rollback to v4.6) is holding."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "#atlas-incident",
+      "author": "PPL-002",
+      "date": "2026-06-11T12:10:00Z",
+      "acl": ["all"],
+      "text": "Confirmed: v4.7 connection-pool leak was the root cause. Do not re-deploy v4.7 until the pool-size cap is in. Tracking a permanent fix."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "#atlas-incident",
+      "author": "PPL-001",
+      "date": "2026-06-11T15:10:00Z",
+      "acl": ["all"],
+      "text": "Reminder: the incident & action tracker is our single source of truth for open actions. I'll create/update action items for monitoring and customer-comms there."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "#atlas-incident",
+      "author": "PPL-009",
+      "date": "2026-06-11T15:20:00Z",
+      "acl": ["all"],
+      "text": "Merchant support is staffed and ready for the customer-comms send. No open items on the support side beyond awaiting the comms commitment."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams channel posts for the Brightwater delivery channel. Used for the scope-discussion (email+chat) and deliverables-due (tracker+chat) multi-signal questions.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "Brightwater / Delivery",
+      "author": "PPL-005",
+      "date": "2026-06-10T11:22:00Z",
+      "acl": ["all"],
+      "text": "Defect burn-down update: 1 of 2 integration defects closed. The second is a date-format edge case, fix in review. Cutover for 26-JUN still looks achievable."
+    },
+    {
+      "id": "MSG-002",
+      "channel": "Brightwater / Delivery",
+      "author": "PPL-003",
+      "date": "2026-06-08T17:05:00Z",
+      "acl": ["all"],
+      "text": "Heads up: client asked for a self-service reporting module. That is NOT in the SOW. I've emailed the team — we log a change request with effort, nobody starts it until approved. Do not absorb new scope."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "Brightwater / Delivery",
+      "author": "PPL-003",
+      "date": "2026-06-11T09:40:00Z",
+      "acl": ["all"],
+      "text": "Deliverables due this week: integration test report (Amir, on track for Friday) and the cutover dry-run. Cutover go-live is the 26th. We're green on the test report, amber on cutover until the last defect closes."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "Brightwater / Delivery",
+      "author": "PPL-001",
+      "date": "2026-06-11T10:05:00Z",
+      "acl": ["all"],
+      "text": "Thanks all. I'm covering for Owen — the engagement tracker is our single source of truth for deliverables and dates. Keep it current; I'm reporting from it."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "Brightwater / Delivery",
+      "author": "PPL-010",
+      "date": "2026-06-11T12:30:00Z",
+      "acl": ["all"],
+      "text": "Data profiling for the cutover is done and handed to Amir. Nothing else from me on the reporting module — understood it's out of scope."
+    }
+  ]
+}

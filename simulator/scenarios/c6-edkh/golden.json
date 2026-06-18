@@ -1,0 +1,90 @@
+{
+  "_comment": "Golden answers for the 8 C6 (Enterprise Developer Knowledge Hub / Atlas payments Sev-1 incident shift handover) compound questions. The engine keyword-scores the incoming question against 'keywords', then returns 'answer' with citations resolved+persona-trimmed. 'restricted_citations' are the subset trimmed for personas lacking access. 'tool' (optional) signals a Tools/write action. Hero actions: create_entity / update_entity (action items). Operational coordination only — no source code or live telemetry.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the last incident bridge call decide about the Atlas payments outage, and what actions were assigned?",
+      "keywords": ["last bridge call", "decide", "actions assigned"],
+      "answer": "At the last incident bridge call (11-JUN 14:00, incident commander Helen Cho), the bridge DECIDED that the rollback of Atlas payments to v4.6 is complete, the error rate has recovered to baseline, and the incident moves to monitoring before all-clear; root cause was confirmed as the v4.7 connection-pool leak. Actions assigned: AI-101 — monitor the Atlas error rate for two hours and report before all-clear — owner Aisha Khan, due 16:00; AI-102 — confirm and publish the customer-communications commitment to affected merchants — owner Dana Lowe, due 15:00.",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What is the customer-communications commitment for the Atlas outage in the confidential comms thread, including affected merchants?",
+      "keywords": ["customer-communications commitment", "confidential", "affected merchants"],
+      "answer": "Per the confidential customer-communications thread (11-JUN, Dana Lowe → incident command), the commitment for the Atlas payments outage is: notify all affected merchants within 4 hours of all-clear, waive transaction fees for the outage window (Legal-cleared), and provide a written incident summary within 48 hours. Marco Reyes approved and owned it, to be reflected in the action tracker and shift-handover brief. Commercial terms are exec-confidential until the public statement.",
+      "trimmed_answer": "The customer-communications commitment for the Atlas outage is held in a leadership-confidential comms thread, so its specific commercial terms cannot be shown to the active persona. At a non-restricted level: a customer-communications workstream exists and a merchant notification is being prepared.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "Which mitigation was rolled out for Atlas and by whom, across the #atlas-incident channel and the action tracker?",
+      "keywords": ["mitigation", "rolled out", "action tracker"],
+      "answer": "The mitigation that was rolled out for the Atlas payments outage was a rollback from v4.7 to v4.6, executed by Liam Foster (DevOps), completed at 11:05. This is consistent across two signals: the #atlas-incident channel post from Liam announcing the rollback and the post-rollback error-rate drop, and the incident & action tracker row ACT-001 (rollback, owner Liam Foster, status Done). The rollback cleared the v4.7 connection-pool leak and the error rate returned toward baseline.",
+      "citations": ["MSG-001", "MSG-002", "ACT-001"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "What's the current status of the Atlas restoration across the last bridge call and the shared incident doc?",
+      "keywords": ["restoration", "incident doc", "shared"],
+      "answer": "Current Atlas restoration status, consistent across two signals. From the last incident bridge call (14:00): rollback to v4.6 complete, error rate recovered to baseline, incident in monitoring for two hours before all-clear. From the shared incident doc (FILE-001, live running record): same — rollback complete, error rate at baseline, in monitoring; root cause the v4.7 connection-pool leak; open items are error-rate monitoring and the customer-comms confirmation. Net: mitigated and stable, awaiting the monitoring window before all-clear.",
+      "citations": ["MTG-001", "FILE-001"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "I'm taking the on-call shift on the Atlas incident — give me the current picture: last bridge-call decisions, suspected root cause, mitigation rolled out and by whom, open actions and owners, and the customer-communications commitment.",
+      "keywords": ["on-call shift", "suspected root cause", "customer-communications commitment"],
+      "answer": "On-call handover picture for the Atlas payments incident:\n\n1. Last bridge-call decisions (14:00): rollback to v4.6 complete, error rate at baseline, incident in monitoring before all-clear.\n\n2. Suspected/confirmed root cause: the v4.7 deploy introduced a connection-pool leak that exhausted DB connections, driving the error rate to 38% (SRE root-cause email).\n\n3. Mitigation rolled out and by whom: rollback v4.7→v4.6 by Liam Foster, completed 11:05 (#atlas-incident channel).\n\n4. Open actions and owners: monitor error rate two hours — Aisha Khan (ACT-002, due 16:00); confirm/publish customer-comms commitment — Dana Lowe (due 15:00).\n\n5. Customer-communications commitment: notify affected merchants within 4 hours of all-clear, waive fees for the window, written summary within 48 hours.",
+      "trimmed_answer": "On-call handover picture for the Atlas payments incident (redacted for the active persona — confidential items withheld):\n\n1. Last bridge-call decisions (14:00): rollback to v4.6 complete, error rate at baseline, in monitoring before all-clear.\n\n2. Root cause: v4.7 connection-pool leak driving the error rate to 38%.\n\n3. Mitigation: rollback v4.7→v4.6 by Liam Foster, completed 11:05.\n\n4. Open actions: monitor error rate — Aisha Khan (due 16:00); customer-comms confirmation — Dana Lowe (due 15:00).\n\n5. Customer-communications commitment: withheld — the confidential comms thread and customer-impact assessment are restricted to incident command.",
+      "citations": ["MTG-001", "MTG-002", "EML-003", "MSG-001", "FILE-001", "ACT-002", "EML-001", "EML-002", "FILE-002"],
+      "restricted_citations": ["EML-001", "EML-002", "FILE-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Build the post-incident timeline for the Atlas outage — decisions, mitigations, actions, and status changes in chronological order with who did what.",
+      "keywords": ["post-incident timeline", "chronological", "status changes"],
+      "answer": "Post-incident timeline for the Atlas payments outage (chronological, 11-JUN):\n\n• 10:00 — Bridge call #1: Helen Cho declared Sev-1 (error rate 38%); Priya Nair suspected the v4.7 connection-pool leak; decision to roll back to v4.6 (MTG-002).\n• 11:05 — Mitigation: Liam Foster completed the rollback v4.7→v4.6 (#atlas-incident, ACT-001 → Done).\n• 11:30 — Status change: error rate dropping 38%→2% post-rollback, Aisha Khan monitoring (MSG-002).\n• 13:30 — Root cause confirmed: v4.7 connection-pool leak; permanent fix recommended (SRE RCA email, EML-003).\n• 14:00 — Bridge call #2 (latest): rollback complete, error rate at baseline, incident in monitoring before all-clear; actions assigned for monitoring and customer-comms (MTG-001).\n\nWho did what: Cho (command/declaration), Nair (root cause), Foster (rollback), Khan (monitoring).",
+      "citations": ["MTG-002", "MTG-001", "MSG-001", "MSG-002", "ACT-001", "FILE-001", "EML-003"],
+      "restricted_citations": [],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "For each open action from the last bridge call, create or update the action item in the incident tracker with owner, service, and due time.",
+      "keywords": ["create", "action item", "incident tracker"],
+      "answer": "Open actions from the last bridge call (14:00) to create/update in the incident & action tracker: (1) Monitor Atlas payments error rate for two hours before all-clear — owner Aisha Khan, service Atlas payments, due 16:00 (already tracked as ACT-002, update status/owner if changed); (2) Confirm and publish the customer-communications commitment to affected merchants — owner Dana Lowe, service Atlas payments, due 15:00 (ACT-003). Proposed Tools actions: update_entity on ACT-002 and ACT-003 to keep owner/service/due current, or create_entity for any open action not yet in the tracker. Do not duplicate existing rows.",
+      "citations": ["MTG-001", "ACT-002", "ACT-003"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "create_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the shift-handover brief and the post-incident-review starting point for the Atlas outage.",
+      "keywords": ["draft", "shift-handover brief", "post-incident-review"],
+      "answer": "Draft — Atlas Outage Shift-Handover Brief + Post-Incident-Review starting point (for review):\n\nShift-handover brief: Sev-1 on Atlas payments mitigated by rollback v4.7→v4.6 (complete 11:05); error rate at baseline; in monitoring before all-clear. Open actions: error-rate monitoring (Aisha Khan, due 16:00); customer-comms confirmation (Dana Lowe, due 15:00). Root cause: v4.7 connection-pool leak.\n\nPIR starting point: Timeline — declare 10:00, mitigate 11:05, root cause confirmed 13:30, monitoring 14:00. Impact: ~1,200 merchants / ~48,000 failed transactions (per customer-impact assessment). Follow-ups: permanent pool-cap fix (Jira ATLAS-4521) before v4.7 re-deploy; customer-comms commitment delivery.\n\n(Proposed Tools action: create both draft documents for review.)",
+      "trimmed_answer": "The shift-handover brief and post-incident-review starting point cannot be fully drafted under the active persona because the customer-impact assessment and the confidential customer-comms commitment are restricted to incident command. Switch to an incident-command persona to draft these. (Non-restricted facts available: rollback mitigation, root cause, error-rate status, and the open monitoring/comms actions.)",
+      "citations": ["MTG-001", "FILE-001", "FILE-002", "EML-002", "ONC-002"],
+      "restricted_citations": ["EML-002", "FILE-002"],
+      "required_sources": 3,
+      "tool": "draft_document"
+    }
+  ]
+}

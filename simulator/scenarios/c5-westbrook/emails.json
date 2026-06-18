@@ -1,0 +1,83 @@
+{
+  "_comment": "Synthetic governance emails for the B.B.A. AACSB reaffirmation. 'restricted' sensitivity items (accreditation-confidential liaison correspondence) are visible only to personas listed in acl. thread groups related mail.",
+  "emails": [
+    {
+      "id": "EML-001",
+      "thread_id": "THR-ACCRED",
+      "subject": "CONFIDENTIAL: AACSB site-visit timeline and evidence requests — B.B.A.",
+      "from": "PPL-004",
+      "to": ["PPL-001", "PPL-006"],
+      "cc": [],
+      "date": "2026-06-09T15:10:00Z",
+      "sensitivity": "restricted",
+      "acl": ["associate_dean", "provost"],
+      "body": "Laura, Provost — confidential pre-decisional note from the AACSB liaison. The peer-review team has set the site visit for the week of 12-OCT. They specifically asked us to prepare: (1) closed-loop assurance-of-learning evidence for the revised B.B.A. assessment plan, and (2) documentation that the program-review committee approved the related course-sequence change. They flagged the assurance-of-learning gap as the single biggest risk to reaffirmation. Keep this to leadership until we brief the committees.",
+      "attachments": []
+    },
+    {
+      "id": "EML-002",
+      "thread_id": "THR-ACCRED",
+      "subject": "RE: CONFIDENTIAL: AACSB site-visit timeline and evidence requests",
+      "from": "PPL-001",
+      "to": ["PPL-004"],
+      "cc": ["PPL-006"],
+      "date": "2026-06-10T09:05:00Z",
+      "sensitivity": "restricted",
+      "acl": ["associate_dean", "provost"],
+      "body": "Paul — understood and owned. We will close the assurance-of-learning loop on the revised B.B.A. assessment plan and produce the program-review sign-off evidence for the course-sequence change ahead of the 12-OCT visit. I'll create tracked tasks for each outstanding item and brief both committees. Treating this as leadership-confidential until the brief.",
+      "attachments": ["FILE-002"]
+    },
+    {
+      "id": "EML-003",
+      "thread_id": "THR-AOL",
+      "subject": "Assurance-of-learning actions still open from the last two committee meetings",
+      "from": "PPL-005",
+      "to": ["dl-bba-governance@westbrook.edu"],
+      "cc": ["PPL-002", "PPL-003"],
+      "date": "2026-06-08T16:40:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Colleagues — flagging that two assurance-of-learning actions are still open. From the curriculum committee: close the loop on the revised B.B.A. written-communication rubric (assigned to me). From the program-review committee: confirm the course-sequence change is reflected in the catalog. Both are stalled waiting on the institutional-research data pull, which Ravi expects this week. We should not let these slip into the site-visit window.",
+      "attachments": []
+    },
+    {
+      "id": "EML-004",
+      "thread_id": "THR-AOL",
+      "subject": "RE: Assurance-of-learning actions still open",
+      "from": "PPL-008",
+      "to": ["PPL-005"],
+      "cc": ["dl-bba-governance@westbrook.edu"],
+      "date": "2026-06-08T18:10:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Ada — the assessment data pull lands Friday. Once you have it you can close the written-communication rubric loop. I'll send the program-review committee the catalog comparison the same day.",
+      "attachments": []
+    },
+    {
+      "id": "EML-005",
+      "thread_id": "THR-COVER",
+      "subject": "Covering B.B.A. site-visit prep while you're travelling",
+      "from": "PPL-002",
+      "to": ["PPL-001"],
+      "cc": ["PPL-003"],
+      "date": "2026-05-30T13:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Laura — confirming the live B.B.A. site-visit items: the curriculum committee's revised assessment-plan decision, the open assurance-of-learning actions, and the program-review committee's course-sequence sign-off. The accreditation tracker should be the source of truth for outstanding tasks.",
+      "attachments": ["FILE-001"]
+    },
+    {
+      "id": "EML-006",
+      "thread_id": "THR-WEEKLY",
+      "subject": "B.B.A. governance weekly — action movement w/c 08-JUN",
+      "from": "PPL-001",
+      "to": ["dl-bba-governance@westbrook.edu"],
+      "cc": [],
+      "date": "2026-06-08T08:30:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Weekly note: the curriculum committee approved the revised B.B.A. assessment plan; two assurance-of-learning actions remain open pending the assessment data pull. The program-review committee has the course-sequence change on its agenda for sign-off. No other governance movement this week.",
+      "attachments": []
+    }
+  ]
+}

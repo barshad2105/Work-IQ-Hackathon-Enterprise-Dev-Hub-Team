@@ -1,0 +1,45 @@
+{
+  "_comment": "Dataverse-style engagement tracker for Meridian's portfolio. This is the create_entity / update_entity / fetch write target for the 'Agent with MCP / Tools' tier (the change-request hero action). Rows have stable ids; writes append or patch here at runtime (in-memory unless persisted).",
+  "engagement_tracker": [
+    {
+      "id": "ENG-001",
+      "client": "Brightwater",
+      "deliverable": "Data migration cutover",
+      "sprint": "Sprint 14",
+      "owner": "PPL-003",
+      "due_date": "2026-06-26",
+      "status": "At Risk",
+      "risk": "Two integration defects; recovery date 26-JUN (slipped from 19-JUN)"
+    },
+    {
+      "id": "ENG-002",
+      "client": "Brightwater",
+      "deliverable": "Integration test report",
+      "sprint": "Sprint 14",
+      "owner": "PPL-005",
+      "due_date": "2026-06-13",
+      "status": "On Track",
+      "risk": "None"
+    },
+    {
+      "id": "ENG-003",
+      "client": "Northwind",
+      "deliverable": "Target-state roadmap workshop",
+      "sprint": "Sprint 6",
+      "owner": "PPL-009",
+      "due_date": "2026-06-20",
+      "status": "On Track",
+      "risk": "None"
+    },
+    {
+      "id": "ENG-004",
+      "client": "Brightwater",
+      "deliverable": "Self-service reporting module (proposed)",
+      "sprint": "Unscheduled",
+      "owner": "PPL-002",
+      "due_date": "",
+      "status": "Proposed",
+      "risk": "Out-of-scope change request; not started until approved"
+    }
+  ]
+}

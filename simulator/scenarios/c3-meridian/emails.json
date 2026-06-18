@@ -1,0 +1,83 @@
+{
+  "_comment": "Synthetic engagement emails for the Brightwater account. 'restricted' sensitivity items are visible only to personas listed in acl (drives the permission-trimming governance demo). thread groups related mail.",
+  "emails": [
+    {
+      "id": "EML-001",
+      "thread_id": "THR-CLIENT-ESC",
+      "subject": "ESCALATION: Brightwater migration cutover slipping — board demo at risk",
+      "from": "PPL-008",
+      "to": ["PPL-002", "PPL-001"],
+      "cc": ["PPL-004"],
+      "date": "2026-06-09T14:20:00Z",
+      "sensitivity": "restricted",
+      "acl": ["delivery_principal", "director"],
+      "body": "Owen, Nina — Brightwater is formally escalating. The data migration cutover that was committed for this sprint is slipping, and our board demo depends on it. We need (1) a committed recovery date, (2) confirmation the integration defects are contained, and (3) a written status to me by Thursday. This is now a relationship issue, not just a delivery one.",
+      "attachments": []
+    },
+    {
+      "id": "EML-002",
+      "thread_id": "THR-CLIENT-ESC",
+      "subject": "RE: ESCALATION: Brightwater migration cutover slipping",
+      "from": "PPL-001",
+      "to": ["PPL-008"],
+      "cc": ["PPL-004", "PPL-006"],
+      "date": "2026-06-10T09:05:00Z",
+      "sensitivity": "restricted",
+      "acl": ["delivery_principal", "director"],
+      "body": "Helen, acknowledged and owned. We commit to: a cutover recovery date of 26-JUN, contingent on closing the two open integration defects; a contained test plan with daily defect burn-down; and a written status to you by 12-JUN. Priya Deshmukh leads the recovery on our side and I am personally covering the engagement while Owen is on leave.",
+      "attachments": ["FILE-002"]
+    },
+    {
+      "id": "EML-003",
+      "thread_id": "THR-SCOPE",
+      "subject": "Open scope change — Brightwater reporting module not in current SOW",
+      "from": "PPL-003",
+      "to": ["dl-brightwater-delivery@meridiangroup.com"],
+      "cc": ["PPL-002", "PPL-008"],
+      "date": "2026-06-08T16:40:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Team — flagging an open scope-change discussion on Brightwater. The client has asked for a new self-service reporting module that is NOT in the current statement of work. This is additional scope and effort; we should not absorb it. Recommend we log a change request with an effort estimate and route it through Owen / the client program office before any work starts.",
+      "attachments": []
+    },
+    {
+      "id": "EML-004",
+      "thread_id": "THR-SCOPE",
+      "subject": "RE: Open scope change — Brightwater reporting module",
+      "from": "PPL-008",
+      "to": ["PPL-003"],
+      "cc": ["dl-brightwater-delivery@meridiangroup.com"],
+      "date": "2026-06-08T18:10:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Priya — agreed it's new scope. Please send a change request with the estimated effort and timeline and we'll get it approved on our side. We do not expect it for free.",
+      "attachments": []
+    },
+    {
+      "id": "EML-005",
+      "thread_id": "THR-HANDOVER",
+      "subject": "Brightwater engagement ownership while I'm on leave",
+      "from": "PPL-002",
+      "to": ["PPL-001", "PPL-003"],
+      "cc": ["PPL-006"],
+      "date": "2026-05-30T13:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Confirming for the record: while I'm on leave (01-JUN to 28-JUN), Nina Alvarez covers Brightwater as Delivery Principal and Priya Deshmukh leads day-to-day delivery. The live items are the migration cutover (sprint 14) and the open reporting-module scope change. Engagement tracker is the source of truth for deliverables.",
+      "attachments": ["FILE-001"]
+    },
+    {
+      "id": "EML-006",
+      "thread_id": "THR-WEEKLY",
+      "subject": "Brightwater weekly — deliverable movement w/c 08-JUN",
+      "from": "PPL-001",
+      "to": ["dl-brightwater-delivery@meridiangroup.com"],
+      "cc": [],
+      "date": "2026-06-08T08:30:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Weekly note: the migration cutover deliverable moved from 19-JUN to 26-JUN pending two integration defects. The integration test report remains on track for this week. The reporting-module scope change is logged as proposed, awaiting a change request. No other deliverable movement.",
+      "attachments": []
+    }
+  ]
+}

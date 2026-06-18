@@ -1,0 +1,29 @@
+{
+  "_comment": "Dataverse-style incident & action tracker for the Atlas payments outage. This is the create_entity / update_entity / fetch write target for the 'Agent with MCP / Tools' tier (the create/update-action-item hero action). '_tracker' suffix => citation kind 'action'; rows carry an 'action' field for nice citation titles. Fields: action, service, owner, status, due (due time).",
+  "action_tracker": [
+    {
+      "id": "ACT-001",
+      "action": "Execute rollback of Atlas payments v4.7 to v4.6",
+      "service": "Atlas payments",
+      "owner": "PPL-008",
+      "status": "Done",
+      "due": "2026-06-11T11:00:00Z"
+    },
+    {
+      "id": "ACT-002",
+      "action": "Monitor Atlas payments error rate for two hours before all-clear",
+      "service": "Atlas payments",
+      "owner": "PPL-005",
+      "status": "Open",
+      "due": "2026-06-11T16:00:00Z"
+    },
+    {
+      "id": "ACT-003",
+      "action": "Confirm and publish customer-communications commitment to affected merchants",
+      "service": "Atlas payments",
+      "owner": "PPL-004",
+      "status": "Open",
+      "due": "2026-06-11T15:00:00Z"
+    }
+  ]
+}

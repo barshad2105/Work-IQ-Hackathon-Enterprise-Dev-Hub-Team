@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams channel posts for Northbridge Health Network. The 'Westgate EHR Rollout' channel is the per-clinic program channel (acl all — the external Lumina vendor participates). The 'Quality Program' channel is staff-only. Used for the multi-signal Westgate-status question and the cross-committee synthesis.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "Westgate EHR Rollout",
+      "author": "PPL-004",
+      "date": "2026-06-08T15:05:00Z",
+      "acl": ["all"],
+      "text": "Westgate go-live status: build configured, end-user training ~80% done. Remaining blocker is the medication-list data migration validation. Target go-live still 22-JUN pending Lumina written confirmation."
+    },
+    {
+      "id": "MSG-002",
+      "channel": "Westgate EHR Rollout",
+      "author": "PPL-010",
+      "date": "2026-06-10T10:40:00Z",
+      "acl": ["all"],
+      "text": "Migration validation update: medication-list mapping is 90% validated, working the last reconciliation exceptions. On track for 13-JUN."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "Westgate EHR Rollout",
+      "author": "PPL-008",
+      "date": "2026-06-10T16:20:00Z",
+      "acl": ["all"],
+      "text": "Lumina ready to issue the written go-live confirmation as soon as Northbridge signs off the migration validation. Trainers booked through 20-JUN to finish the remaining 20%."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "Quality Program",
+      "author": "PPL-001",
+      "date": "2026-06-10T17:30:00Z",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "text": "Steering committee adopted the revised medication-reconciliation policy today — reconciliation at every transition of care. Angela owns the policy doc (CAPA-001), David owns the workflow. Both feed the Joint Commission readiness review."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "Quality Program",
+      "author": "PPL-007",
+      "date": "2026-06-11T09:15:00Z",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "text": "Reminder for the readiness review: CAPA-004 (Westgate environment-of-care documentation) is still open and past due. Credentialing already closed the onboarding gap (CAPA-002). Med-rec policy (CAPA-001) is the other open item."
+    }
+  ]
+}

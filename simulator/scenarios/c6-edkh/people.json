@@ -1,0 +1,105 @@
+{
+  "_comment": "People directory for Challenge 6 — Enterprise Developer Knowledge Hub (incident shift handover for the Atlas payments Sev-1 outage). Operational coordination only — no source code or live telemetry. acl='all' means visible to every persona.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Marco Reyes",
+      "title": "On-Call Lead / SRE Lead",
+      "email": "marco.reyes@enterprise-dev.com",
+      "department": "Site Reliability Engineering",
+      "manager": "PPL-006",
+      "expertise": ["incident command", "on-call leadership", "Atlas payments service"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "Priya Nair",
+      "title": "SRE Engineer (root-cause analysis)",
+      "email": "priya.nair@enterprise-dev.com",
+      "department": "Site Reliability Engineering",
+      "manager": "PPL-001",
+      "expertise": ["root-cause analysis", "observability", "payments infrastructure"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Tom Becker",
+      "title": "Service Owner — Atlas Payments",
+      "email": "tom.becker@enterprise-dev.com",
+      "department": "Payments Engineering",
+      "manager": "PPL-006",
+      "expertise": ["Atlas payments service", "service ownership", "release coordination"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Dana Lowe",
+      "title": "Customer Communications Lead",
+      "email": "dana.lowe@enterprise-dev.com",
+      "department": "Customer Communications",
+      "manager": "PPL-006",
+      "expertise": ["customer communications", "incident comms", "merchant relations"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Aisha Khan",
+      "title": "SRE Engineer (on-call, mid privilege)",
+      "email": "aisha.khan@enterprise-dev.com",
+      "department": "Site Reliability Engineering",
+      "manager": "PPL-001",
+      "expertise": ["incident response", "mitigation", "monitoring"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "Helen Cho",
+      "title": "Incident Commander / Director of Engineering",
+      "email": "helen.cho@enterprise-dev.com",
+      "department": "Engineering Leadership",
+      "manager": null,
+      "expertise": ["incident command", "engineering leadership", "executive escalation"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Raj Patel",
+      "title": "Release Manager",
+      "email": "raj.patel@enterprise-dev.com",
+      "department": "Release Engineering",
+      "manager": "PPL-006",
+      "expertise": ["release management", "deployment", "rollback coordination"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Liam Foster",
+      "title": "DevOps Engineer (deploy/rollback)",
+      "email": "liam.foster@enterprise-dev.com",
+      "department": "Platform Engineering",
+      "manager": "PPL-007",
+      "expertise": ["CI/CD", "rollback execution", "infrastructure"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Sofia Martins",
+      "title": "Support Lead (merchant support)",
+      "email": "sofia.martins@enterprise-dev.com",
+      "department": "Customer Support",
+      "manager": "PPL-006",
+      "expertise": ["merchant support", "incident triage", "escalation"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Evan Cole",
+      "title": "Contractor SRE (least privilege)",
+      "email": "evan.cole@contractor.enterprise-dev.com",
+      "department": "Site Reliability Engineering (Contractor)",
+      "manager": "PPL-001",
+      "expertise": ["monitoring", "runbook execution"],
+      "acl": ["all"]
+    }
+  ]
+}

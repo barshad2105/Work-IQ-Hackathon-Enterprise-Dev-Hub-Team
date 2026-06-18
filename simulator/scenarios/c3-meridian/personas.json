@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming. A persona sees a fixture if the fixture acl contains the persona id OR 'all'. delivery_principal = full delivery view incl client-confidential escalations + commercial budget; consultant = internal engagement + budget summary but NOT client-restricted escalations; contractor = least privilege; director = sees everything.",
+  "personas": [
+    {
+      "id": "delivery_principal",
+      "label": "Nina Alvarez — Delivery Principal (covering Brightwater)",
+      "person_id": "PPL-001",
+      "description": "Full delivery leadership view including client-confidential escalations and commercial budget/utilisation.",
+      "groups": ["delivery_leadership", "director"]
+    },
+    {
+      "id": "consultant",
+      "label": "Priya Deshmukh — Lead Consultant",
+      "person_id": "PPL-003",
+      "description": "Sees all internal engagement signals and the engagement budget summary, but NOT client-confidential escalation threads or the commercial rate card.",
+      "groups": ["delivery"]
+    },
+    {
+      "id": "contractor",
+      "label": "Lena Frost — Subcontractor Consultant (vendor)",
+      "person_id": "PPL-010",
+      "description": "Least-privilege vendor. Sees only non-sensitive engagement signals; cannot see client escalations, budget/utilisation, or the commercial rate card.",
+      "groups": ["contractor"]
+    },
+    {
+      "id": "director",
+      "label": "Sofia Marin — Director, Consulting Delivery (escalation)",
+      "person_id": "PPL-006",
+      "description": "Executive escalation view. Sees everything delivery_principal sees.",
+      "groups": ["delivery_leadership", "director"]
+    }
+  ]
+}

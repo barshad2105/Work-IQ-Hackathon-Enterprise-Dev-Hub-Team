@@ -1,0 +1,45 @@
+{
+  "_comment": "Dataverse-style work-order tracker for Arundel facilities. This is the create_entity / update_entity / fetch write target for the 'Agent with MCP / Tools' tier (the update-work-order hero action). Rows have stable ids; writes append or patch here at runtime (in-memory unless persisted).",
+  "work_order_tracker": [
+    {
+      "id": "WO-001",
+      "building": "Calder Tower",
+      "asset": "Chiller-2",
+      "description": "Pressure-test, braze suction-line leak, recharge, soak-test",
+      "owner": "PPL-004",
+      "due_date": "2026-06-26",
+      "status": "Open",
+      "risk": "Cooling outage; tenant exposure on floors 18-24"
+    },
+    {
+      "id": "WO-002",
+      "building": "Calder Tower",
+      "asset": "Interim spot-cooling (floors 18-24)",
+      "description": "Deploy and run interim spot-cooling pending chiller restoration",
+      "owner": "PPL-005",
+      "due_date": "2026-06-11",
+      "status": "Open",
+      "risk": "Mitigation only; remove on restoration"
+    },
+    {
+      "id": "WO-003",
+      "building": "Bishop House",
+      "asset": "AHU planned maintenance",
+      "description": "Monthly planned-maintenance window — needs rebooking",
+      "owner": "PPL-009",
+      "due_date": "2026-06-05",
+      "status": "Overdue",
+      "risk": "Missed planned-maintenance window this month"
+    },
+    {
+      "id": "WO-004",
+      "building": "Calder Tower",
+      "asset": "BMS sensor (chilled-water loop)",
+      "description": "Replace faulty chilled-water temperature sensor",
+      "owner": "PPL-003",
+      "due_date": "2026-06-02",
+      "status": "Closed",
+      "risk": "None"
+    }
+  ]
+}

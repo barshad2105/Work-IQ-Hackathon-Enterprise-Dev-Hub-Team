@@ -1,0 +1,43 @@
+{
+  "_comment": "Synthetic incident files (metadata + short content excerpt). FILE-002 (customer-impact assessment) carries a sensitivity label and is restricted to incident command + SRE engineers; FILE-003 (commercial-impact summary) is restricted to incident command only — both demonstrate sensitivity-label / file-level permission trimming. FILE-001 is the shared incident doc (all).",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "Atlas Incident Doc.docx",
+      "url": "https://enterprise-dev.sharepoint.com/sites/SRE/Shared%20Documents/Atlas-Incident-Doc.docx",
+      "type": "document",
+      "owner": "PPL-001",
+      "date": "2026-06-11T10:30:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "The shared Atlas payments incident document — the live running record of the outage: timeline, current status of restoration, mitigations, and open actions.",
+      "content_excerpt": "Status: rollback to v4.6 complete; error rate at baseline; in monitoring before all-clear. Root cause: v4.7 connection-pool leak. Open: error-rate monitoring, customer-comms confirmation."
+    },
+    {
+      "id": "FILE-002",
+      "name": "Atlas Outage — Customer-Impact Assessment.docx",
+      "url": "https://enterprise-dev.sharepoint.com/sites/SRE/Restricted/Atlas-Customer-Impact-Assessment.docx",
+      "type": "document",
+      "owner": "PPL-001",
+      "date": "2026-06-11T14:30:00Z",
+      "sensitivity": "restricted",
+      "label": "Internal — Incident Confidential",
+      "acl": ["oncall_lead", "incident_commander", "sre_engineer"],
+      "summary": "Sensitivity-labelled assessment of merchant impact during the Atlas payments outage. Quantifies affected merchants and failed transactions; pre-decisional input to the customer-comms commitment.",
+      "content_excerpt": "Affected merchants: ~1,200. Failed transactions during the outage window: ~48,000. Recommended remediation: fee waiver for the window. Pre-decisional — not for wide distribution."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Atlas Outage — Commercial Impact (confidential).pdf",
+      "url": "https://enterprise-dev.sharepoint.com/sites/Exec/Restricted/Atlas-Commercial-Impact.pdf",
+      "type": "document",
+      "owner": "PPL-006",
+      "date": "2026-06-11T15:30:00Z",
+      "sensitivity": "restricted",
+      "label": "Confidential — Commercial",
+      "acl": ["oncall_lead", "incident_commander"],
+      "summary": "Confidential commercial-impact summary of the Atlas outage for the executive team. Restricted to incident command leadership.",
+      "content_excerpt": "[RESTRICTED — commercial] Estimated revenue exposure and contractual SLA-credit implications for the outage window."
+    }
+  ]
+}

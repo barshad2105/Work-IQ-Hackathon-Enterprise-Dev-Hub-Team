@@ -1,0 +1,41 @@
+{
+  "_comment": "Dataverse-style milestone tracker for 45621-B. This is the create_entity / update_entity / fetch write target for the 'Agent with MCP / Tools' tier. Rows have stable ids; writes append or patch here at runtime (in-memory unless persisted).",
+  "milestone_tracker": [
+    {
+      "id": "MS-001",
+      "milestone": "Design Freeze",
+      "owner": "PPL-003",
+      "baseline_date": "2026-05-15",
+      "current_date": "2026-05-15",
+      "status": "Complete",
+      "risk": "None"
+    },
+    {
+      "id": "MS-002",
+      "milestone": "Qualification Test Complete",
+      "owner": "PPL-003",
+      "baseline_date": "2026-06-19",
+      "current_date": "2026-07-03",
+      "status": "At Risk",
+      "risk": "Material hardness non-conformance (Apex Alloys lot 24-118) — remachine + re-test in progress"
+    },
+    {
+      "id": "MS-003",
+      "milestone": "Quality Sign-off",
+      "owner": "PPL-004",
+      "baseline_date": "2026-06-22",
+      "current_date": "2026-07-06",
+      "status": "Held",
+      "risk": "Held by Quality pending qualification hardness re-test"
+    },
+    {
+      "id": "MS-004",
+      "milestone": "First Article Inspection (FAI)",
+      "owner": "PPL-004",
+      "baseline_date": "2026-07-10",
+      "current_date": "2026-07-10",
+      "status": "Scheduled",
+      "risk": "Dependent on qualification completion"
+    }
+  ]
+}

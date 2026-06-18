@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming. 'acl' on each fixture is matched against the persona id. A persona sees a fixture if the fixture acl contains the persona id OR contains 'all'. 'restricted'/'internal' sensitivity is informational; the acl is the enforced gate. new_pm = full program leadership view; quality_engineer = engineering/quality but NOT customer-restricted threads; contractor = least privilege (no restricted, no commercial).",
+  "personas": [
+    {
+      "id": "new_pm",
+      "label": "Sam Ortiz — Incoming Program Manager",
+      "person_id": "PPL-002",
+      "description": "Full program leadership view including customer-restricted escalations and commercial supplier terms.",
+      "groups": ["program_leadership", "director"]
+    },
+    {
+      "id": "quality_engineer",
+      "label": "Raj Patel — Senior Quality Engineer",
+      "person_id": "PPL-004",
+      "description": "Sees all internal engineering, quality, and supplier-risk signals, but NOT customer-facing restricted escalations or confidential commercial agreements.",
+      "groups": ["engineering", "quality"]
+    },
+    {
+      "id": "contractor",
+      "label": "Diego Salas — Contract Test Engineer (vendor)",
+      "person_id": "PPL-010",
+      "description": "Least-privilege vendor. Sees only non-sensitive program signals; cannot see customer escalations, supplier risk register, or commercial agreements.",
+      "groups": ["contractor"]
+    },
+    {
+      "id": "director",
+      "label": "Marcus Reed — Director (escalation)",
+      "person_id": "PPL-006",
+      "description": "Executive escalation view. Sees everything new_pm sees.",
+      "groups": ["program_leadership", "director"]
+    }
+  ]
+}

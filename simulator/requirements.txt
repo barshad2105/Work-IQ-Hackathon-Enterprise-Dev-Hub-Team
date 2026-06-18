@@ -1,0 +1,11 @@
+# Local Work IQ Simulator (mcp + optional openai)
+#
+# Metadata
+#   Created: 14-JUN-2026
+#   Purpose: dependencies for the local Work IQ MCP simulator (server.py + engine.py).
+#
+# Install into the repo venv:
+#   .\.venv\Scripts\python.exe -m pip install -r simulator\requirements.txt
+
+mcp>=1.27           # MCP Python SDK (FastMCP stdio server + client)
+openai>=1.0         # OPTIONAL: ad-hoc LLM fallback for non-golden questions

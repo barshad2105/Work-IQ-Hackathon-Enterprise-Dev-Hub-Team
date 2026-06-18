@@ -1,0 +1,105 @@
+{
+  "_comment": "People directory for Arundel Holdings facilities operations (Challenge 4 — facilities coordination, Calder Tower chiller event). acl='all' means visible to every persona. Stable ids are cited by golden answers.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Marco Reyes",
+      "title": "Facilities Duty Manager (covering)",
+      "email": "marco.reyes@arundelholdings.com",
+      "department": "Facilities Operations",
+      "manager": "PPL-006",
+      "expertise": ["facilities coordination", "incident response", "vendor management"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "Janet Cole",
+      "title": "On-call Facilities Engineer (handing over)",
+      "email": "janet.cole@arundelholdings.com",
+      "department": "Facilities Operations",
+      "manager": "PPL-006",
+      "expertise": ["on-call response", "Calder Tower", "BMS"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Derek Owens",
+      "title": "Mechanical Engineer (cause analysis)",
+      "email": "derek.owens@arundelholdings.com",
+      "department": "Engineering",
+      "manager": "PPL-006",
+      "expertise": ["chiller systems", "HVAC", "root-cause analysis"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Sam Whitford",
+      "title": "Mechanical Contractor Lead (Coolflow Mechanical)",
+      "email": "sam.whitford@coolflow-mechanical.com",
+      "department": "Vendor (Coolflow Mechanical)",
+      "manager": null,
+      "expertise": ["chiller repair", "field service"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Aisha Bello",
+      "title": "Building Operations Coordinator, Calder Tower",
+      "email": "aisha.bello@arundelholdings.com",
+      "department": "Facilities Operations",
+      "manager": "PPL-001",
+      "expertise": ["building operations", "tenant coordination", "work orders"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "Helen Stamos",
+      "title": "Director, Portfolio Operations (escalation)",
+      "email": "helen.stamos@arundelholdings.com",
+      "department": "Facilities Operations",
+      "manager": null,
+      "expertise": ["portfolio operations", "executive escalation", "vendor commercial"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Raj Anand",
+      "title": "Tenant Relations Lead",
+      "email": "raj.anand@arundelholdings.com",
+      "department": "Tenant Relations",
+      "manager": "PPL-006",
+      "expertise": ["tenant relations", "tenant notifications", "lease obligations"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Mei Lin",
+      "title": "Vendor & Procurement Manager",
+      "email": "mei.lin@arundelholdings.com",
+      "department": "Procurement",
+      "manager": "PPL-006",
+      "expertise": ["vendor contracts", "SLA", "Coolflow account"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Carlos Pena",
+      "title": "Building Operations Coordinator, Bishop House",
+      "email": "carlos.pena@arundelholdings.com",
+      "department": "Facilities Operations",
+      "manager": "PPL-006",
+      "expertise": ["building operations", "planned maintenance"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Victor Hale",
+      "title": "Subcontractor Technician (vendor)",
+      "email": "victor.hale@contractors.coolflow-mechanical.com",
+      "department": "Vendor (Subcontractor)",
+      "manager": "PPL-004",
+      "expertise": ["field service"],
+      "acl": ["all"]
+    }
+  ]
+}

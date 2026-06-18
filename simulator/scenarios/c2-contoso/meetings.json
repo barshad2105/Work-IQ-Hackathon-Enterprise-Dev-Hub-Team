@@ -1,0 +1,49 @@
+{
+  "_comment": "Synthetic meeting recaps + transcript excerpts + action items for 45621-B design reviews. action_items carry their own ids, owners (people ids), due dates, status.",
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "45621-B Weekly Design Review",
+      "date": "2026-06-11T15:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-001", "PPL-003", "PPL-004", "PPL-005", "PPL-008"],
+      "acl": ["all"],
+      "recap": "Latest design review (11-JUN). The review concluded that the part design is NOT the cause of the material hardness non-conformance; root cause is a non-conforming bar-stock material lot (Apex Alloys 24-118, low hardness). The review DECIDED to: quarantine lot 24-118, remachine the two failing units with conforming material, and re-run the hardness acceptance test before qualification sign-off. Qualification completion re-baselined to 03-JUL. Quality sign-off remains held by Raj Patel until the hardness re-test passes.",
+      "transcript_excerpt": "Elena Cho: '...so the data says hardness is out on 24-118, not a design margin problem. I don't want to rework the process.' Raj Patel: 'Agreed, but I'm not signing qualification until we re-run the hardness acceptance test on remachined units.' Dana Whitfield: 'Then qualification completion is 03-JUL. Priya, when are conforming material here?' Priya Nair: 'Five business days, so by 13-JUN.' Dana Whitfield: 'OK. Elena owns the recovery plan, Raj owns sign-off.'",
+      "action_items": [
+        {"id": "AI-101", "text": "Quarantine Apex Alloys material lot 24-118 and request conforming replacement lot with material cert", "owner": "PPL-008", "due": "2026-06-13", "status": "open"},
+        {"id": "AI-102", "text": "Remachine the two failing machined units with conforming material and re-run hardness acceptance test", "owner": "PPL-003", "due": "2026-06-20", "status": "open"},
+        {"id": "AI-103", "text": "Issue written risk summary to Aeronix program office", "owner": "PPL-001", "due": "2026-06-12", "status": "open"},
+        {"id": "AI-104", "text": "Update milestone tracker with re-baselined qualification date 03-JUL", "owner": "PPL-001", "due": "2026-06-12", "status": "closed"}
+      ]
+    },
+    {
+      "id": "MTG-002",
+      "title": "45621-B Weekly Design Review",
+      "date": "2026-06-04T15:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-001", "PPL-003", "PPL-004", "PPL-005"],
+      "acl": ["all"],
+      "recap": "Prior design review (04-JUN). The qualification test result showing hardness non-conformance on 2 of 5 units was presented. The review did not yet have root cause; assigned Priya to investigate bar-stock material lot and Raj to hold sign-off. No re-baseline decided yet at this point.",
+      "transcript_excerpt": "Raj Patel: 'Two of five units measured below the hardness minimum. I need root cause before I sign.' Priya Nair: 'Let me pull the material lot certs and check hardness.' Elena Cho: 'Could be material. Don't touch the design yet.'",
+      "action_items": [
+        {"id": "AI-095", "text": "Investigate Inconel 718 bar-stock material lot variation as candidate root cause", "owner": "PPL-005", "due": "2026-06-10", "status": "closed"},
+        {"id": "AI-096", "text": "Hold qualification sign-off pending root cause", "owner": "PPL-004", "due": "2026-06-11", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Aeronix Customer Sync (45621-B)",
+      "date": "2026-06-02T17:00:00Z",
+      "organizer": "PPL-001",
+      "attendees": ["PPL-001", "PPL-006", "PPL-009"],
+      "acl": ["new_pm", "director"],
+      "sensitivity": "restricted",
+      "recap": "Monthly customer sync with Aeronix. Customer raised concern about qualification timeline and flight-test window. Contoso committed to provide weekly status and early warning on any slip. (Restricted: customer-facing commitments.)",
+      "transcript_excerpt": "Karen Vance: 'We cannot lose the flight-test window. Tell us early if you slip.' Marcus Reed: 'You'll get weekly status and a call the moment risk materialises.'",
+      "action_items": [
+        {"id": "AI-090", "text": "Provide weekly written status to Aeronix program office", "owner": "PPL-001", "due": "2026-06-09", "status": "open"}
+      ]
+    }
+  ]
+}

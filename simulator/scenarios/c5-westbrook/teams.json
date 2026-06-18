@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams per-program channel posts for the B.B.A. program review. Used for the program-review status (channel+meeting) multi-signal question.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "B.B.A. Program / Review",
+      "author": "PPL-003",
+      "date": "2026-06-07T11:22:00Z",
+      "acl": ["all"],
+      "text": "Program-review update: the course-sequence change is conditionally approved, not yet signed off. I need the catalog comparison and alignment with the new assessment plan before I take it to a vote."
+    },
+    {
+      "id": "MSG-002",
+      "channel": "B.B.A. Program / Review",
+      "author": "PPL-001",
+      "date": "2026-06-08T09:40:00Z",
+      "acl": ["all"],
+      "text": "Status of the B.B.A. program review: assessment plan approved by curriculum committee; course-sequence change conditionally approved by program-review committee pending catalog comparison; two assurance-of-learning actions still open. Net: on track for the site visit if we close the AoL loop and get the sign-off vote."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "B.B.A. Program / Review",
+      "author": "PPL-005",
+      "date": "2026-06-08T13:05:00Z",
+      "acl": ["all"],
+      "text": "I'll close the written-communication assurance-of-learning loop as soon as Ravi's assessment data pull lands Friday. That's the last curriculum-side item."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "B.B.A. Program / Review",
+      "author": "PPL-001",
+      "date": "2026-06-08T14:30:00Z",
+      "acl": ["all"],
+      "text": "Reminder: the accreditation tracker is our single source of truth for outstanding site-visit tasks. I'll create tracked tasks for each open AoL action and the sign-off."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "B.B.A. Program / Review",
+      "author": "PPL-007",
+      "date": "2026-06-08T15:00:00Z",
+      "acl": ["all"],
+      "text": "Management department is ready to support whatever the committees need for the site visit. No open items on our side beyond the two AoL actions already logged."
+    }
+  ]
+}

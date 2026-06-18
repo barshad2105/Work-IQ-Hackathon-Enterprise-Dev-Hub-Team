@@ -1,0 +1,90 @@
+{
+  "_comment": "Golden answers for the 8 C4 (Arundel Holdings / Calder Tower facilities coordination) compound questions. The engine keyword-scores the incoming question against 'keywords', then returns 'answer' with citations resolved+persona-trimmed. 'restricted_citations' are the subset trimmed for personas lacking access. 'tool' (optional) signals a Tools/write action. Hero action: update_entity on the work-order tracker.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the last facilities coordination call decide about the Calder Tower chiller failure, and what actions were assigned?",
+      "keywords": ["last", "coordination call", "calder tower", "actions"],
+      "answer": "The most recent Calder Tower facilities coordination call (10-JUN-2026, chaired by Marco Reyes) decided to: accept the suspected low-refrigerant suction-line leak as the working cause; authorise Coolflow to pressure-test, braze the leak, recharge and soak-test Chiller-2; deploy interim spot-cooling to floors 18-24 within 24 hours; and target full cooling restored by 26-JUN, with the tenant-notification commitment to be confirmed by leadership. Actions assigned: AI-101 — chiller leak repair + soak test — owner Sam Whitford (Coolflow), due 26-JUN; AI-102 — deploy interim spot-cooling to floors 18-24 — owner Aisha Bello, due 11-JUN; AI-103 — confirm the tenant-notification commitment with leadership approval — owner Raj Anand, due 11-JUN.",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What tenant-notification commitment did we make for the Calder Tower outage, and who approved it?",
+      "keywords": ["tenant-notification", "commitment", "approved"],
+      "answer": "In the tenant-confidential thread (09-10 JUN), Tenant Relations (Raj Anand) flagged that the anchor tenant on floors 18-24 has lease cooling-availability obligations and asked what restoration time to formally communicate and what service-credit exposure to accept. Marco Reyes replied with the commitment — approved by Director Helen Stamos — to the anchor tenant: cooling restored by 26-JUN, interim spot-cooling on floors 18-24 within 24 hours, and acceptance of the contractual service-credit terms in the vendor SLA register if missed. The credit exposure is leadership-only.",
+      "trimmed_answer": "The Calder Tower tenant-notification commitment thread is tenant-confidential and restricted to facilities leadership, so the specific commitment and service-credit exposure cannot be shown to the active persona. At a non-restricted level: a tenant notification is being issued and an internal restoration plan targets cooling back by 26-JUN.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "Which work orders are open at Calder Tower and what do the building-ops channel posts say about progress on each?",
+      "keywords": ["work orders", "open", "channel", "progress"],
+      "answer": "Two work orders are open at Calder Tower per the tracker: WO-001 (Chiller-2 leak repair + soak test, owner Sam Whitford/Coolflow, due 26-JUN) and WO-002 (interim spot-cooling floors 18-24, owner Aisha Bello, due 11-JUN). The building-ops channel says: on WO-001, Coolflow is on site, the suction-line leak is located and being brazed, parts arrive tomorrow and it is tracking to 26-JUN restored; on WO-002, interim spot-cooling is deployed and running and the anchor tenant is comfortable for now. Both stay open until the chiller soak test is verified.",
+      "citations": ["WO-001", "WO-002", "MSG-001", "MSG-002", "MSG-003"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "What's the current status of the Calder Tower restoration across the last coordination call and the shared works log?",
+      "keywords": ["restoration", "status", "works log"],
+      "answer": "Current Calder Tower restoration status, consistent across two signals. From the last coordination call (10-JUN): working cause is the low-refrigerant suction-line leak; Coolflow authorised to repair and soak-test; interim spot-cooling deployed; target restored 26-JUN. From the shared works log: Chiller-2 repair is in progress with Coolflow brazing the leak, interim spot-cooling is live on floors 18-24, and the restored ETA is 26-JUN pending the soak test. Net: not yet restored — full cooling depends on completing the leak repair and the 24-hour soak test, ETA 26-JUN; the building is held on interim spot-cooling until then.",
+      "citations": ["MTG-001", "FILE-001"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "I'm taking coverage on the Calder Tower chiller event — give me the current picture: last coordination-call decisions, suspected cause, contractor dispatched and ETA, open work orders and owners, and any tenant-notification commitment.",
+      "keywords": ["taking coverage", "current picture", "contractor", "tenant-notification"],
+      "answer": "Calder Tower chiller event — current picture:\n\n1. Last coordination-call decisions (10-JUN): accept the low-refrigerant leak as working cause; authorise Coolflow to repair and soak-test; deploy interim spot-cooling to floors 18-24; target restored 26-JUN.\n\n2. Suspected cause: low-refrigerant lockout on Chiller-2's lead compressor from a slow suction-line leak (Derek Owens, engineering).\n\n3. Contractor dispatched and ETA: Coolflow (Sam Whitford) on site, Victor Hale brazing the leak; parts 11-JUN; soak-verified ETA 25-26 JUN.\n\n4. Open work orders and owners: WO-001 chiller leak repair (Sam Whitford/Coolflow, due 26-JUN); WO-002 interim spot-cooling floors 18-24 (Aisha Bello, due 11-JUN).\n\n5. Tenant-notification commitment: to the anchor tenant on floors 18-24 — cooling restored by 26-JUN, interim spot-cooling within 24 hours, and acceptance of the SLA service-credit terms if missed (approved by Helen Stamos).",
+      "trimmed_answer": "Calder Tower chiller event — current picture (redacted for the active persona — tenant-confidential and vendor-commercial items withheld):\n\n1. Last coordination-call decisions (10-JUN): accept the low-refrigerant leak as working cause; authorise Coolflow to repair and soak-test; deploy interim spot-cooling to floors 18-24; target restored 26-JUN.\n\n2. Suspected cause: low-refrigerant lockout on Chiller-2 from a slow suction-line leak.\n\n3. Contractor dispatched and ETA: Coolflow on site, leak being brazed; soak-verified ETA 25-26 JUN.\n\n4. Open work orders and owners: WO-001 chiller leak repair (Coolflow, due 26-JUN); WO-002 interim spot-cooling floors 18-24 (Aisha Bello, due 11-JUN).\n\n5. Tenant-notification commitment: withheld — restricted to facilities leadership.",
+      "citations": ["MTG-001", "EML-003", "EML-004", "MSG-001", "FILE-001", "WO-001", "WO-002", "EML-001", "EML-002", "FILE-002"],
+      "restricted_citations": ["EML-001", "EML-002", "FILE-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Across all my buildings, which vendors have an overdue work order, an unanswered escalation, or a missed planned-maintenance window this month — and who owns each?",
+      "keywords": ["all my buildings", "overdue work order", "missed planned-maintenance", "owns"],
+      "answer": "Portfolio scan across your buildings:\n\n- Calder Tower — Coolflow Mechanical: active P1 chiller event (CMMS INC-44821), work orders WO-001/WO-002 open and on track to 26-JUN, not overdue; owner Sam Whitford (repair) / Aisha Bello (interim cooling).\n- Bishop House — Coolflow Mechanical: overdue work order WO-003 (monthly AHU planned-maintenance window missed, CMMS PM-10233 Overdue); owner Carlos Pena — needs rebooking with the vendor.\n\nNet: the only overdue/missed-PM flag this month is Bishop House (Coolflow), owned by Carlos Pena; Calder Tower is active but on schedule. Same vendor (Coolflow) appears on both — worth a single vendor conversation.",
+      "citations": ["WO-001", "WO-002", "WO-003", "CMMS-001", "CMMS-002"],
+      "restricted_citations": [],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "For each open action from the last coordination call, update the work order in the tracker with owner, asset, and due date.",
+      "keywords": ["update", "work order", "tracker", "asset"],
+      "answer": "Open actions from the last coordination call (10-JUN) mapped to work orders:\n\n1. AI-101 chiller leak repair + soak test → WO-001 (asset Chiller-2, owner Sam Whitford/Coolflow, due 26-JUN) — set status In Progress.\n2. AI-102 interim spot-cooling floors 18-24 → WO-002 (asset interim spot-cooling, owner Aisha Bello, due 11-JUN) — set status In Progress / Deployed.\n\nProposed Tools action: update each work order in the work_order_tracker with the owner, asset, and due date above and advance its status to reflect the coordination-call decisions. Use update_entity against WO-001 and WO-002; do not create duplicates.",
+      "citations": ["MTG-001", "WO-001", "WO-002"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "update_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the tenant-notification note and the leadership status update for the Calder Tower event.",
+      "keywords": ["draft", "tenant-notification", "leadership", "status"],
+      "answer": "Draft — Calder Tower event communications (for review, not sent):\n\nTENANT-NOTIFICATION NOTE (anchor tenant, floors 18-24): We are addressing a cooling-system fault at Calder Tower. Interim spot-cooling is in place on your floors now, and full cooling is expected to be restored by 26-JUN. We will update you if anything changes. (Per the approved leadership commitment.)\n\nLEADERSHIP STATUS UPDATE: Chiller-2 failed on a low-refrigerant leak; Coolflow is on site repairing and soak-testing, ETA 26-JUN. Interim spot-cooling deployed to floors 18-24. Tenant-notification commitment approved (restored by 26-JUN; service-credit exposure accepted per the SLA register if missed). Two work orders open (WO-001, WO-002); Bishop House PM is separately overdue.\n\n(Proposed Tools action: create both drafts for review — do not send.)",
+      "trimmed_answer": "The Calder Tower communications cannot be fully drafted under the active persona because the tenant-commitment thread and the vendor SLA/penalty exposure are restricted to facilities leadership. Switch to a leadership persona to draft these. (Non-restricted facts available: the low-refrigerant cause, Coolflow on site with a 26-JUN ETA, interim spot-cooling on floors 18-24, and the two open work orders.)",
+      "citations": ["MTG-001", "FILE-001", "EML-002", "FILE-002", "WO-003", "CMMS-002"],
+      "restricted_citations": ["EML-002", "FILE-002"],
+      "required_sources": 3,
+      "tool": "draft_document"
+    }
+  ]
+}

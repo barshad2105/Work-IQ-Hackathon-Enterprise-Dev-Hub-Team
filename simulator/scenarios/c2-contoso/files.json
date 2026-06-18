@@ -1,0 +1,41 @@
+{
+  "_comment": "Synthetic program files (metadata + short content excerpt). FILE-003 is restricted (supplier-confidential) to demonstrate file-level permission trimming.",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "QTP-45621B PPAP Qualification Plan rev D.docx",
+      "url": "https://contoso-precision.sharepoint.com/sites/45621B/Shared%20Documents/QTP-45621B-revD.docx",
+      "type": "document",
+      "owner": "PPL-003",
+      "date": "2026-05-28T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "The 45621-B PPAP Qualification Plan, revision D. Owned by Elena Cho. Defines the qualification test sequence including the 40-44 HRC hardness acceptance test, dimensional, and environmental. Quality acceptance sign-off is held by Raj Patel.",
+      "content_excerpt": "Section 4.2 Hardness Acceptance: each part shall measure 40-44 HRC core hardness with no material non-conformance. Section 7 Acceptance: qualification is complete only upon Quality sign-off (R. Patel) of all sections."
+    },
+    {
+      "id": "FILE-002",
+      "name": "45621-B Supplier Risk Register.xlsx",
+      "url": "https://contoso-precision.sharepoint.com/sites/45621B/Shared%20Documents/45621B-Supplier-Risk-Register.xlsx",
+      "type": "spreadsheet",
+      "owner": "PPL-004",
+      "date": "2026-06-09T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["new_pm", "director", "quality_engineer"],
+      "summary": "Supplier risk register. Top open risk: Apex Alloys Inconel 718 lot 24-118 non-conforming hardness causing material non-conformance; mitigation is quarantine + conforming replacement lot 24-126 + re-test.",
+      "content_excerpt": "RISK-07 | Apex Alloys | material lot 24-118 out of hardness spec | Sev: High | Status: Open | Mitigation: quarantine, replace with lot 24-126, re-run the hardness acceptance test | Owner: R. Patel."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Apex Alloys Supplier Agreement (pricing).pdf",
+      "url": "https://contoso-precision.sharepoint.com/sites/45621B/Restricted/Apex Alloys-Agreement.pdf",
+      "type": "document",
+      "owner": "PPL-008",
+      "date": "2026-01-15T00:00:00Z",
+      "sensitivity": "restricted",
+      "acl": ["new_pm", "director"],
+      "summary": "Confidential commercial agreement with Apex Alloys including unit pricing and penalty clauses. Restricted to program leadership.",
+      "content_excerpt": "[RESTRICTED — commercial terms] Penalty clause 9.3 applies for delivery of non-conforming lots."
+    }
+  ]
+}

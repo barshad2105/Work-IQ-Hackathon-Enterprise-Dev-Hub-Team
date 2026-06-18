@@ -1,0 +1,83 @@
+{
+  "_comment": "Synthetic facilities emails for the Calder Tower chiller event. 'restricted' sensitivity items (tenant-confidential commitments) are visible only to personas listed in acl. thread groups related mail.",
+  "emails": [
+    {
+      "id": "EML-001",
+      "thread_id": "THR-TENANT",
+      "subject": "TENANT-CONFIDENTIAL: Calder Tower cooling outage — notification commitment needed",
+      "from": "PPL-007",
+      "to": ["PPL-001", "PPL-006"],
+      "cc": [],
+      "date": "2026-06-09T15:10:00Z",
+      "sensitivity": "restricted",
+      "acl": ["duty_manager", "director"],
+      "body": "Marco, Helen — the anchor tenant on floors 18-24 has lease cooling-availability obligations. With the Calder Tower chiller down we are exposed. We need a tenant-notification commitment: what restoration time do we formally communicate, and what service-credit exposure do we accept? This is commercially and legally sensitive — leadership only until approved.",
+      "attachments": []
+    },
+    {
+      "id": "EML-002",
+      "thread_id": "THR-TENANT",
+      "subject": "RE: TENANT-CONFIDENTIAL: Calder Tower cooling outage — notification commitment",
+      "from": "PPL-001",
+      "to": ["PPL-007"],
+      "cc": ["PPL-006"],
+      "date": "2026-06-10T08:30:00Z",
+      "sensitivity": "restricted",
+      "acl": ["duty_manager", "director"],
+      "body": "Raj — approved by Helen Stamos. We commit to the anchor tenant: cooling restored by 26-JUN, interim spot-cooling on floors 18-24 within 24 hours, and we accept the contractual service-credit terms in the vendor SLA register if we miss. Issue the tenant notification on that basis. Do not share the credit exposure outside leadership.",
+      "attachments": ["FILE-002"]
+    },
+    {
+      "id": "EML-003",
+      "thread_id": "THR-CAUSE",
+      "subject": "Calder Tower chiller — suspected cause (compressor / low refrigerant)",
+      "from": "PPL-003",
+      "to": ["dl-calder-ops@arundelholdings.com"],
+      "cc": ["PPL-001", "PPL-004"],
+      "date": "2026-06-08T17:40:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Ops team — cause analysis on the Calder Tower Chiller-2 trip: the lead compressor faulted on a low-refrigerant lockout, likely a slow leak on the suction line. Recommend the contractor pressure-test the circuit, locate and braze the leak, recharge, and verify before we call it restored. Treating the compressor as serviceable pending the leak fix.",
+      "attachments": []
+    },
+    {
+      "id": "EML-004",
+      "thread_id": "THR-VENDOR",
+      "subject": "Coolflow — Calder Tower repair scope and ETA",
+      "from": "PPL-004",
+      "to": ["PPL-001", "PPL-005"],
+      "cc": ["PPL-008"],
+      "date": "2026-06-09T11:15:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Marco — Coolflow scope for Calder Tower Chiller-2: pressure-test, locate/braze the suction-line leak, recharge refrigerant, and run a 24-hour soak test. We dispatched Victor Hale to site; parts arrive 11-JUN. Realistic ETA to restored and soak-verified is 25-26 JUN. I'll keep the building-ops channel updated.",
+      "attachments": []
+    },
+    {
+      "id": "EML-005",
+      "thread_id": "THR-HANDOVER",
+      "subject": "Calder Tower chiller event — duty handover",
+      "from": "PPL-002",
+      "to": ["PPL-001"],
+      "cc": ["PPL-006"],
+      "date": "2026-06-10T07:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Marco — handing you the Calder Tower chiller event. Open items: contractor on site for the leak repair, two open work orders (chiller repair, interim spot-cooling), and a tenant-notification commitment in flight with Raj. The shared works log and the work-order tracker are current — work from those.",
+      "attachments": ["FILE-001"]
+    },
+    {
+      "id": "EML-006",
+      "thread_id": "THR-WEEKLY",
+      "subject": "Calder Tower works log — status w/c 08-JUN",
+      "from": "PPL-005",
+      "to": ["dl-calder-ops@arundelholdings.com"],
+      "cc": [],
+      "date": "2026-06-10T09:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "body": "Works log update: Chiller-2 repair in progress (Coolflow on site), interim spot-cooling deployed to floors 18-24, restored ETA 26-JUN. Bishop House planned-maintenance window for this month is now overdue and needs rebooking. No other building events.",
+      "attachments": []
+    }
+  ]
+}

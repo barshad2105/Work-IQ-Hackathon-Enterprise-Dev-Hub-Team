@@ -1,0 +1,115 @@
+{
+  "_comment": "Synthetic people directory / committee-membership map for Northbridge Health Network (C2 — cross-committee coordination). Administrative/non-clinical only — NO PHI. acl='all' means visible to every persona. Stable ids are cited by golden answers.",
+  "people": [
+    {
+      "id": "PPL-001",
+      "name": "Maria Delgado",
+      "title": "Quality Program Manager (chairs Quality Steering Committee)",
+      "email": "maria.delgado@northbridge-health.org",
+      "department": "Quality & Patient Safety",
+      "manager": "PPL-002",
+      "expertise": ["quality programs", "Joint Commission readiness", "medication reconciliation policy", "corrective actions"],
+      "committees": ["quality_steering"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-002",
+      "name": "James Whitaker",
+      "title": "Director of Clinic Operations",
+      "email": "james.whitaker@northbridge-health.org",
+      "department": "Operations",
+      "manager": null,
+      "expertise": ["network operations", "executive escalation", "EHR rollout oversight", "vendor management"],
+      "committees": ["quality_steering", "credentialing"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-003",
+      "name": "Sandra Okafor",
+      "title": "Credentialing Manager (chairs Credentialing Committee)",
+      "email": "sandra.okafor@northbridge-health.org",
+      "department": "Medical Staff Services",
+      "manager": "PPL-002",
+      "expertise": ["provider credentialing", "primary source verification", "onboarding", "committee governance"],
+      "committees": ["credentialing"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-004",
+      "name": "Robert Klein",
+      "title": "EHR Program Lead (Westgate rollout)",
+      "email": "robert.klein@northbridge-health.org",
+      "department": "Health Informatics",
+      "manager": "PPL-002",
+      "expertise": ["EHR implementation", "data migration", "go-live readiness", "Westgate clinic"],
+      "committees": [],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-005",
+      "name": "Angela Foster",
+      "title": "Quality Analyst",
+      "email": "angela.foster@northbridge-health.org",
+      "department": "Quality & Patient Safety",
+      "manager": "PPL-001",
+      "expertise": ["CAPA tracking", "policy drafting", "audit preparation"],
+      "committees": ["quality_steering"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-006",
+      "name": "David Munoz",
+      "title": "Pharmacy Operations Coordinator (non-clinical)",
+      "email": "david.munoz@northbridge-health.org",
+      "department": "Pharmacy Operations",
+      "manager": "PPL-002",
+      "expertise": ["medication reconciliation workflow", "formulary administration"],
+      "committees": ["quality_steering"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-007",
+      "name": "Priya Raman",
+      "title": "Compliance Officer",
+      "email": "priya.raman@northbridge-health.org",
+      "department": "Compliance",
+      "manager": "PPL-002",
+      "expertise": ["regulatory readiness", "Joint Commission standards", "environment of care"],
+      "committees": ["quality_steering", "credentialing"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-008",
+      "name": "Tom Becker",
+      "title": "Account Manager, Lumina Health Systems (EHR vendor)",
+      "email": "tom.becker@lumina-ehr.com",
+      "department": "Vendor (Lumina Health Systems)",
+      "manager": null,
+      "expertise": ["EHR deployment", "vendor delivery", "go-live support"],
+      "committees": [],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-009",
+      "name": "Nina Alvarez",
+      "title": "Credentialing Specialist",
+      "email": "nina.alvarez@northbridge-health.org",
+      "department": "Medical Staff Services",
+      "manager": "PPL-003",
+      "expertise": ["primary source verification", "provider file management"],
+      "committees": ["credentialing"],
+      "acl": ["all"]
+    },
+    {
+      "id": "PPL-010",
+      "name": "Greg Sullivan",
+      "title": "IT Integration Engineer (contractor)",
+      "email": "greg.sullivan@contractors.northbridge-health.org",
+      "department": "Health Informatics (Contractor)",
+      "manager": "PPL-004",
+      "expertise": ["interface engineering", "data migration scripts"],
+      "committees": [],
+      "acl": ["all"]
+    }
+  ]
+}

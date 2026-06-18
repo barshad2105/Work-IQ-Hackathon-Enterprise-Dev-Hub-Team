@@ -1,0 +1,29 @@
+{
+  "_metadata": {
+    "title": "Work IQ MCP client config snippet",
+    "file": "workiq-mcp-config_14-JUN-2026.json",
+    "created_date": "14-JUN-2026",
+    "created_time": "14:05 IST",
+    "purpose": "Register the local Work IQ CLI as an MCP stdio server for any MCP host (VS Code, Claude Desktop, custom agent). Copy the entry under 'servers' / 'mcpServers' into your host's MCP config.",
+    "note": "Uses delegated auth from the signed-in `workiq` account; first connection may require an interactive browser sign-in."
+  },
+
+  "vscode_style (.vscode/mcp.json)": {
+    "servers": {
+      "work-iq": {
+        "type": "stdio",
+        "command": "workiq",
+        "args": ["mcp"]
+      }
+    }
+  },
+
+  "claude_desktop_style (mcpServers)": {
+    "mcpServers": {
+      "work-iq": {
+        "command": "workiq",
+        "args": ["mcp"]
+      }
+    }
+  }
+}

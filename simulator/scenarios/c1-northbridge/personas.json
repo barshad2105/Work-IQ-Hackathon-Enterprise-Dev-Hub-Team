@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming for C2 (Northbridge Health Network). A persona sees a fixture if the fixture acl contains the persona id OR contains 'all'. ops_director = full network-leadership view (sees everything incl. commercial vendor terms and HR-sensitive credentialing matters). quality_pm = quality + both committees' decisions + the shared CAPA tracker + the leadership/vendor commercial penalty thread (Maria is a named recipient on it), but NOT the HR-sensitive credentialing personnel file. credentialing_lead = credentialing committee fully (incl. HR-sensitive personnel matter) + quality decisions, but NOT the leadership commercial thread. vendor_liaison = least privilege external EHR vendor; sees only the Westgate rollout program signals and vendor-facing emails, NOT internal committee decisions, leadership commercial terms, or HR matters.",
+  "personas": [
+    {
+      "id": "ops_director",
+      "label": "James Whitaker — Director of Clinic Operations",
+      "person_id": "PPL-002",
+      "description": "Full network-leadership view. Sees every committee decision, the leadership/vendor commercial thread, and the HR-sensitive credentialing matter.",
+      "groups": ["operations_leadership", "director"]
+    },
+    {
+      "id": "quality_pm",
+      "label": "Maria Delgado — Quality Program Manager",
+      "person_id": "PPL-001",
+      "description": "Sees quality + credentialing committee decisions, the shared CAPA tracker, and the leadership/vendor commercial penalty thread (Maria is a named recipient on it), but NOT the HR-sensitive credentialing personnel file.",
+      "groups": ["quality", "committee_member"]
+    },
+    {
+      "id": "credentialing_lead",
+      "label": "Sandra Okafor — Credentialing Manager",
+      "person_id": "PPL-003",
+      "description": "Sees the credentialing committee fully, including the HR-sensitive personnel matter, plus quality decisions. Does NOT see the leadership/vendor commercial penalty thread.",
+      "groups": ["credentialing", "committee_member"]
+    },
+    {
+      "id": "vendor_liaison",
+      "label": "Tom Becker — Lumina Health Systems (EHR vendor)",
+      "person_id": "PPL-008",
+      "description": "Least-privilege external vendor. Sees only the Westgate EHR rollout program channel and vendor-facing emails; cannot see internal committee decisions, leadership commercial terms, or HR-sensitive credentialing material.",
+      "groups": ["external_vendor"]
+    }
+  ]
+}

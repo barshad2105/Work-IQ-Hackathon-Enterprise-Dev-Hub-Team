@@ -1,0 +1,43 @@
+{
+  "_comment": "Synthetic governance files (metadata + short content excerpt). FILE-002 (B.B.A. self-study draft) carries an Internal sensitivity label and is restricted to leadership + committee members; FILE-003 (faculty personnel review) is restricted to leadership only — both demonstrate sensitivity-label / file-level permission trimming.",
+  "files": [
+    {
+      "id": "FILE-001",
+      "name": "B.B.A. Program Review Template.docx",
+      "url": "https://westbrook.sharepoint.com/sites/COB-Governance/Shared%20Documents/BBA-Program-Review-Template.docx",
+      "type": "document",
+      "owner": "PPL-003",
+      "date": "2026-04-10T00:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "The B.B.A. program-review working template. Tracks the assessment plan, the course-sequence change, and the assurance-of-learning actions feeding the AACSB self-study.",
+      "content_excerpt": "Sections: 1 Assessment plan (revised, approved); 2 Course-sequence change (conditionally approved); 3 Assurance-of-learning closed-loop evidence (in progress)."
+    },
+    {
+      "id": "FILE-002",
+      "name": "B.B.A. AACSB Self-Study Draft.docx",
+      "url": "https://westbrook.sharepoint.com/sites/COB-Governance/Shared%20Documents/BBA-AACSB-Self-Study-Draft.docx",
+      "type": "document",
+      "owner": "PPL-001",
+      "date": "2026-06-07T00:00:00Z",
+      "sensitivity": "restricted",
+      "label": "Internal — Accreditation",
+      "acl": ["associate_dean", "provost", "committee_member"],
+      "summary": "Sensitivity-labelled draft AACSB self-study for the B.B.A. program. Documents the closed-loop assurance-of-learning evidence and the program-review sign-off status; pre-decisional and not for wide distribution.",
+      "content_excerpt": "Standard 5 (Assurance of Learning): written-communication loop closure in progress. Standard 4 (Curriculum): course-sequence change conditionally approved, sign-off pending."
+    },
+    {
+      "id": "FILE-003",
+      "name": "Faculty Personnel Review (confidential).pdf",
+      "url": "https://westbrook.sharepoint.com/sites/Provost/Restricted/BBA-Personnel-Review.pdf",
+      "type": "document",
+      "owner": "PPL-006",
+      "date": "2026-06-05T00:00:00Z",
+      "sensitivity": "restricted",
+      "label": "Confidential — Personnel",
+      "acl": ["associate_dean", "provost"],
+      "summary": "Confidential faculty personnel review related to B.B.A. program staffing. Restricted to college and provost leadership.",
+      "content_excerpt": "[RESTRICTED — personnel] Reappointment recommendation and evaluation notes."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "_comment": "Simulated PSA (professional services automation) connector table — budget and utilisation per engagement, surfaced via Tools. Round-trips on fetch/create/update like any Tools table. Rows are acl='all' (operational utilisation); the sensitive full-margin view lives in FILE-002/FILE-003.",
+  "psa_table": [
+    {
+      "id": "PSA-001",
+      "client": "Brightwater",
+      "budget": "1.20M",
+      "spent": "1.03M",
+      "utilisation": "86%",
+      "status": "Over plan",
+      "acl": ["all"]
+    },
+    {
+      "id": "PSA-002",
+      "client": "Northwind",
+      "budget": "0.80M",
+      "spent": "0.40M",
+      "utilisation": "72%",
+      "status": "On plan",
+      "acl": ["all"]
+    }
+  ]
+}

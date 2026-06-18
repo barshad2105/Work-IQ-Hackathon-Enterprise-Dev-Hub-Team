@@ -1,0 +1,90 @@
+{
+  "_comment": "Golden answers for the 8 C2 (Northbridge Health Network) compound questions. The engine keyword-scores the incoming question against 'keywords' (stemmed subset match, threshold 0.5), then returns 'answer' with citations resolved + persona-trimmed. 'citations' are fixture ids resolved across all fixture files and the capa_tracker table. 'restricted_citations' are the subset trimmed for personas lacking access — when ANY citation trims, the engine returns 'trimmed_answer' (fail-closed) plus a governance note. 'tool' signals a Tools/write action the agent is expected to take. Administrative/non-clinical only — NO PHI.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the quality steering committee decide about the medication-reconciliation policy in its last meeting, and who owns the follow-up?",
+      "keywords": ["quality steering committee", "decide", "medication-reconciliation policy", "owns the follow-up"],
+      "answer": "At its last meeting (10-JUN), the Quality Steering Committee decided to adopt the revised medication-reconciliation policy, which requires a documented reconciliation at every transition of care (admission, transfer, and discharge) across all network clinics — replacing the prior admission-only standard. Follow-up ownership was assigned: Angela Foster owns finalising the policy document (tracked as corrective action CAPA-001, due 09-JUN) and David Munoz owns updating the operational workflow and staff training materials. Compliance review of the revised policy against Joint Commission medication-management standards is owned by Priya Raman.",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What has the EHR vendor emailed us about the Westgate go-live date, and what did we ask them to confirm?",
+      "keywords": ["EHR vendor", "emailed", "Westgate go-live", "ask them to confirm"],
+      "answer": "The EHR vendor, Lumina Health Systems (Tom Becker), emailed (08-JUN) that the Westgate build is configured, end-user training is ~80% complete, and Lumina is holding the 22-JUN go-live target. The one item remaining on the vendor's side is Northbridge's sign-off on the medication-list data-migration validation. In our reply (09-JUN, Robert Klein) we asked Lumina to confirm in writing: (1) the medication-list data-migration validation is complete and signed off, and (2) the final go-live date of 22-JUN. On our side, Greg Sullivan owns the migration validation, due 13-JUN; once both are confirmed we will issue the go-live notice to Westgate staff.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "What is the current status of the EHR rollout at Westgate — combine the program channel updates with the last steering-committee meeting?",
+      "keywords": ["current status", "EHR rollout", "Westgate"],
+      "answer": "Current Westgate EHR rollout status, combining the rollout program channel with the 09-JUN program review: the LuminaEHR build is configured and end-user training is ~80% complete (trainers booked through 20-JUN to finish the rest). The single outstanding go-live blocker is validation of the medication-list data migration, owned by Greg Sullivan and due 13-JUN — the program channel shows it 90% validated and on track. The target go-live date is 22-JUN, pending Lumina's written confirmation that the migration validation and training sign-off are complete; Robert Klein owns obtaining that confirmation.",
+      "citations": ["MSG-001", "MSG-002", "MTG-004"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "Which corrective actions from the last two quality meetings are still open, and what do the email threads say about why they're stalled?",
+      "keywords": ["corrective actions", "last two quality meetings", "still open", "stalled"],
+      "answer": "Two corrective actions from the last two Quality Steering Committee meetings (27-MAY and 10-JUN) are still open, and both are past due: CAPA-001 (finalise the revised medication-reconciliation policy, owner Angela Foster, due 09-JUN) and CAPA-004 (Westgate environment-of-care documentation, owner Priya Raman, due 06-JUN). Per Angela Foster's 11-JUN email thread, CAPA-001 is stalled because she has the policy draft but is waiting on David Munoz's updated workflow steps before compliance review can begin; CAPA-004 is stalled because Priya is blocked waiting on a facilities vendor quote for the signage update. Both are on the Joint Commission readiness-review critical path.",
+      "citations": ["MTG-001", "MTG-002", "EML-005", "CAPA-001", "CAPA-004"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "Prep me for the Joint Commission readiness review: what did the quality committee decide on med-reconciliation, who owns the corrective action, did credentialing close the related onboarding gap, and what's outstanding?",
+      "keywords": ["prep", "Joint Commission readiness review", "credentialing close", "onboarding gap", "outstanding"],
+      "answer": "Joint Commission readiness brief:\n\n1. Quality decision (10-JUN Quality Steering Committee): adopted the revised medication-reconciliation policy requiring documented reconciliation at every transition of care. Corrective action CAPA-001 tracks finalising it — owner Angela Foster (policy document), with David Munoz on the workflow and Priya Raman on compliance review.\n\n2. Credentialing closure: yes — the Credentialing Committee closed the related provider-onboarding gap on 05-JUN. The primary-source verification backlog was cleared and the onboarding checklist updated; CAPA-002 is Closed, confirmed by Sandra Okafor. (A separate HR-sensitive credentialing personnel matter, CAPA-005, was handled in closed session — detail in the restricted personnel file.)\n\n3. Outstanding (per the readiness checklist): CAPA-001 (medication-reconciliation policy, past due) and CAPA-004 (Westgate environment-of-care documentation, past due) both remain open and are the two items to close before the review.",
+      "trimmed_answer": "Joint Commission readiness brief (redacted for the active persona — an HR-sensitive credentialing personnel file is withheld):\n\n1. Quality decision (10-JUN Quality Steering Committee): adopted the revised medication-reconciliation policy requiring documented reconciliation at every transition of care. Corrective action CAPA-001 tracks finalising it — owner Angela Foster (policy document), with David Munoz on the workflow and Priya Raman on compliance review.\n\n2. Credentialing closure: yes — the Credentialing Committee closed the related provider-onboarding gap on 05-JUN (CAPA-002 Closed, confirmed by Sandra Okafor). The related HR-sensitive personnel matter is restricted and not shown here, but the onboarding-gap closure itself is non-confidential and complete.\n\n3. Outstanding (per the readiness checklist): CAPA-001 (medication-reconciliation policy, past due) and CAPA-004 (Westgate environment-of-care documentation, past due) both remain open and are the two items to close before the review.",
+      "citations": ["MTG-001", "MTG-003", "EML-006", "FILE-004", "CAPA-001", "CAPA-002", "FILE-003"],
+      "restricted_citations": ["FILE-003"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Give me a cross-committee view of everything touching the Westgate clinic in the last month — decisions, open actions, vendor commitments, and the people accountable.",
+      "keywords": ["cross-committee view", "everything touching", "Westgate clinic", "vendor commitments", "people accountable"],
+      "answer": "Cross-committee view of the Westgate clinic (last month):\n\n- Decisions: the Quality Steering Committee adopted the revised medication-reconciliation policy (10-JUN), which applies network-wide including Westgate; the Westgate EHR rollout review (09-JUN) set a 22-JUN target go-live pending vendor confirmation.\n- Open actions: CAPA-001 (medication-reconciliation policy finalisation, owner Angela Foster, past due) and CAPA-003 (Westgate medication-list data-migration validation, owner Greg Sullivan, due 13-JUN).\n- Vendor commitments: Lumina Health Systems (Tom Becker) — build configured, training ~80%, will issue a written go-live confirmation once Northbridge signs off the migration validation (EML-001/EML-002). Commercial lever: under MSA clause 7.4, Northbridge is entitled to an 8%-per-week service credit if Lumina-side delays push go-live past 22-JUN (leadership-only).\n- People accountable: Robert Klein (EHR program lead), Greg Sullivan (migration validation), Angela Foster (med-reconciliation policy), James Whitaker (operations leadership).",
+      "trimmed_answer": "Cross-committee view of the Westgate clinic (last month) — redacted for the active persona (a leadership-only commercial thread is withheld):\n\n- Decisions: the Quality Steering Committee adopted the revised medication-reconciliation policy (10-JUN), applied network-wide including Westgate; the Westgate EHR rollout review (09-JUN) set a 22-JUN target go-live pending vendor confirmation.\n- Open actions: CAPA-001 (medication-reconciliation policy finalisation, owner Angela Foster, past due) and CAPA-003 (Westgate medication-list data-migration validation, owner Greg Sullivan, due 13-JUN).\n- Vendor commitments: Lumina Health Systems (Tom Becker) — build configured, training ~80%, will issue a written go-live confirmation once Northbridge signs off the migration validation (EML-001/EML-002). (Commercial contract terms withheld — restricted to leadership.)\n- People accountable: Robert Klein (EHR program lead), Greg Sullivan (migration validation), Angela Foster (med-reconciliation policy), James Whitaker (operations leadership).",
+      "citations": ["MTG-001", "MTG-004", "EML-001", "EML-002", "EML-003", "MSG-001", "CAPA-001", "CAPA-003", "PPL-004"],
+      "restricted_citations": ["EML-003"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "For every open corrective action from the quality committee, update its status in our program tracker and flag the ones past due.",
+      "keywords": ["every open corrective action", "quality committee", "update its status", "program tracker", "past due"],
+      "answer": "Open corrective actions owned by the Quality Steering Committee (from the 27-MAY and 10-JUN meetings):\n\n1. CAPA-001 — finalise the revised medication-reconciliation policy — owner Angela Foster — due 09-JUN — PAST DUE.\n2. CAPA-004 — complete Westgate environment-of-care documentation — owner Priya Raman — due 06-JUN — PAST DUE.\n\nCAPA-002 (provider-onboarding gap) is a Credentialing Committee item and is already Closed, so it is excluded.\n\nProposed Tools action: for each open quality-committee row, call update_entity against the capa_tracker table to advance its status (e.g., to 'Escalated') and set past_due = true, since both CAPA-001 and CAPA-004 are past their due dates. Do not modify CAPA-002 (closed) or CAPA-003 (not a quality-committee item and not yet past due).",
+      "citations": ["MTG-001", "MTG-002", "CAPA-001", "CAPA-004"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "update_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the readiness-review summary memo for leadership pulling decisions, open actions, and owners across both committees.",
+      "keywords": ["draft", "readiness-review summary memo", "leadership", "across both committees"],
+      "answer": "Draft — Joint Commission Readiness Review Summary (for leadership; not yet circulated):\n\nDecisions across both committees:\n- Quality Steering Committee (10-JUN): adopted the revised medication-reconciliation policy (reconciliation at every transition of care).\n- Credentialing Committee (05-JUN): closed the provider-onboarding verification gap (CAPA-002 Closed).\n\nOpen actions and owners:\n- CAPA-001 — medication-reconciliation policy finalisation — Angela Foster — past due.\n- CAPA-004 — Westgate environment-of-care documentation — Priya Raman — past due.\n\nLeadership note (commercial): under Lumina MSA clause 7.4, Northbridge holds an 8%-per-week service-credit lever if the Westgate go-live slips past 22-JUN due to vendor-side delay — available as a readiness-review escalation point.\n\n(Proposed Tools action: create the memo as a draft document for leadership review — do not circulate to committee channels.)",
+      "trimmed_answer": "Draft — Joint Commission Readiness Review Summary (for review; redacted for the active persona — a leadership-only commercial term is withheld):\n\nDecisions across both committees:\n- Quality Steering Committee (10-JUN): adopted the revised medication-reconciliation policy (reconciliation at every transition of care).\n- Credentialing Committee (05-JUN): closed the provider-onboarding verification gap (CAPA-002 Closed).\n\nOpen actions and owners:\n- CAPA-001 — medication-reconciliation policy finalisation — Angela Foster — past due.\n- CAPA-004 — Westgate environment-of-care documentation — Priya Raman — past due.\n\n(Commercial contract terms withheld — restricted to operations leadership. Switch to a leadership persona to include them.)",
+      "citations": ["MTG-001", "MTG-003", "EML-006", "CAPA-001", "CAPA-002", "EML-003"],
+      "restricted_citations": ["EML-003"],
+      "required_sources": 3,
+      "tool": "draft_document"
+    }
+  ]
+}

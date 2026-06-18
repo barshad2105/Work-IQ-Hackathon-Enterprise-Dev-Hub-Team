@@ -1,0 +1,90 @@
+{
+  "_comment": "Golden answers for the 8 C1 compound questions. The engine keyword-scores the incoming question against 'keywords' (all-or-threshold match), then returns 'answer' with citations resolved+persona-trimmed. 'citations' are fixture ids; the engine looks them up across all fixture files. 'restricted_citations' are the subset that get trimmed for personas lacking access — when trimmed, the engine appends a governance note. 'tool' (optional) signals a Tools/write action the agent is expected to take.",
+  "golden": [
+    {
+      "id": "Q1",
+      "tier": "single-signal",
+      "question": "What did the last 45621-B design review meeting conclude, and what action items came out of it with owners?",
+      "keywords": ["last", "design review", "conclude", "action items"],
+      "answer": "The most recent 45621-B design review (11-JUN-2026, organised by Elena Cho) concluded that the material hardness non-conformance is NOT a design problem — root cause is a non-conforming bar-stock material lot (Apex Alloys 24-118, hardness 34 HRC vs spec 40-44 HRC). The review decided to quarantine that lot, remachine the two failing units with conforming material, and re-run the hardness acceptance test, re-baselining qualification completion to 03-JUL-2026. Action items: (1) AI-101 — quarantine lot 24-118 and obtain a conforming replacement with cert — owner Tom Iverson, due 13-JUN; (2) AI-102 — remachine the two units and re-run the hardness acceptance test — owner Elena Cho, due 20-JUN; (3) AI-103 — issue a written risk summary to the Aeronix program office — owner Dana Whitfield, due 12-JUN; (4) AI-104 — update the milestone tracker to 03-JUL (closed).",
+      "citations": ["MTG-001"],
+      "restricted_citations": [],
+      "required_sources": 1
+    },
+    {
+      "id": "Q2",
+      "tier": "single-signal",
+      "question": "What did our customer's program office email us about in the last escalation thread, and what did we commit to?",
+      "keywords": ["customer", "email", "escalation", "commit"],
+      "answer": "In the last escalation thread (08-JUN-2026), the Aeronix program office (Karen Vance) formally escalated that the 45621-B PPAP qualification, originally due 19-JUN, was slipping to early July, threatening their flight-test window. They demanded (1) a committed recovery date, (2) confirmation the material supplier issue is contained, and (3) a written risk summary by Friday. In our reply (09-JUN), Dana Whitfield committed to a recovery date of 03-JUL for qualification completion, a containment plan with Apex Alloys, and a written risk summary by 12-JUN, and named Elena Cho as owner of the qualification recovery plan.",
+      "trimmed_answer": "The most recent customer escalation thread is customer-confidential and restricted to program leadership, so its contents and our specific commitments cannot be shown to the active persona. At a non-restricted level: the customer raised a schedule concern about the qualification timeline, and the program has an internal recovery plan in progress.",
+      "citations": ["EML-001", "EML-002"],
+      "restricted_citations": ["EML-001", "EML-002"],
+      "required_sources": 1
+    },
+    {
+      "id": "Q3",
+      "tier": "multi-signal",
+      "question": "What is currently blocking the PPAP qualification?",
+      "keywords": ["blocking", "PPAP qualification"],
+      "answer": "Qualification is blocked by one root issue surfaced across two signals. From the quality team's risk emails to the program distribution list (05–06-JUN): qualification hardness testing showed material hardness non-conformance below the acceptance minimum on two of five units, all using Apex Alloys Inconel 718 lot 24-118, which Priya Nair confirmed is below hardness spec (34 vs 40-44 HRC) — a material-lot issue, not a design issue, and Raj Patel is holding qualification sign-off until root cause is closed. From the open design-review action items (11-JUN): AI-101 (quarantine lot 24-118 / obtain conforming replacement, Tom Iverson, due 13-JUN) and AI-102 (remachine the two units and re-run the hardness acceptance test, Elena Cho, due 20-JUN) must close before sign-off. Net: the blocker is the non-conforming material lot; clearing it requires the replacement lot plus a passing hardness acceptance re-test, with qualification re-baselined to 03-JUL.",
+      "citations": ["MTG-001", "EML-003", "EML-004"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q4",
+      "tier": "multi-signal",
+      "question": "Who is the expert on the Inconel 718 supplier issue, and what have they said about it across chats and email in the last month?",
+      "keywords": ["expert", "Inconel 718", "supplier", "across", "chat"],
+      "answer": "The expert is Priya Nair, Materials Engineer (Materials & Metallurgy), whose expertise covers Inconel 718 machining, superalloy metallurgy, and supplier qualification. Across signals in the last month she has said: in email (06-JUN) that Apex Alloys lot 24-118 measured 34 HRC vs spec 40-44 HRC and the non-conformance is a material-lot issue, not design, recommending quarantine + replacement lot + hardness re-test; in the 45621-B / Inconel 718 Teams channel (05-JUN) that the cert data confirms the material issue and she is quarantining the lot; and (10-JUN) that this is the second out-of-hardness Inconel 718 lot from Apex Alloys in 12 months and the program should consider a second source. She is the named materials POC on bar stock.",
+      "citations": ["PPL-005", "EML-004", "MSG-001", "MSG-004"],
+      "restricted_citations": [],
+      "required_sources": 2
+    },
+    {
+      "id": "Q5",
+      "tier": "agentic-synthesis",
+      "question": "I'm taking over the 45621-B program — give me the current state: last design-review decisions, open supplier risks, who owns the PPAP qualification plan, and the customer's most recent escalation.",
+      "keywords": ["taking over", "current state", "give me", "handover"],
+      "answer": "45621-B handover brief:\n\n1. Last design-review decisions (11-JUN): material hardness non-conformance is a non-conforming material lot (Apex Alloys 24-118), NOT a design fault; decision to quarantine the lot, remachine the two failing units with conforming material, re-run the hardness acceptance test, and re-baseline qualification to 03-JUL.\n\n2. Open supplier risk: Apex Alloys Inconel 718 lot 24-118 is out of hardness spec (34 vs 40-44 HRC), causing hardness below the acceptance minimum on two of five units; mitigation is quarantine + conforming replacement lot 24-126 + re-test (Supplier Risk Register RISK-07, owner Raj Patel). Raj is holding quality sign-off until the hardness re-test passes.\n\n3. PPAP Qualification Plan ownership: Elena Cho owns the QTP (document QTP-45621B rev D); Raj Patel owns quality acceptance / sign-off.\n\n4. Customer's most recent escalation (08-JUN): Aeronix (Karen Vance) escalated the qualification slip from 19-JUN as a threat to their flight-test window; we committed (09-JUN) to a 03-JUL recovery date, containment with Apex Alloys, and a written risk summary by 12-JUN.\n\nMilestone status: Qualification Test Complete is At Risk (19-JUN → 03-JUL); Quality Sign-off Held; FAI still scheduled 10-JUL.",
+      "trimmed_answer": "45621-B handover brief (redacted for the active persona — customer-confidential and supplier-confidential items are withheld):\n\n1. Last design-review decisions (11-JUN): material hardness non-conformance is a non-conforming material lot (Apex Alloys 24-118), NOT a design fault; decision to quarantine the lot, remachine the two failing units with conforming material, re-run the hardness acceptance test, and re-baseline qualification to 03-JUL.\n\n2. Open supplier risk: the quality team flagged material hardness non-conformance below the acceptance minimum on two of five units, tied to the supplier material lot; quality sign-off is held until a passing hardness acceptance re-test. (Detailed supplier risk register withheld.)\n\n3. PPAP Qualification Plan ownership: Elena Cho owns the QTP (QTP-45621B rev D); Raj Patel owns quality acceptance / sign-off.\n\n4. Customer escalation: withheld — restricted to program leadership.\n\nMilestone status: Qualification Test Complete is At Risk (19-JUN → 03-JUL); Quality Sign-off Held; FAI still scheduled 10-JUL.",
+      "citations": ["MTG-001", "FILE-002", "EML-003", "EML-005", "FILE-001", "EML-001", "EML-002", "MS-002", "MS-003", "MS-004"],
+      "restricted_citations": ["EML-001", "EML-002", "FILE-002"],
+      "required_sources": 4
+    },
+    {
+      "id": "Q6",
+      "tier": "agentic-synthesis",
+      "question": "Across the program, what changed in the last two weeks that I should know about — decisions, new risks, slipped milestones, and people who flagged concerns?",
+      "keywords": ["changed", "last two weeks", "decisions", "slipped"],
+      "answer": "Changes in the last two weeks on 45621-B:\n\n- Decision (11-JUN design review): root cause of hardness non-conformance confirmed as the non-conforming Apex Alloys lot 24-118, not the design; plan is remachine + re-test.\n- New risk (05-JUN): quality flagged material hardness non-conformance below the acceptance minimum on two of five units to the program distribution list; Raj Patel is holding qualification sign-off — now the top open program risk (Supplier Risk Register RISK-07).\n- Slipped milestone (08-JUN weekly): Qualification Test Complete moved from 19-JUN to 03-JUL pending material rework; the milestone tracker now shows MS-002 'At Risk' and MS-003 Quality Sign-off 'Held'. Design freeze remains complete; FAI still 10-JUL.\n- People who flagged concerns: Raj Patel (holding sign-off), Priya Nair (identified the hardness issue and raised a recurring-supplier / second-source concern in the material channel on 10-JUN).",
+      "citations": ["MTG-001", "EML-003", "EML-006", "MS-002", "MS-003", "MSG-004"],
+      "restricted_citations": [],
+      "required_sources": 4
+    },
+    {
+      "id": "Q7",
+      "tier": "agent-mcp-tools",
+      "question": "Summarise the open qualification blockers and create a tracked risk item in the milestone tracker for each one, assigned to the named owner.",
+      "keywords": ["open", "blockers", "create", "tracked risk", "milestone tracker"],
+      "answer": "Open qualification blockers (from the 11-JUN design review and the 05–06-JUN risk emails):\n\n1. Non-conforming material lot Apex Alloys 24-118 (hardness 34 vs 40-44 HRC) causing non-conformance — owner Tom Iverson (quarantine + obtain conforming replacement lot, AI-101).\n2. Two failing units require remachine with conforming material and a passing hardness acceptance re-test — owner Elena Cho (AI-102).\n3. Quality sign-off held pending the hardness re-test — owner Raj Patel.\n\nProposed Tools action: create a tracked risk item in the milestone tracker for each blocker, assigned to the named owner (Tom Iverson, Elena Cho, Raj Patel). Use create_entity against the milestone_tracker table; do not duplicate existing rows MS-002/MS-003.",
+      "citations": ["MTG-001", "EML-003", "EML-004", "MS-002", "MS-003"],
+      "restricted_citations": [],
+      "required_sources": 2,
+      "tool": "create_entity"
+    },
+    {
+      "id": "Q8",
+      "tier": "agent-mcp-tools",
+      "question": "Draft the weekly program status email to the customer covering decisions, risks, and milestone movement since the last update.",
+      "keywords": ["draft", "weekly", "status email", "customer"],
+      "answer": "Draft — Weekly 45621-B Program Status to Aeronix (for review, not sent):\n\nSubject: 45621-B Weekly Status — week of 08-JUN\n\nKaren,\n\nDecisions: Last week's design review (11-JUN) confirmed the material hardness non-conformance is caused by a non-conforming supplier material lot (Apex Alloys 24-118), not the part design. Plan is to quarantine the lot, remachine the affected units with conforming material, and re-run the hardness acceptance test.\n\nRisks: The material lot remains our top open risk; quality sign-off is held until the hardness re-test passes. Containment with Apex Alloys is in place (conforming replacement lot inbound).\n\nMilestone movement: Qualification Test Complete has moved from 19-JUN to 03-JUL. Design freeze remains complete and First Article Inspection is still scheduled for 10-JUL.\n\nWe will continue weekly status and flag any further movement immediately.\n\nRegards,\n45621-B Program Office\n\n(Proposed Tools action: create the draft mail for review — do not send.)",
+      "trimmed_answer": "A customer-facing status email cannot be drafted under the active persona because the prior customer-commitment thread is restricted to program leadership. Switch to a program-leadership persona to draft this email. (Non-restricted program facts available: the 11-JUN design-review decision, the open material-lot risk, and the qualification milestone move from 19-JUN to 03-JUL.)",
+      "citations": ["MTG-001", "EML-003", "EML-006", "MS-002", "MS-004", "EML-002"],
+      "restricted_citations": ["EML-002"],
+      "required_sources": 3,
+      "tool": "draft_email"
+    }
+  ]
+}

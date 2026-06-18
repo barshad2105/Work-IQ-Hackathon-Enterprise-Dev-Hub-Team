@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming. A persona sees a fixture if the fixture acl contains the persona id OR 'all'. associate_dean = full governance view incl accreditation-confidential threads + sensitivity-labelled self-study and personnel files; committee_member = committee signals + the self-study draft but NOT accreditation-confidential liaison threads or personnel files; adjunct = least privilege; provost = sees everything.",
+  "personas": [
+    {
+      "id": "associate_dean",
+      "label": "Dr. Laura Simmons — Associate Dean, College of Business",
+      "person_id": "PPL-001",
+      "description": "Full governance leadership view including accreditation-confidential liaison threads and sensitivity-labelled self-study and personnel documents.",
+      "groups": ["college_leadership", "provost_office"]
+    },
+    {
+      "id": "committee_member",
+      "label": "Dr. Ada Okonkwo — Assessment Coordinator (committee member)",
+      "person_id": "PPL-005",
+      "description": "Sees committee meetings, action items, and the sensitivity-labelled self-study draft, but NOT accreditation-confidential liaison threads or personnel review files.",
+      "groups": ["curriculum_committee"]
+    },
+    {
+      "id": "adjunct",
+      "label": "Dr. Sam Reyes — Adjunct Faculty (least privilege)",
+      "person_id": "PPL-010",
+      "description": "Least-privilege faculty. Sees only non-sensitive governance signals; cannot see accreditation-confidential threads, the self-study draft, or personnel files.",
+      "groups": ["adjunct"]
+    },
+    {
+      "id": "provost",
+      "label": "Dr. Gloria Hahn — Provost (escalation)",
+      "person_id": "PPL-006",
+      "description": "Institutional leadership view. Sees everything associate_dean sees.",
+      "groups": ["college_leadership", "provost_office"]
+    }
+  ]
+}

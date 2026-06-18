@@ -1,0 +1,45 @@
+{
+  "_comment": "Synthetic Teams channel posts for the 45621-B material channel. Used for the people+chat multi-signal question.",
+  "teams_messages": [
+    {
+      "id": "MSG-001",
+      "channel": "45621-B / Inconel 718",
+      "author": "PPL-005",
+      "date": "2026-06-05T18:22:00Z",
+      "acl": ["all"],
+      "text": "Pulled the certs. Apex Alloys lot 24-118 hardness is 34 HRC, spec is 40-44 HRC. That's the material issue. I'd bet on material, not design. Quarantining and asking for a fresh lot."
+    },
+    {
+      "id": "MSG-002",
+      "channel": "45621-B / Inconel 718",
+      "author": "PPL-004",
+      "date": "2026-06-05T18:40:00Z",
+      "acl": ["all"],
+      "text": "Thanks Priya. Holding qualification sign-off until we re-run the hardness acceptance test on remachined units. This is the #1 program risk right now."
+    },
+    {
+      "id": "MSG-003",
+      "channel": "45621-B / Inconel 718",
+      "author": "PPL-008",
+      "date": "2026-06-06T09:10:00Z",
+      "acl": ["all"],
+      "text": "Apex Alloys confirmed a conforming replacement lot (24-126) ships in 5 business days with full cert. PO updated."
+    },
+    {
+      "id": "MSG-004",
+      "channel": "45621-B / Inconel 718",
+      "author": "PPL-005",
+      "date": "2026-06-10T12:05:00Z",
+      "acl": ["all"],
+      "text": "For the record: this is the second time in 12 months Apex Alloys has shipped an out-of-hardness Inconel 718 lot. We should consider a second source. I'm the materials POC on bar stock if anyone needs detail."
+    },
+    {
+      "id": "MSG-005",
+      "channel": "45621-B / Program",
+      "author": "PPL-003",
+      "date": "2026-06-11T16:30:00Z",
+      "acl": ["all"],
+      "text": "Design review done. Decision: it's the material lot, not the design. Remachine + re-test, qualification to 03-JUL. I own the recovery plan."
+    }
+  ]
+}

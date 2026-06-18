@@ -1,0 +1,33 @@
+{
+  "_comment": "Personas drive permission trimming. A persona sees a fixture if the fixture acl contains the persona id OR 'all'. oncall_lead = full incident view incl confidential customer-comms commitment thread + sensitivity-labelled customer-impact assessment + exec briefing; sre_engineer = incident signals + the customer-impact assessment doc but NOT the confidential customer-comms thread or exec/commercial files; contractor = least privilege; incident_commander = sees everything.",
+  "personas": [
+    {
+      "id": "oncall_lead",
+      "label": "Marco Reyes — On-Call Lead / SRE Lead",
+      "person_id": "PPL-001",
+      "description": "Full incident leadership view including the confidential customer-communications commitment thread and sensitivity-labelled customer-impact and exec files.",
+      "groups": ["sre", "incident_command"]
+    },
+    {
+      "id": "sre_engineer",
+      "label": "Aisha Khan — SRE Engineer (on-call)",
+      "person_id": "PPL-005",
+      "description": "Sees incident bridge calls, channel mitigations, action tracker, and the sensitivity-labelled customer-impact assessment, but NOT the confidential customer-comms commitment thread or exec/commercial files.",
+      "groups": ["sre"]
+    },
+    {
+      "id": "contractor",
+      "label": "Evan Cole — Contractor SRE (least privilege)",
+      "person_id": "PPL-010",
+      "description": "Least-privilege contractor. Sees only non-sensitive incident signals; cannot see the confidential customer-comms thread, the customer-impact assessment, or exec files.",
+      "groups": ["contractor"]
+    },
+    {
+      "id": "incident_commander",
+      "label": "Helen Cho — Incident Commander / Director (escalation)",
+      "person_id": "PPL-006",
+      "description": "Incident command + engineering leadership view. Sees everything oncall_lead sees.",
+      "groups": ["incident_command", "engineering_leadership"]
+    }
+  ]
+}

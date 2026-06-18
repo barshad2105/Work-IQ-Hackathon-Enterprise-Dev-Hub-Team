@@ -1,0 +1,66 @@
+{
+  "_comment": "Synthetic meeting recaps + transcript excerpts + action items for Northbridge Health Network. Two DISTINCT committees (Quality Steering, Credentialing) plus the Westgate EHR rollout program review. action_items carry their own ids, owners (people ids), due dates, status. Committee meetings are acl-scoped to internal staff personas (NOT the external vendor); the rollout review is visible to the vendor too. Administrative/non-clinical only — NO PHI. Reference 'today' is mid-June 2026.",
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "Quality Steering Committee — Monthly Meeting",
+      "committee": "quality_steering",
+      "date": "2026-06-10T16:00:00Z",
+      "organizer": "PPL-001",
+      "attendees": ["PPL-001", "PPL-002", "PPL-005", "PPL-006", "PPL-007"],
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "recap": "Last Quality Steering Committee meeting (10-JUN). The committee DECIDED to adopt the revised medication-reconciliation policy, which requires a documented reconciliation at every transition of care (admission, transfer, discharge) across all network clinics, replacing the prior admission-only standard. The committee assigned the follow-up: Angela Foster owns finalising the policy document and David Munoz owns updating the operational workflow and training material. This is tracked as corrective action CAPA-001, due 09-JUN. The committee also reviewed the open environment-of-care documentation gap (CAPA-004) ahead of the Joint Commission readiness review and confirmed it remains open and owned by Priya Raman.",
+      "transcript_excerpt": "Maria Delgado: 'We're standardising reconciliation at every transition of care, not just admission. Angela, you own the policy document; David, you own the workflow and training.' Angela Foster: 'Understood — I'll have the final draft for compliance review.' Priya Raman: 'Remember CAPA-004, the environment-of-care documentation, is still open and we need it for the readiness review.'",
+      "action_items": [
+        {"id": "AI-201", "text": "Finalise the revised medication-reconciliation policy document for compliance review", "owner": "PPL-005", "due": "2026-06-09", "status": "open"},
+        {"id": "AI-202", "text": "Update medication-reconciliation operational workflow and staff training materials", "owner": "PPL-006", "due": "2026-06-18", "status": "open"},
+        {"id": "AI-203", "text": "Compliance review of revised policy against Joint Commission medication-management standards", "owner": "PPL-007", "due": "2026-06-20", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-002",
+      "title": "Quality Steering Committee — Monthly Meeting",
+      "committee": "quality_steering",
+      "date": "2026-05-27T16:00:00Z",
+      "organizer": "PPL-001",
+      "attendees": ["PPL-001", "PPL-002", "PPL-005", "PPL-007"],
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "recap": "Prior Quality Steering Committee meeting (27-MAY). The committee opened two corrective actions ahead of the Joint Commission readiness review: CAPA-001 to revise the medication-reconciliation policy (owner Angela Foster) and CAPA-004 to close an environment-of-care documentation gap for the Westgate clinic (owner Priya Raman, due 06-JUN). Initial discussion of the medication-reconciliation scope began here but no decision was reached; the decision was deferred to the 10-JUN meeting.",
+      "transcript_excerpt": "Maria Delgado: 'We have two corrective actions to land before the readiness review — the med-reconciliation policy and the environment-of-care documentation for Westgate.' Priya Raman: 'I'll own the environment-of-care item, target early June.'",
+      "action_items": [
+        {"id": "AI-210", "text": "Draft options for revised medication-reconciliation policy scope", "owner": "PPL-005", "due": "2026-06-03", "status": "closed"},
+        {"id": "AI-211", "text": "Open environment-of-care documentation corrective action for Westgate clinic", "owner": "PPL-007", "due": "2026-06-06", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Credentialing Committee — Monthly Meeting",
+      "committee": "credentialing",
+      "date": "2026-06-05T15:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-003", "PPL-002", "PPL-007", "PPL-009"],
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "recap": "Last Credentialing Committee meeting (05-JUN). The committee CLOSED the provider-onboarding gap that the Quality Steering Committee had flagged as related to the readiness review: the primary-source verification backlog for newly onboarded providers was cleared and the onboarding checklist updated. This closure is tracked as corrective action CAPA-002 (now Closed). A separate HR-sensitive personnel matter (CAPA-005) was discussed in closed session and its detail is restricted to the credentialing committee and operations leadership; only the existence and closure-status of that item is shared more broadly.",
+      "transcript_excerpt": "Sandra Okafor: 'The onboarding verification backlog is cleared — CAPA-002 is closed, and I've confirmed the updated checklist with operations.' James Whitaker: 'Good, that closes the gap Quality raised for the readiness review.' Sandra Okafor: 'The personnel matter we discussed stays in closed session.'",
+      "action_items": [
+        {"id": "AI-301", "text": "Confirm primary-source verification backlog cleared and update onboarding checklist", "owner": "PPL-009", "due": "2026-06-04", "status": "closed"},
+        {"id": "AI-302", "text": "Notify Quality Steering Committee that the provider-onboarding gap (CAPA-002) is closed", "owner": "PPL-003", "due": "2026-06-06", "status": "closed"}
+      ]
+    },
+    {
+      "id": "MTG-004",
+      "title": "Westgate EHR Rollout — Program Review",
+      "committee": null,
+      "date": "2026-06-09T14:00:00Z",
+      "organizer": "PPL-004",
+      "attendees": ["PPL-004", "PPL-002", "PPL-010", "PPL-008"],
+      "acl": ["ops_director", "quality_pm", "credentialing_lead", "vendor_liaison"],
+      "recap": "Westgate EHR rollout program review (09-JUN). Status: the LuminaEHR build for the Westgate clinic is configured; end-user training is ~80% complete; the outstanding go-live blocker is validation of the medication-list data migration, owned by Greg Sullivan and due 13-JUN. The target go-live date is 22-JUN, pending Lumina's written confirmation that migration validation and training sign-off are complete. Robert Klein is to confirm the date with the vendor.",
+      "transcript_excerpt": "Robert Klein: 'Training's at eighty percent. The one thing standing between us and go-live is the medication-list migration validation.' Greg Sullivan: 'I'll have the validation done by the thirteenth.' James Whitaker: 'Target is the twenty-second if Lumina confirms in writing.'",
+      "action_items": [
+        {"id": "AI-401", "text": "Complete and validate the Westgate medication-list data migration", "owner": "PPL-010", "due": "2026-06-13", "status": "open"},
+        {"id": "AI-402", "text": "Obtain written go-live date confirmation from Lumina Health Systems", "owner": "PPL-004", "due": "2026-06-11", "status": "open"}
+      ]
+    }
+  ]
+}

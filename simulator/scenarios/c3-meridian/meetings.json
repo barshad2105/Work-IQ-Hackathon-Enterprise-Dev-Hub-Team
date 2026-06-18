@@ -1,0 +1,47 @@
+{
+  "_comment": "Synthetic meeting recaps + transcript excerpts + action items for the Brightwater engagement. action_items carry their own ids, owners (people ids), due dates, status. MTG-003 is restricted (client-confidential).",
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "title": "Brightwater Sprint 14 Standup",
+      "date": "2026-06-11T09:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-001", "PPL-003", "PPL-005", "PPL-010"],
+      "acl": ["all"],
+      "recap": "Latest Brightwater standup (11-JUN, sprint 14). The team committed for this sprint to: complete the data migration cutover by the recovery date of 26-JUN, close the two open integration defects, and deliver the integration test report this week. Priya owns the cutover recovery; Amir owns the integration test report. The open reporting-module scope change was noted as out-of-scope pending a change request.",
+      "transcript_excerpt": "Priya Deshmukh: 'Cutover is the priority — two defects left, we burn them down daily and hit 26-JUN.' Amir Haddad: 'Integration test report lands this week regardless.' Priya Deshmukh: 'The reporting module is new scope — nobody starts it until the change request is approved.'",
+      "action_items": [
+        {"id": "AI-101", "text": "Close the two open integration defects and complete the migration cutover by 26-JUN", "owner": "PPL-003", "due": "2026-06-26", "status": "open"},
+        {"id": "AI-102", "text": "Deliver the Brightwater integration test report this week", "owner": "PPL-005", "due": "2026-06-13", "status": "open"},
+        {"id": "AI-103", "text": "Raise a change request for the reporting-module scope with effort estimate", "owner": "PPL-003", "due": "2026-06-12", "status": "open"}
+      ]
+    },
+    {
+      "id": "MTG-002",
+      "title": "Brightwater Sprint 14 Standup",
+      "date": "2026-06-09T09:00:00Z",
+      "organizer": "PPL-003",
+      "attendees": ["PPL-001", "PPL-003", "PPL-005"],
+      "acl": ["all"],
+      "recap": "Prior standup (09-JUN). The migration cutover risk was raised: two integration defects threatened the 19-JUN date. The team agreed to re-baseline if the defects were not closed by mid-week. No recovery date committed yet at this point.",
+      "transcript_excerpt": "Amir Haddad: 'Two integration defects are blocking cutover.' Priya Deshmukh: 'If they're not closed by Wednesday we move the date and tell Nina.'",
+      "action_items": [
+        {"id": "AI-095", "text": "Triage the two integration defects blocking cutover", "owner": "PPL-005", "due": "2026-06-10", "status": "closed"}
+      ]
+    },
+    {
+      "id": "MTG-003",
+      "title": "Brightwater Client QBR Prep (commercial)",
+      "date": "2026-06-05T15:00:00Z",
+      "organizer": "PPL-004",
+      "attendees": ["PPL-004", "PPL-006", "PPL-008"],
+      "acl": ["delivery_principal", "director"],
+      "sensitivity": "restricted",
+      "recap": "Client QBR prep with the Brightwater partner and director. Reviewed commercial standing, margin, and the client's appetite for the reporting-module expansion. (Restricted: commercial / client-confidential.)",
+      "transcript_excerpt": "Gerald Mosby: 'Margin is tight on this engagement; the reporting module needs to be paid scope.' Sofia Marin: 'Agreed — no free work, route it through a change request.'",
+      "action_items": [
+        {"id": "AI-090", "text": "Confirm commercial terms for the reporting-module expansion before QBR", "owner": "PPL-004", "due": "2026-06-12", "status": "open"}
+      ]
+    }
+  ]
+}
