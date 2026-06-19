@@ -82,14 +82,6 @@ python -m venv .venv
 .\.venv\Scripts\python.exe simulator\demo.py --persona contractor --ask "Give me the 45621-B handover brief."
 ```
 
-### Validate any of the 6 challenge scenarios
-
-```powershell
-.\.venv\Scripts\python.exe simulator\tests\validate_scenario.py scenarios\c1-northbridge
-.\.venv\Scripts\python.exe simulator\tests\validate_scenario.py scenarios\c2-contoso
-# ... c3-meridian, c4-arundel, c5-westbrook, c6-edkh
-```
-
 ### Plug it into your agent (MCP)
 
 Register the simulator like the real Work IQ MCP server — same tool name
