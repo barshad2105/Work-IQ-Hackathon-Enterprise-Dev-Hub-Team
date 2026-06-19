@@ -31,3 +31,6 @@ Thumbs.db
 
 # Instructor-only material — never publish to participants.
 /instructor/
+
+# Maintainer-only architecture diagram — kept local like the Architecture Guide.
+/architecture/
