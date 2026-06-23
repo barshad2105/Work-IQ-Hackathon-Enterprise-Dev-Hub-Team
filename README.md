@@ -8,7 +8,7 @@
 # Microsoft Work IQ Hackathon
 
 Everything a team needs to take on a **Work IQ** hackathon challenge — the challenge
-pack, a setup guide, and a **local simulator** so you can build and test **without a
+pack and a **local simulator** so you can build and test **without a
 Microsoft 365 tenant**.
 
 > **Work IQ** grounds answers in your *live work context* — email, meetings, chats,
@@ -24,7 +24,7 @@ Foundry** model, connected to Work IQ over **both MCP and A2A**. See
 
 ```
 workiq-hackathon/
-  challenge-pack/     # The PDFs you read first (challenge pack + setup guide)
+  challenge-pack/     # The challenge pack PDF you read first
   simulator/          # Local Work IQ simulator — 6 challenge scenarios, MCP + A2A servers, tests
   starter-kit/        # MCP connection smoke-tests and a reference MCP config
   README.md           # You are here
@@ -33,7 +33,9 @@ workiq-hackathon/
 | Folder | Start here |
 |---|---|
 | `challenge-pack/WorkIQ-Hackathon-Challenge-Pack_14-JUN-2026.pdf` | The 6 challenges, judging criteria, capability tiers. **Read first.** |
-| `challenge-pack/WorkIQ-Hackathon-Participant-Setup-Guide_14-JUN-2026.pdf` | Step-by-step environment setup — only needed for **real** Work IQ (Path B). |
+
+> **Setup Guide:** the participant setup guide for **real** Work IQ (Path B) is **not
+> included in this repo** — request it from the hackathon organizers.
 
 ---
 
@@ -43,7 +45,7 @@ workiq-hackathon/
 |---|---|---|
 | **Needs a tenant?** | ❌ No | ✅ Yes (M365 + Copilot, admin consent) |
 | **Best for** | Building & testing logic fast, offline | The final, production-grade demo |
-| **Setup** | 3 commands (below) | Follow the **Setup Guide PDF** |
+| **Setup** | 3 commands (below) | Follow the **Setup Guide** (from organizers) |
 
 You can build your whole solution against **Path A**, then swap the MCP endpoint to the
 real server for **Path B** — your agent code doesn't change.
@@ -143,10 +145,10 @@ details are in [`simulator/README.md`](simulator/README.md) — start there.
 
 ## Quick start — Path B (real Work IQ)
 
-Open **`challenge-pack/WorkIQ-Hackathon-Participant-Setup-Guide_14-JUN-2026.pdf`** and
-follow it end to end: tenant prerequisites, admin consent for `WorkIQAgent.Ask`, the
-service principal, Copilot licensing, and registering the real MCP endpoint. The
-`starter-kit/` scripts get you to a first call quickly.
+Request the **Participant Setup Guide** from the hackathon organizers (it is not included
+in this repo) and follow it end to end: tenant prerequisites, admin consent for
+`WorkIQAgent.Ask`, the service principal, Copilot licensing, and registering the real MCP
+endpoint. The `starter-kit/` scripts get you to a first call quickly.
 
 ---
 
@@ -168,7 +170,7 @@ repath as needed):
 ## Need more detail?
 
 - **The challenges** → `challenge-pack/WorkIQ-Hackathon-Challenge-Pack_14-JUN-2026.pdf`
-- **Real Work IQ setup** → `challenge-pack/WorkIQ-Hackathon-Participant-Setup-Guide_14-JUN-2026.pdf`
+- **Real Work IQ setup** → Participant Setup Guide (request from organizers — not in this repo)
 - **Simulator internals, MCP/A2A config, tool contract** → [`simulator/README.md`](simulator/README.md)
 
 Happy hacking. 🛠️
