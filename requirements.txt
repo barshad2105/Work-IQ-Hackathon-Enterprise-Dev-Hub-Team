@@ -1,0 +1,23 @@
+# Work IQ Agent Requirements
+
+# OpenAI SDK (works with Azure OpenAI-compatible endpoints)
+openai>=1.0.0
+
+# Azure authentication for DefaultAzureCredential
+azure-identity>=1.25.3
+
+# Microsoft Agent Framework runtime + OpenAI client bindings
+agent-framework>=1.9.0
+agent-framework-openai>=1.8.2
+
+# Flask for Web UI
+Flask>=3.0.0
+
+# Python dotenv for environment variables
+python-dotenv>=1.0.0
+
+# Additional dependencies from simulator
+requests>=2.31.0
+
+# Development dependencies (optional)
+# pytest>=7.0.0
