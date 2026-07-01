@@ -1,0 +1,5 @@
+{"query": "What did the last incident bridge call decide about the Atlas payments outage?", 
+"response": "rollback of Atlas payments to v4.6 is complete; error rate has recovered to baseline and the incident moves to monitoring before an all‑clear. ",
+ "ground_truth": "Summary from the last incident bridge (11‑Jun 14:00, IC: Helen Cho): - Decision: rollback of Atlas payments to v4.6 is complete; error rate has recovered to baseline and the incident moves to monitoring before an all‑clear. - Root cause: v4.7 connection‑pool leak confirmed. - Actions assigned: - AI‑101 — monitor Atlas error rate for 2 hours and report before all‑clear. Owner: Aisha Khan, due 16:00. - AI‑102 — confirm and publish customer communications to affected merchants. Owner: Dana Lowe, due 15:00. Meeting notes: https://simulator.local/meeting/MTG-001"
+ }
+
