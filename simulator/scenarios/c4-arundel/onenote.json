@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for Arundel facilities operations. ONN-002 is leadership-restricted for tenant commitment strategy.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "Calder Tower Chiller Incident Log",
+      "notebook": "Facilities Operations",
+      "section": "Incidents",
+      "author": "PPL-003",
+      "date": "2026-06-16T11:10:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "Operations log summarizing troubleshooting timeline, temporary controls, and work-order dependencies.",
+      "content_excerpt": "Sequence notes include BMS alarms, temporary cooling staging, and owner handoffs across work order queue.",
+      "url": "https://arundel-facilities.sharepoint.com/sites/Calder/OneNote/Chiller-Incident"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Tenant Commitment Strategy",
+      "notebook": "Facilities Leadership",
+      "section": "Tenant Communications",
+      "author": "PPL-001",
+      "date": "2026-06-16T18:25:00Z",
+      "sensitivity": "restricted",
+      "acl": ["duty_manager", "director"],
+      "summary": "Leadership-only notes for commitment language and remediation posture with anchor tenant stakeholders.",
+      "content_excerpt": "Capture negotiation posture, service-credit boundaries, and communication sequence for executive tenant update.",
+      "url": "https://arundel-facilities.sharepoint.com/sites/Calder/Restricted/OneNote-Tenant-Commitments"
+    }
+  ]
+}

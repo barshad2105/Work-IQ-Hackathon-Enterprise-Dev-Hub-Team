@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for Contoso 45621-B. ONN-002 is leadership-restricted and mirrors customer escalation prep notes.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "45621-B Daily Recovery Log",
+      "notebook": "Program Notebook",
+      "section": "Recovery",
+      "author": "PPL-003",
+      "date": "2026-06-11T17:05:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "Daily OneNote checkpoint tracking material replacement, remachine, and hardness re-test plan.",
+      "content_excerpt": "Decision recap: material lot issue confirmed; execute quarantine lot 24-118, machine replacement lot 24-126, run hardness acceptance test before quality sign-off.",
+      "url": "https://contoso-precision.sharepoint.com/sites/45621B/OneNote/Recovery-Log"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Customer Escalation Call Notes",
+      "notebook": "Program Leadership",
+      "section": "Customer",
+      "author": "PPL-002",
+      "date": "2026-06-12T08:30:00Z",
+      "sensitivity": "restricted",
+      "acl": ["new_pm", "director"],
+      "summary": "Leadership notes from the customer escalation touchpoint and commitment tracking.",
+      "content_excerpt": "Track commitment wording, recovery confidence, and readiness package timing before next customer update.",
+      "url": "https://contoso-precision.sharepoint.com/sites/45621B/Restricted/OneNote-Customer-Escalation"
+    }
+  ]
+}

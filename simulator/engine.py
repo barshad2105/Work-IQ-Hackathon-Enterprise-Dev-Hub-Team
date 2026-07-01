@@ -47,6 +47,7 @@ FIXTURE_FILES: dict[str, str] = {
     "meetings.json": "meetings",
     "teams.json": "teams_messages",
     "files.json": "files",
+    "onenote.json": "onenote_pages",
     "personas.json": "personas",
     "golden.json": "golden",
 }
@@ -65,6 +66,7 @@ class Scenario:
     meetings: list[dict] = field(default_factory=list)
     teams_messages: list[dict] = field(default_factory=list)
     files: list[dict] = field(default_factory=list)
+    onenote_pages: list[dict] = field(default_factory=list)
     personas: list[dict] = field(default_factory=list)
     golden: list[dict] = field(default_factory=list)
     # Tools-backed tables, keyed by file stem (e.g. "milestone_tracker", "capa_tracker").
@@ -174,6 +176,8 @@ def _build_index(sc: Scenario) -> None:
         idx[msg["id"]] = ("teams_message", msg)
     for f in sc.files:
         idx[f["id"]] = ("file", f)
+    for page in sc.onenote_pages:
+        idx[page["id"]] = ("onenote_page", page)
     for table, rows in sc.tables.items():
         kind = _kind_for_table(table)
         for row in rows:
@@ -237,6 +241,8 @@ def _title_for(kind: str, record: dict) -> str:
         return f"Teams ({record.get('channel')}): {record.get('author')}"
     if kind == "file":
         return f"File: {record.get('name')}"
+    if kind == "onenote_page":
+        return f"OneNote: {record.get('title')}"
     if kind == "action_item":
         return f"Action item: {record.get('text', '')[:60]}"
     # Generic table row (milestone, capa, engagement, deal, …): pick the best label field.
@@ -412,6 +418,17 @@ def _all_snippets(sc: Scenario, persona_id: str | None) -> list[dict]:
     for f in sc.files:
         if can_see(f, persona_id):
             snippets.append({"id": f["id"], "text": f"{f.get('name')} :: {f.get('summary')}"})
+    for page in sc.onenote_pages:
+        if can_see(page, persona_id):
+            snippets.append(
+                {
+                    "id": page["id"],
+                    "text": (
+                        f"{page.get('title')} :: {page.get('summary')} :: "
+                        f"{page.get('content_excerpt')}"
+                    ),
+                }
+            )
     for table, rows in sc.tables.items():
         for row in rows:
             if can_see(row, persona_id):
@@ -435,6 +452,68 @@ def _retrieve(snippets: list[dict], question: str, k: int = 6) -> list[dict]:
     return [s for _, s in scored[:k]]
 
 
+def _detect_source_hints(question: str) -> set[str]:
+    """Infer requested source kinds from user wording (e.g., 'OneNote')."""
+    q = _normalize(question)
+    hints: set[str] = set()
+
+    if "one note" in q or "onenote" in q:
+        hints.add("onenote_page")
+    if "email" in q or "mail" in q:
+        hints.add("email")
+    if "teams" in q or "chat" in q:
+        hints.add("teams_message")
+    if "meeting" in q or "review" in q:
+        hints.add("meeting")
+    if "action item" in q or "action items" in q:
+        hints.add("action_item")
+    if (
+        "file" in q
+        or "document" in q
+        or "doc" in q
+        or "ppt" in q
+        or "pdf" in q
+        or "spreadsheet" in q
+    ):
+        hints.add("file")
+
+    return hints
+
+
+def _citation_ids_match_hints(sc: Scenario, citation_ids: list[str], hints: set[str]) -> bool:
+    """Return True when a golden answer cites at least one requested source kind."""
+    if not hints:
+        return True
+    for cid in citation_ids:
+        entry = sc.index.get(cid)
+        if entry is None:
+            continue
+        kind, _ = entry
+        if kind in hints:
+            return True
+    return False
+
+
+def _filter_snippets_by_hints(sc: Scenario, snippets: list[dict], hints: set[str]) -> list[dict]:
+    """Prefer snippets from requested source kinds, fallback to all when none match."""
+    if not hints:
+        return snippets
+
+    filtered: list[dict] = []
+    for s in snippets:
+        sid = s.get("id")
+        if not sid:
+            continue
+        entry = sc.index.get(sid)
+        if entry is None:
+            continue
+        kind, _ = entry
+        if kind in hints:
+            filtered.append(s)
+
+    return filtered or snippets
+
+
 # --------------------------------------------------------------------------- #
 # Public API: ask
 # --------------------------------------------------------------------------- #
@@ -449,7 +528,13 @@ GOVERNANCE_NOTE = (
 def ask(sc: Scenario, question: str, persona_id: str | None = None) -> dict:
     """Answer a question. Returns {response, conversationId, citations, trimmed}."""
     conversation_id = f"sim-{uuid.uuid4().hex[:12]}"
+    source_hints = _detect_source_hints(question)
     golden = match_golden(sc, question)
+
+    # If user explicitly asks for a source type (e.g., OneNote), do not force a
+    # golden answer that cites different source kinds (e.g., emails).
+    if golden is not None and not _citation_ids_match_hints(sc, golden.get("citations", []), source_hints):
+        golden = None
 
     if golden is not None:
         visible, trimmed = resolve_citations(sc, golden.get("citations", []), persona_id)
@@ -490,6 +575,7 @@ def ask(sc: Scenario, question: str, persona_id: str | None = None) -> dict:
 
     # No golden match — retrieve, then optionally synthesise with a model.
     snippets = _all_snippets(sc, persona_id)
+    snippets = _filter_snippets_by_hints(sc, snippets, source_hints)
     top = _retrieve(snippets, question)
     llm = _llm_answer(question, [f"[{s['id']}] {s['text']}" for s in top])
     if llm is not None:
@@ -509,8 +595,9 @@ def ask(sc: Scenario, question: str, persona_id: str | None = None) -> dict:
     if top:
         bullets = "\n".join(f"- [{s['id']}] {s['text'][:140]}" for s in top)
         response = (
-            "No scripted answer matched this question, and no model is configured "
-            "(set OPENAI_API_KEY for ad-hoc synthesis). Closest work-context signals:\n"
+            "No exact scripted answer matched this question, and no model is configured "
+            "(set OPENAI_API_KEY for ad-hoc synthesis). "
+            "Showing related work-context signals that may help:\n"
             f"{bullets}"
         )
     else:

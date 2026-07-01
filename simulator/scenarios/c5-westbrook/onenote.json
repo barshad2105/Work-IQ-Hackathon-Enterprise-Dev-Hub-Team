@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for Westbrook accreditation governance. ONN-002 is leadership-restricted and mirrors confidential liaison preparation.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "AACSB Reaffirmation Working Notes",
+      "notebook": "College Governance",
+      "section": "Accreditation",
+      "author": "PPL-005",
+      "date": "2026-06-17T14:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["associate_dean", "committee_member", "provost"],
+      "summary": "Committee working notes for assurance-of-learning evidence gaps and assigned remediation actions.",
+      "content_excerpt": "Open actions include rubric calibration completion, course-map evidence upload, and assessment-cycle closeout owner updates.",
+      "url": "https://westbrook-college.sharepoint.com/sites/Accreditation/OneNote/Reaffirmation-Working-Notes"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Confidential Liaison Brief Prep",
+      "notebook": "Provost Office",
+      "section": "External Liaison",
+      "author": "PPL-001",
+      "date": "2026-06-18T08:10:00Z",
+      "sensitivity": "restricted",
+      "acl": ["associate_dean", "provost"],
+      "summary": "Leadership prep notes for confidential liaison discussion points and escalation boundaries.",
+      "content_excerpt": "Prepare response framing for unresolved evidence exceptions and escalation options before liaison check-in.",
+      "url": "https://westbrook-college.sharepoint.com/sites/Provost/Restricted/OneNote-Liaison-Prep"
+    }
+  ]
+}

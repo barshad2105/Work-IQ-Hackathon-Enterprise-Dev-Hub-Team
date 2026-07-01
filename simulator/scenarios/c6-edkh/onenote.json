@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for EDKH incident response. ONN-002 is incident-command restricted and mirrors confidential comms planning.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "Atlas Sev-1 Timeline Scratchpad",
+      "notebook": "Incident Notebook",
+      "section": "Timeline",
+      "author": "PPL-005",
+      "date": "2026-06-19T02:20:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "Live timeline notes tracking mitigations, rollback checkpoints, and on-call ownership handoffs.",
+      "content_excerpt": "Captured sequence includes paging times, mitigation decisions, and validation checkpoints for payment path recovery.",
+      "url": "https://edkh-tech.sharepoint.com/sites/Incident/OneNote/Atlas-Sev1-Timeline"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Customer Comms Commitment Draft",
+      "notebook": "Incident Command",
+      "section": "Communications",
+      "author": "PPL-001",
+      "date": "2026-06-19T03:05:00Z",
+      "sensitivity": "restricted",
+      "acl": ["oncall_lead", "incident_commander"],
+      "summary": "Incident-command only notes for customer commitment language and disclosure sequence.",
+      "content_excerpt": "Draft wording for commitment windows, confidence qualifiers, and legal review checkpoints ahead of customer updates.",
+      "url": "https://edkh-tech.sharepoint.com/sites/Incident/Restricted/OneNote-Customer-Comms"
+    }
+  ]
+}

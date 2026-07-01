@@ -36,6 +36,7 @@ simulator/
       meetings.json         # Quality Steering + Credentialing committees + Westgate EHR rollout review
       teams.json            # per-clinic Westgate rollout channel + staff-only Quality Program channel
       files.json            # CAPA tracker summary, med-rec policy draft, (restricted) HR personnel file
+      onenote.json          # OneNote pages for working notes / leadership prep
       personas.json         # ops_director | quality_pm | credentialing_lead | vendor_liaison
       golden.json           # the 8 C1 compound questions -> cited answers
       tables/
@@ -46,6 +47,7 @@ simulator/
       meetings.json         # design-review recaps + transcripts + action items
       teams.json            # Inconel 718 material channel posts
       files.json            # PPAP QTP rev D, supplier risk register, (restricted) supplier agreement
+      onenote.json          # OneNote pages for recovery log / escalation prep
       personas.json         # new_pm | quality_engineer | contractor | director
       golden.json           # the 8 C2 compound questions -> cited answers
       tables/
@@ -228,6 +230,6 @@ This is the same answer pipeline trimming on identity — the RBAC narrative the
 
 ## Adding Challenges 3–6 (data-only)
 
-Copy a scenario folder, replace the seven fixture files + `tables/*.json`, and run
+Copy a scenario folder, replace the eight fixture files + `tables/*.json`, and run
 `.\.venv\Scripts\python.exe simulator\tests\validate_scenario.py scenarios\<new>` from the repo root. No `engine.py` / `server.py` changes are needed — the engine
 discovers personas, tables, citation kinds, and id-prefixes from the data.

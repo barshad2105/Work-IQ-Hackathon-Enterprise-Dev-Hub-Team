@@ -53,8 +53,10 @@ def main() -> int:
     check("load: meetings", len(sc.meetings) == 3, f"got {len(sc.meetings)}")
     check("load: teams", len(sc.teams_messages) == 5, f"got {len(sc.teams_messages)}")
     check("load: files", len(sc.files) == 3, f"got {len(sc.files)}")
+    check("load: onenote", len(sc.onenote_pages) == 2, f"got {len(sc.onenote_pages)}")
     check("load: golden", len(sc.golden) == 8, f"got {len(sc.golden)}")
-    check("load: tracker", len(sc.tables["milestone_tracker"]) == 4, f"got {len(sc.tables["milestone_tracker"])}")
+    check("load: tracker", len(sc.tables["milestone_tracker"]) == 4,
+          f"got {len(sc.tables['milestone_tracker'])}")
     check("load: personas", len(sc.personas) == 4, f"got {len(sc.personas)}")
 
     # ---- 8 golden questions match correctly (persona=new_pm, full access) ----
@@ -142,7 +144,7 @@ def main() -> int:
         "risk": "Apex Alloys lot 24-118 non-conforming",
     })
     check("create: appended", res_new["created"] is True and len(sc.tables["milestone_tracker"]) == before + 1,
-          f"created={res_new.get('created')} len={len(sc.tables["milestone_tracker"])}")
+          f"created={res_new.get('created')} len={len(sc.tables['milestone_tracker'])}")
 
     # re-issue the same logical create -> deduped, no growth
     res_dup = engine.create_entity(sc, "milestone_tracker", {
@@ -154,7 +156,7 @@ def main() -> int:
         "risk": "Apex Alloys lot 24-118 non-conforming",
     })
     check("create: idempotent", res_dup["created"] is False and len(sc.tables["milestone_tracker"]) == before + 1,
-          f"created={res_dup.get('created')} len={len(sc.tables["milestone_tracker"])}")
+          f"created={res_dup.get('created')} len={len(sc.tables['milestone_tracker'])}")
 
     # ---- Tools surface: update_entity ----
     res_upd = engine.update_entity(sc, "milestone_tracker", "MS-003", {"status": "Released"})
@@ -193,6 +195,12 @@ def main() -> int:
     r_adhoc = engine.ask(sc, "what is the cafeteria menu today", persona_id="new_pm")
     check("adhoc: no crash", isinstance(r_adhoc["response"], str) and r_adhoc["source"] in {"retrieval-only", "llm"},
           f"source={r_adhoc['source']}")
+
+    # ---- OneNote source is retrievable/citable ----
+    r_note = engine.ask(sc, "show the daily recovery log notes for lot 24-126", persona_id="new_pm")
+    note_ids = citation_ids(r_note)
+    check("onenote: cited in ad-hoc retrieval", "ONN-001" in note_ids,
+          f"cites={note_ids}")
 
     # ---- Summary ----
     print()

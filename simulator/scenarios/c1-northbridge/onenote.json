@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for Northbridge Health Network. ONN-002 is leadership-restricted to mirror commercial discussion notes; ONN-001 is shared staff context.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "Westgate Rollout - Risks and Dependencies",
+      "notebook": "Northbridge Operations",
+      "section": "Westgate EHR",
+      "author": "PPL-001",
+      "date": "2026-06-11T13:00:00Z",
+      "sensitivity": "internal",
+      "acl": ["ops_director", "quality_pm", "credentialing_lead"],
+      "summary": "Working notes after the 10-JUN quality meeting listing open readiness dependencies for Westgate go-live.",
+      "content_excerpt": "Open dependencies: CAPA-001 policy finalization, CAPA-004 environment documentation package, and final migration validation sign-off before vendor go-live confirmation.",
+      "url": "https://northbridge-health.sharepoint.com/sites/Operations/OneNote/Westgate-Risks"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Lumina Commercial Escalation Prep",
+      "notebook": "Ops Leadership",
+      "section": "Vendor Management",
+      "author": "PPL-002",
+      "date": "2026-06-12T09:15:00Z",
+      "sensitivity": "restricted",
+      "acl": ["ops_director", "quality_pm"],
+      "summary": "Leadership prep notes for potential service-credit enforcement if vendor-side delays continue.",
+      "content_excerpt": "Prepare talking points on MSA clause 7.4 and decision threshold for invoking commercial remedies if milestone recovery misses the 22-JUN target.",
+      "url": "https://northbridge-health.sharepoint.com/sites/OpsLeadership/OneNote/Lumina-Escalation"
+    }
+  ]
+}

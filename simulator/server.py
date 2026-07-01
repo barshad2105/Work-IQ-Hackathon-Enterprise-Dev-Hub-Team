@@ -66,7 +66,7 @@ def ask_work_iq(question: str, fileUrls: list[str] | None = None) -> str:
     """Ask a question to Microsoft 365 Copilot (Work IQ).
 
     Grounds the answer in the active persona's work context (email, meetings, chats,
-    files, people, and the Dataverse milestone tracker). Returns JSON with 'response'
+    files, OneNote pages, people, and the Dataverse milestone tracker). Returns JSON with 'response'
     (the answer), the 'conversationId', and 'citations' back to the source signals.
 
     This mirrors the real Work IQ `ask_work_iq` contract exactly so the simulator is a

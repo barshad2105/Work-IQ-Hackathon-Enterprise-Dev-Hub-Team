@@ -1,0 +1,31 @@
+{
+  "_comment": "Synthetic OneNote pages for Meridian consulting engagement. ONN-002 is leadership-restricted for client escalation prep.",
+  "onenote_pages": [
+    {
+      "id": "ONN-001",
+      "title": "Brightwater Steering Readout",
+      "notebook": "Engagement Notebook",
+      "section": "Steering Committee",
+      "author": "PPL-003",
+      "date": "2026-06-14T15:20:00Z",
+      "sensitivity": "internal",
+      "acl": ["all"],
+      "summary": "Consolidated notes from the weekly steering review with current delivery risks and owner actions.",
+      "content_excerpt": "Track decision log, at-risk milestones, and owners for data migration quality gates and change-control approvals.",
+      "url": "https://meridian-consulting.sharepoint.com/sites/Brightwater/OneNote/Steering-Readout"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Client Escalation Narrative Draft",
+      "notebook": "Delivery Leadership",
+      "section": "Escalations",
+      "author": "PPL-001",
+      "date": "2026-06-15T07:45:00Z",
+      "sensitivity": "restricted",
+      "acl": ["delivery_principal", "director"],
+      "summary": "Leadership prep notes for framing client escalation status and recovery asks.",
+      "content_excerpt": "Draft external narrative for scope-risk ownership, resource ask, and timeline confidence envelope before client steering call.",
+      "url": "https://meridian-consulting.sharepoint.com/sites/Brightwater/Restricted/OneNote-Escalation"
+    }
+  ]
+}

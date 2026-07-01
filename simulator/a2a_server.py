@@ -97,7 +97,7 @@ def _agent_card(public_url: str) -> dict[str, Any]:
         "name": "workiq-simulator",
         "description": (
             "Local Work IQ simulator — answers questions grounded in the active persona's "
-            "synthetic M365 work context (email, meetings, chats, files, people, and "
+            "synthetic M365 work context (email, meetings, chats, files, OneNote pages, people, and "
             "Dataverse tables) with citations and permission-aware trimming. Mirrors the "
             "real Work IQ Chat capability over A2A."
         ),
