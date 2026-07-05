@@ -30,6 +30,7 @@ import re
 import sys
 import uuid
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -515,6 +516,179 @@ def _filter_snippets_by_hints(sc: Scenario, snippets: list[dict], hints: set[str
 
 
 # --------------------------------------------------------------------------- #
+# Data duration filtering
+# --------------------------------------------------------------------------- #
+
+def _parse_iso_date(date_str: str) -> datetime | None:
+    """Parse ISO 8601 date strings (e.g., '2026-06-10T16:00:00Z')."""
+    if not date_str:
+        return None
+    try:
+        dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+        # Ensure the datetime is timezone-aware (UTC)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except (ValueError, AttributeError):
+        return None
+
+
+def _get_date_from_record(record: dict) -> datetime | None:
+    """Extract date from a fixture record. Checks common date fields."""
+    for field in ('date', 'created', 'updated', 'due', 'sent_date', 'posted_at'):
+        val = record.get(field)
+        if val:
+            parsed = _parse_iso_date(val) if isinstance(val, str) else None
+            if parsed:
+                return parsed
+    return None
+
+
+def _filter_fixtures_by_duration(
+    fixtures: list[dict], 
+    days_back: int, 
+    reference_date: datetime | None = None
+) -> list[dict]:
+    """Filter fixtures to only include those from the last N days.
+    
+    Args:
+        fixtures: List of fixture records
+        days_back: Number of days to look back (e.g., 7 for last week)
+        reference_date: Date to calculate from (defaults to now)
+    
+    Returns:
+        Filtered list of fixtures within the date range
+    """
+    if not fixtures or days_back is None or days_back < 1:
+        return fixtures
+    
+    if reference_date is None:
+        reference_date = datetime.now(timezone.utc)
+    
+    cutoff = reference_date - timedelta(days=days_back)
+    filtered = []
+    
+    for record in fixtures:
+        record_date = _get_date_from_record(record)
+        if record_date and record_date >= cutoff:
+            filtered.append(record)
+        elif not record_date:
+            # Include records with no date (can't filter them)
+            filtered.append(record)
+    
+    return filtered
+
+
+def _apply_data_filters(
+    sc: Scenario,
+    data_filters: dict | None
+) -> None:
+    """Apply data duration filters to scenario fixtures in-place.
+    
+    Filters are applied based on mode:
+    - 'by-source': Apply different duration per source type
+    - 'by-duration': Apply same duration across multiple source types
+    """
+    if not data_filters:
+        return
+    
+    mode = data_filters.get('mode', 'by-source')
+    print(f"[FILTER] Applying data filters - mode: {mode}, data_filters: {data_filters}")
+    
+    if mode == 'by-source':
+        by_source = data_filters.get('bySource', {})
+        print(f"[FILTER] By-source mode - sources to filter: {list(by_source.keys())}")
+        for source_type, config in by_source.items():
+            days = config.get('days')
+            if not days or days < 1:
+                continue
+            print(f"[FILTER] Filtering {source_type} for last {days} days")
+            
+            if source_type == 'emails':
+                before = len(sc.emails)
+                sc.emails = _filter_fixtures_by_duration(sc.emails, days)
+                after = len(sc.emails)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'meetings':
+                before = len(sc.meetings)
+                sc.meetings = _filter_fixtures_by_duration(sc.meetings, days)
+                after = len(sc.meetings)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'teams_messages':
+                before = len(sc.teams_messages)
+                sc.teams_messages = _filter_fixtures_by_duration(sc.teams_messages, days)
+                after = len(sc.teams_messages)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'files':
+                before = len(sc.files)
+                sc.files = _filter_fixtures_by_duration(sc.files, days)
+                after = len(sc.files)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'onenote_pages':
+                before = len(sc.onenote_pages)
+                sc.onenote_pages = _filter_fixtures_by_duration(sc.onenote_pages, days)
+                after = len(sc.onenote_pages)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'tables':
+                for table_name, rows in sc.tables.items():
+                    before = len(rows)
+                    sc.tables[table_name] = _filter_fixtures_by_duration(rows, days)
+                    after = len(sc.tables[table_name])
+                    print(f"[FILTER] {table_name}: {before} -> {after} records")
+    
+    elif mode == 'by-duration':
+        by_duration = data_filters.get('byDuration', {})
+        days = by_duration.get('days')
+        sources = by_duration.get('sources', set())
+        print(f"[FILTER] By-duration mode - days: {days}, sources: {sources}")
+        
+        if not days or days < 1:
+            return
+        
+        # Convert to set if it's a list (from JSON)
+        if isinstance(sources, list):
+            sources = set(sources)
+        
+        for source_type in sources:
+            print(f"[FILTER] Filtering {source_type} for last {days} days")
+            if source_type == 'emails':
+                before = len(sc.emails)
+                sc.emails = _filter_fixtures_by_duration(sc.emails, days)
+                after = len(sc.emails)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'meetings':
+                before = len(sc.meetings)
+                sc.meetings = _filter_fixtures_by_duration(sc.meetings, days)
+                after = len(sc.meetings)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'teams_messages':
+                before = len(sc.teams_messages)
+                sc.teams_messages = _filter_fixtures_by_duration(sc.teams_messages, days)
+                after = len(sc.teams_messages)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'files':
+                before = len(sc.files)
+                sc.files = _filter_fixtures_by_duration(sc.files, days)
+                after = len(sc.files)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'onenote_pages':
+                before = len(sc.onenote_pages)
+                sc.onenote_pages = _filter_fixtures_by_duration(sc.onenote_pages, days)
+                after = len(sc.onenote_pages)
+                print(f"[FILTER] {source_type}: {before} -> {after} records")
+            elif source_type == 'tables':
+                for table_name, rows in sc.tables.items():
+                    before = len(rows)
+                    sc.tables[table_name] = _filter_fixtures_by_duration(rows, days)
+                    after = len(sc.tables[table_name])
+                    print(f"[FILTER] {table_name}: {before} -> {after} records")
+    
+    # Rebuild the index after filtering
+    _build_index(sc)
+    print(f"[FILTER] Completed - index has {len(sc.index)} items")
+
+
+# --------------------------------------------------------------------------- #
 # Public API: ask
 # --------------------------------------------------------------------------- #
 
@@ -525,9 +699,20 @@ GOVERNANCE_NOTE = (
 )
 
 
-def ask(sc: Scenario, question: str, persona_id: str | None = None) -> dict:
-    """Answer a question. Returns {response, conversationId, citations, trimmed}."""
+def ask(sc: Scenario, question: str, persona_id: str | None = None, data_filters: dict | None = None) -> dict:
+    """Answer a question. Returns {response, conversationId, citations, trimmed}.
+    
+    Args:
+        sc: The loaded scenario
+        question: The user's question
+        persona_id: Optional persona ID for RBAC filtering
+        data_filters: Optional data duration filters (by-source or by-duration mode)
+    """
     conversation_id = f"sim-{uuid.uuid4().hex[:12]}"
+    
+    # Apply data duration filters if provided
+    if data_filters:
+        _apply_data_filters(sc, data_filters)
     source_hints = _detect_source_hints(question)
     golden = match_golden(sc, question)
 

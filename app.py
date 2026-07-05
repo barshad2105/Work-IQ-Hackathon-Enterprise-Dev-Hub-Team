@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from urllib.parse import urlparse
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, send_file
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 from agent_framework import Agent
@@ -295,7 +295,7 @@ def init_agent():
         raw_scenario = os.getenv("WORKIQ_SIM_SCENARIO", r"scenarios\c2-contoso")
         scenario_path = _resolve_scenario_path(raw_scenario)
         available_personas = _load_personas_for_scenario(scenario_path)
-        sim_persona = os.getenv("WORKIQ_SIM_PERSONA", "quality_engineer").strip() or "all"
+        sim_persona = os.getenv("WORKIQ_SIM_PERSONA", "").strip() or "all"
 
         # Simulator-only mode: if no Azure endpoint is configured, answer directly from
         # simulator engine (same behavior family as simulator/demo.py).
@@ -369,8 +369,16 @@ def add_cors_headers(response):
 
 @app.route("/")
 def index():
-    """Serve the main chat interface."""
-    return render_template("index.html")
+    """Serve the main chat interface directly (bypass Jinja2 to avoid truncation)."""
+    html_path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+    return send_file(html_path, mimetype='text/html')
+
+
+@app.route("/flyout-panel", methods=["GET"])
+def flyout_panel():
+    """Serve the side panel content (loaded dynamically)."""
+    panel_path = os.path.join(os.path.dirname(__file__), 'templates', 'flyout-panel.html')
+    return send_file(panel_path, mimetype='text/html')
 
 
 @app.route("/api/personas", methods=["GET", "OPTIONS"])
@@ -428,6 +436,7 @@ def chat():
         data = request.get_json(silent=True) or {}
         user_message = data.get("message", "").strip()
         transport_mode = str(data.get("transport", "MCP")).strip().upper() or "MCP"
+        data_filters = data.get("data_filters")  # Optional data duration filters
 
         if not user_message:
             return jsonify({"error": "Empty message"}), 400
@@ -453,7 +462,7 @@ def chat():
 
             active_persona = session.get("persona_id", sim_persona or "all")
             persona_id = None if (active_persona or "").lower() == "all" else active_persona
-            result = sim_engine.ask(sim_scenario, user_message, persona_id=persona_id)
+            result = sim_engine.ask(sim_scenario, user_message, persona_id=persona_id, data_filters=data_filters)
             result = _maybe_enforce_source_intent(sim_scenario, sim_engine, user_message, persona_id, result)
             citations = result.get("citations", [])
             trace = _build_demo_trace(
@@ -610,21 +619,212 @@ def internal_error(e):
     return jsonify({"error": "Internal server error"}), 500
 
 
+# ===== Panel Orchestrator Endpoints =====
+
+@app.route("/api/agent/orchestrate", methods=["POST", "OPTIONS"])
+def orchestrate_agents():
+    """Orchestrate all panel agents - called on page load."""
+    try:
+        if request.method == "OPTIONS":
+            return ("", 204)
+
+        if not sim_engine or not sim_scenario:
+            return jsonify({"success": False, "error": "Simulator not initialized"}), 500
+
+        active_persona = session.get("persona_id", sim_persona or "all")
+        persona_id = None if (active_persona or "").lower() == "all" else active_persona
+
+        # Import orchestrator
+        from simulator.agents.orchestrator import PanelOrchestrator
+        
+        # Run orchestrator (sync mode, agents will be called as threads)
+        result = asyncio.run(PanelOrchestrator.orchestrate(
+            scenario=sim_scenario,
+            persona_id=persona_id,
+            response_count=0,
+            citations=[],
+            conversation_history=[],
+            last_response=None,
+            timeout=5.0
+        ))
+
+        return jsonify(result)
+
+    except Exception as e:
+        print(f"[ORCHESTRATOR] Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "success": False,
+            "error": f"Orchestrator error: {str(e)}",
+            "suggestions": [],
+            "timeline": [],
+            "nextsteps": [],
+            "progress": {}
+        }), 500
+
+
+@app.route("/api/agent/timeline", methods=["POST", "OPTIONS"])
+def agent_timeline():
+    """Generate timeline after messages are processed."""
+    try:
+        if request.method == "OPTIONS":
+            return ("", 204)
+
+        if not sim_engine or not sim_scenario:
+            return jsonify({"success": False, "error": "Simulator not initialized"}), 500
+
+        data = request.get_json(silent=True) or {}
+        active_persona = session.get("persona_id", sim_persona or "all")
+        persona_id = None if (active_persona or "").lower() == "all" else active_persona
+
+        from simulator.agents.timeline_agent import TimelineAgent
+
+        timeline = TimelineAgent.generate(
+            scenario=sim_scenario,
+            persona_id=persona_id,
+            conversation_history=data.get("conversation_history", []),
+            citations=data.get("citations", [])
+        )
+
+        return jsonify({
+            "success": True,
+            "timeline": timeline
+        })
+
+    except Exception as e:
+        print(f"[TIMELINE_AGENT] Error: {e}", file=sys.stderr)
+        return jsonify({"success": False, "error": str(e), "timeline": []}), 500
+
+
+@app.route("/api/agent/nextsteps", methods=["POST", "OPTIONS"])
+def agent_nextsteps():
+    """Generate next steps after a response."""
+    try:
+        if request.method == "OPTIONS":
+            return ("", 204)
+
+        if not sim_engine or not sim_scenario:
+            return jsonify({"success": False, "error": "Simulator not initialized"}), 500
+
+        data = request.get_json(silent=True) or {}
+        active_persona = session.get("persona_id", sim_persona or "all")
+        persona_id = None if (active_persona or "").lower() == "all" else active_persona
+
+        from simulator.agents.nextsteps_agent import NextStepsAgent
+
+        nextsteps = NextStepsAgent.generate(
+            scenario=sim_scenario,
+            persona_id=persona_id,
+            last_response=data.get("last_response"),
+            conversation_history=data.get("conversation_history", [])
+        )
+
+        return jsonify({
+            "success": True,
+            "nextsteps": nextsteps
+        })
+
+    except Exception as e:
+        print(f"[NEXTSTEPS_AGENT] Error: {e}", file=sys.stderr)
+        return jsonify({"success": False, "error": str(e), "nextsteps": []}), 500
+
+
+@app.route("/api/agent/progress-trend", methods=["POST", "OPTIONS"])
+def agent_progress_trend():
+    """Generate 7-day trend data for progress visualization."""
+    try:
+        if request.method == "OPTIONS":
+            return ("", 204)
+
+        if not sim_engine or not sim_scenario:
+            return jsonify({"success": False, "error": "Simulator not initialized", "trend": []}), 500
+
+        # Calculate trend based on available data
+        # For each of the last 7 days, count relevant items (emails, messages, etc.)
+        from datetime import datetime, timedelta
+        
+        trend_data = []
+        trend_values = []
+        today = datetime.now()
+        
+        # Generate 7-day trend
+        for day_offset in range(6, -1, -1):
+            date = today - timedelta(days=day_offset)
+            date_str = date.strftime('%Y-%m-%d')
+            
+            # Count items for this day from available data sources
+            # This is a simulation - counting based on available data in scenario
+            count = 0
+            
+            # Count emails, meetings, chats, and other items for this date
+            try:
+                emails = sim_engine.get_emails() or []
+                count += len([e for e in emails if e.get('date', '').startswith(date_str)])
+                
+                meetings = sim_engine.get_meetings() or []
+                count += len([m for m in meetings if m.get('date', '').startswith(date_str)])
+                
+                chats = sim_engine.get_chats() or []
+                count += len([c for c in chats if c.get('date', '').startswith(date_str)])
+            except:
+                pass
+            
+            trend_values.append(max(count, 0))
+            trend_data.append(date_str)
+        
+        # Determine trend direction
+        if len(trend_values) >= 2:
+            first_half_avg = sum(trend_values[:3]) / 3 if len(trend_values) >= 3 else trend_values[0]
+            second_half_avg = sum(trend_values[-3:]) / 3 if len(trend_values) >= 3 else trend_values[-1]
+            
+            if second_half_avg > first_half_avg * 1.1:
+                direction = 'improving'
+                desc = '↑ Trending up - Improved activity'
+            elif second_half_avg < first_half_avg * 0.9:
+                direction = 'declining'
+                desc = '↓ Trending down - Decreased activity'
+            else:
+                direction = 'stable'
+                desc = '→ Stable - Consistent activity'
+        else:
+            direction = 'stable'
+            desc = 'Insufficient data'
+        
+        return jsonify({
+            "success": True,
+            "trend": trend_values,
+            "trendDirection": direction,
+            "trendDescription": desc,
+            "dates": trend_data
+        })
+
+    except Exception as e:
+        print(f"[PROGRESS_TREND] Error: {e}", file=sys.stderr)
+        return jsonify({
+            "success": False,
+            "error": str(e),
+            "trend": [],
+            "trendDirection": "stable",
+            "trendDescription": "Error loading trend"
+        }), 500
+
+
 def main():
     """Main entry point."""
-    print("⏳ Initializing Work IQ Agent Web UI...")
+    print("[*] Initializing Work IQ Agent Web UI...")
 
     port = int(os.getenv("WORKIQ_PORT", "5000"))
 
     if not init_agent():
-        print("\n❌ Failed to initialize agent. Please check your configuration.", file=sys.stderr)
+        print("\n[ERROR] Failed to initialize agent. Please check your configuration.", file=sys.stderr)
         print("\nRequired environment variables:")
         print("  - For full agent+MCP mode: WORKIQ_AZURE_ENDPOINT, WORKIQ_MCP_COMMAND, WORKIQ_MCP_ARGS")
         print("  - For simulator-only mode: WORKIQ_SIM_SCENARIO (optional), WORKIQ_SIM_PERSONA (optional)")
         sys.exit(1)
 
-    print("✅ Agent initialized!")
-    print("\n🌐 Starting Web Server...")
+    print("[OK] Agent initialized!")
+    print("\n[SERVER] Starting Web Server...")
     print(f"   Open your browser and go to: http://localhost:{port}")
     print("   Press CTRL+C to stop the server\n")
 

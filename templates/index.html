@@ -762,6 +762,92 @@
             transform: scale(1);
         }
 
+        /* Compact filter mode tabs */
+        .filter-mode-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .filter-mode-tab {
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #e8ebf7;
+            color: #555;
+            border: 1px solid #d0d7f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .filter-mode-tab:hover {
+            background: #dfe4f0;
+            border-color: #bcc5e3;
+        }
+
+        .filter-mode-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Filter mode content visibility */
+        .filter-mode-content {
+            display: none;
+        }
+
+        .filter-mode-content.active {
+            display: block;
+        }
+
+        /* Compact filter action buttons */
+        .filter-btn-sm {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            background: #667eea !important;
+            color: white !important;
+            border: 1px solid #667eea !important;
+            border-radius: 4px !important;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn-sm:hover {
+            background: #5568d3 !important;
+            border-color: #5568d3 !important;
+        }
+
+        .filter-btn-sm:active {
+            transform: scale(0.98);
+        }
+
+        /* Work In Progress section styling */
+        .wip-section {
+            background-color: #f5f5f5 !important;
+            border-color: #d0d0d0 !important;
+            opacity: 0.85;
+        }
+
+        .wip-section summary {
+            color: #888 !important;
+            font-weight: 500 !important;
+        }
+
+        .wip-content {
+            background-color: #fafafa !important;
+            color: #666 !important;
+        }
+
+        .wip-content canvas {
+            opacity: 0.8;
+            filter: grayscale(20%);
+        }
+
         .clear-btn {
             background: #999;
         }
@@ -1077,10 +1163,103 @@
             personaStatus.style.display = message ? 'inline' : 'none';
         }
 
+        async function loadFlyoutPanel() {
+            try {
+                const response = await fetch('/flyout-panel');
+                if (!response.ok) {
+                    console.error('[FLYOUT] Failed to load panel:', response.statusText);
+                    return false;
+                }
+                const html = await response.text();
+                sidePanel.innerHTML = html;
+                
+                // Re-attach event listeners to newly loaded elements
+                reattachPanelListeners();
+                console.log('[FLYOUT] Panel loaded and listeners re-attached');
+                return true;
+            } catch (error) {
+                console.error('[FLYOUT] Error loading panel:', error.message);
+                return false;
+            }
+        }
+
+        function reattachPanelListeners() {
+            // Re-attach listeners to newly loaded flyout panel elements
+            let personaSelect = document.getElementById('personaSelect');
+            const faqChips = document.querySelectorAll('.faq-chip');
+
+            console.log('[FLYOUT] Reattaching listeners...', { personaSelect: !!personaSelect, faqChips: faqChips.length });
+
+            // **CRITICAL**: Re-attach persona select change listener
+            if (personaSelect) {
+                // Remove old listeners first by cloning (required to remove event listeners)
+                const newPersonaSelect = personaSelect.cloneNode(true);
+                personaSelect.replaceWith(newPersonaSelect);
+                
+                // Update reference to the new cloned element
+                personaSelect = document.getElementById('personaSelect');
+                if (personaSelect) {
+                    personaSelect.addEventListener('change', () => {
+                        const selected = personaSelect.value;
+                        console.log('[PERSONA] Changed to:', selected);
+                        if (selected) {
+                            changePersona(selected);
+                        }
+                    });
+                    console.log('[FLYOUT] Persona listener attached to cloned element');
+                }
+            }
+
+            // FAQ chips - add click to populate message input
+            faqChips.forEach((chip) => {
+                chip.addEventListener('click', () => {
+                    messageInput.value = chip.textContent;
+                    messageInput.focus();
+                });
+            });
+
+            // Set up filter mode tab switching
+            const filterModeTabs = document.querySelectorAll('.filter-mode-tab');
+            const modeToContentId = {
+                'by-source': 'filterBySource',
+                'by-duration': 'filterByDuration'
+            };
+            
+            filterModeTabs.forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    const mode = tab.dataset.mode;
+                    
+                    // Update active tab styling
+                    filterModeTabs.forEach((t) => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Hide all content sections
+                    const filterContents = document.querySelectorAll('.filter-mode-content');
+                    filterContents.forEach((content) => content.classList.remove('active'));
+                    
+                    // Show the selected content section
+                    const contentId = modeToContentId[mode];
+                    const activeContent = document.getElementById(contentId);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                        console.log('[FILTER] Tab switched:', mode, '-> showing:', contentId);
+                    } else {
+                        console.warn('[FILTER] Content not found:', contentId);
+                    }
+                });
+            });
+
+            console.log('[FLYOUT] All listeners re-attached successfully');
+        }
+
         function toggleSidePanel(forceOpen = null) {
             const shouldOpen = forceOpen === null ? sidePanel.classList.contains('hidden') : forceOpen;
             sidePanel.classList.toggle('hidden', !shouldOpen);
             if (shouldOpen) {
+                // Load flyout panel content if not already loaded
+                if (sidePanel.children.length === 0) {
+                    loadFlyoutPanel();
+                }
                 sidePanel.querySelectorAll('details').forEach((details) => {
                     details.open = false;
                 });
@@ -1214,12 +1393,19 @@
 
         async function loadPersonas() {
             try {
+                // Always look up personaSelect fresh - it may have been cloned
+                const select = document.getElementById('personaSelect');
+                if (!select) {
+                    console.error('[PERSONAS] personaSelect element not found');
+                    return;
+                }
+
                 const response = await fetch(`${API_BASE}/api/personas`, { credentials: 'include' });
                 const data = await parseJsonSafely(response);
 
                 if (!response.ok || data.__parseError || !data.success) {
-                    personaSelect.innerHTML = '<option value="">Default persona</option>';
-                    personaSelect.disabled = true;
+                    select.innerHTML = '<option value="">Default persona</option>';
+                    select.disabled = true;
                     if (response.status === 404) {
                         setPersonaStatus('Backend is old. Restart app to enable persona switch.', true);
                     } else {
@@ -1232,23 +1418,29 @@
                 const active = data.active_persona || 'all';
 
                 const options = [{ id: 'all', label: 'All access (admin/unscoped)' }, ...personas];
-                personaSelect.innerHTML = options
+                select.innerHTML = options
                     .map((p) => `<option value="${p.id}">${p.label || p.id}${p.role ? ` - ${p.role}` : ''}</option>`)
                     .join('');
 
-                personaSelect.value = active;
-                personaSelect.disabled = false;
+                select.value = active;
+                select.disabled = false;
                 setPersonaStatus('');
+                console.log('[PERSONAS] Loaded', personas.length, 'personas');
             } catch (error) {
-                personaSelect.innerHTML = '<option value="">Default persona</option>';
-                personaSelect.disabled = true;
+                const select = document.getElementById('personaSelect');
+                if (select) {
+                    select.innerHTML = '<option value="">Default persona</option>';
+                    select.disabled = true;
+                }
                 setPersonaStatus('Persona API not reachable', true);
             }
         }
 
         async function changePersona(newPersona) {
             try {
-                personaSelect.disabled = true;
+                const select = document.getElementById('personaSelect');
+                if (select) select.disabled = true;
+                
                 setPersonaStatus('');
 
                 const response = await fetch(`${API_BASE}/api/persona`, {
@@ -1269,7 +1461,8 @@
             } catch (error) {
                 setPersonaStatus(`Switch failed: ${error.message}`, true);
             } finally {
-                personaSelect.disabled = false;
+                const select = document.getElementById('personaSelect');
+                if (select) select.disabled = false;
             }
         }
 
@@ -1580,16 +1773,43 @@
         updateSourceTags([]);
         toggleSidePanel(false);
 
+        // Deferred initialization - don't block page load
         (async () => {
-            const connected = await detectApiBase();
-            if (!connected) {
-                personaSelect.innerHTML = '<option value="">Default persona</option>';
-                personaSelect.disabled = true;
-                setPersonaStatus('Persona API not reachable', true);
-                return;
+            try {
+                console.log('[INIT] Starting deferred initialization...');
+                
+                // Detect API with timeout
+                const connected = await Promise.race([
+                    detectApiBase(),
+                    new Promise((_, reject) => setTimeout(() => reject(new Error('API detection timeout')), 3000))
+                ]);
+                
+                if (!connected) {
+                    console.warn('[INIT] API detection failed');
+                    return;
+                }
+                
+                console.log('[INIT] API connected:', window.API_BASE);
+                console.log('[INIT] Loading panel and personas...');
+                
+                // Load flyout panel FIRST so elements exist
+                const panelLoaded = await loadFlyoutPanel();
+                
+                // Then load personas into the newly loaded elements
+                await loadPersonas();
+                
+                // Finally initialize orchestrator
+                if (typeof window.initPanelOrchestrator === 'function') {
+                    await initPanelOrchestrator();
+                    console.log('[INIT] Orchestrator initialized');
+                }
+                
+                console.log('[INIT] Initialization complete');
+            } catch (error) {
+                console.error('[INIT] Error:', error.message);
             }
-            loadPersonas();
         })();
     </script>
+    <script src="/static/orchestrator.js"></script>
 </body>
 </html>

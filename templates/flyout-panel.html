@@ -1,0 +1,185 @@
+<details class="panel-card" open>
+    <summary>👤 Persona</summary>
+    <div class="panel-content">
+        <div class="panel-form-row">
+            <label for="personaSelect">Active Persona</label>
+            <select id="personaSelect" class="panel-select" title="Active simulator persona">
+                <option value="">Loading personas...</option>
+            </select>
+            <span class="panel-persona-status" id="personaStatus"></span>
+        </div>
+    </div>
+</details>
+
+<details class="panel-card" open>
+    <summary>📊 Data Duration Filter</summary>
+    <div class="panel-content">
+        <div class="filter-mode-tabs">
+            <button type="button" class="filter-mode-tab active" data-mode="by-source">By Source</button>
+            <button type="button" class="filter-mode-tab" data-mode="by-duration">By Duration</button>
+        </div>
+
+        <div id="filterBySource" class="filter-mode-content active">
+            <div class="panel-form-row">
+                <label for="sourceSelect">Select Source</label>
+                <select id="sourceSelect" class="panel-select">
+                    <option value="">-- Choose a source --</option>
+                    <option value="emails">📧 Emails</option>
+                    <option value="meetings">📅 Meetings</option>
+                    <option value="teams_messages">💬 Teams Chat</option>
+                    <option value="files">📄 Files</option>
+                    <option value="onenote_pages">📝 OneNote Pages</option>
+                    <option value="tables">📊 Tables</option>
+                </select>
+                <button type="button" id="applySourceFilterBtn" class="filter-btn-sm">Apply</button>
+            </div>
+            <div class="panel-form-row">
+                <label for="sourceDaysInput">Days Back</label>
+                <input type="number" id="sourceDaysInput" class="panel-input" min="1" max="365" placeholder="e.g., 7" title="Number of days to look back">
+            </div>
+            <div id="activeSourceFilters" class="active-filters"></div>
+        </div>
+
+        <div id="filterByDuration" class="filter-mode-content">
+            <div class="panel-form-row">
+                <label for="durationDaysInput">Days Back</label>
+                <input type="number" id="durationDaysInput" class="panel-input" min="1" max="365" placeholder="e.g., 7" title="Number of days to look back">
+            </div>
+            <div class="panel-form-row">
+                <label>Enable Sources</label>
+                <div class="source-checkboxes">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="emails" checked> 📧 Emails
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="meetings" checked> 📅 Meetings
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="teams_messages" checked> 💬 Teams Chat
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="files" checked> 📄 Files
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="onenote_pages" checked> 📝 OneNote
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="duration-source-check" value="tables" checked> 📊 Tables
+                    </label>
+                </div>
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+                <button type="button" id="applyDurationFilterBtn" class="filter-btn-sm" style="flex: 1;">Apply to All</button>
+                <button type="button" id="clearFiltersBtn" class="filter-btn-sm" style="flex: 1; background: #f0f0f0; color: #555; border-color: #ddd;">Clear</button>
+            </div>
+            <div id="activeDurationFilter" class="active-filters"></div>
+        </div>
+</details>
+
+<details class="panel-card">
+    <summary>❓ FAQS</summary>
+    <div class="panel-content">
+        <ul class="faq-list" id="faqList">
+            <li>
+                <button class="chip faq-chip" type="button">What did the last incident bridge call decide about the Atlas payments outage, and what actions were assigned?</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">What has the SRE team emailed the incident distribution about the suspected root cause of the Atlas outage?</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">Which mitigation was rolled out for Atlas and by whom, across the #atlas-incident channel and the action tracker?</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">What's the current status of the Atlas restoration across the last bridge call and the shared incident doc?</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">I'm taking the on-call shift on the Atlas incident. Give me the current picture: last bridge-call decisions, suspected root cause, mitigation rolled out and by whom, open actions and owners, and the customer-communications commitment.</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">Build the post-incident timeline for the Atlas outage: decisions, mitigations, actions, and status changes in chronological order with who did what.</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">For each open action from the last bridge call, create or update the action item in the incident tracker with owner, service, and due time.</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">Draft the shift-handover brief and the post-incident-review starting point for the Atlas outage.</button>
+            </li>
+            <li>
+                <button class="chip faq-chip" type="button">What do the OneNote customer escalation call notes say?</button>
+            </li>
+        </ul>
+    </div>
+</details>
+
+<details class="panel-card">
+    <summary>💡 SUGGESTIONS</summary>
+    <div class="panel-content">
+        <div class="chip-list" id="suggestionsList">
+            <button class="chip" type="button">What is blocking qualification?</button>
+            <button class="chip" type="button">Who owns PPAP plan?</button>
+            <button class="chip" type="button">Show OneNote recovery log summary</button>
+        </div>
+    </div>
+</details>
+
+<details class="panel-card" style="display: none;">
+    <summary>📌 RECENT</summary>
+    <div class="panel-content">
+        <ul class="mini-list" id="recentQuestionsList">
+            <li>No recent questions yet.</li>
+        </ul>
+    </div>
+</details>
+
+<details class="panel-card wip-section">
+    <summary>📊 PROGRESS <span style="font-size: 11px; color: #999; margin-left: 4px;">(Work In Progress)</span></summary>
+    <div class="panel-content wip-content">
+        <div class="progress-wrap">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="panel-note" id="progressText">0 responses in current session</div>
+        
+        <div style="margin-top: 16px; border-top: 1px solid #e0e0e0; padding-top: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: #888; margin-bottom: 8px;">
+                7-Day Trend
+            </div>
+            <canvas id="trendChart" style="max-height: 100px; width: 100%; border: 1px solid #e0e0e0; border-radius: 4px;"></canvas>
+            <div style="font-size: 11px; color: #888; margin-top: 6px; text-align: center;" id="trendLabel">
+                Loading trend data...
+            </div>
+            <div style="font-size: 11px; color: #666; margin-top: 12px; line-height: 1.6; background: #f9f9f9; padding: 8px; border-radius: 3px;">
+                <strong style="color: #333;">Legend:</strong><br>
+                <span style="color: #4CAF50;">●</span> Green/Upward = Improving activity<br>
+                <span style="color: #F44336;">●</span> Red/Downward = Declining activity<br>
+                <span style="color: #999;">●</span> Grey/Flat = Stable activity<br>
+                <span style="font-size: 10px; color: #999;">Based on emails, meetings, chats</span>
+            </div>
+        </div>
+    </div>
+</details>
+
+<details class="panel-card">
+    <summary>✅ NEXT STEPS</summary>
+    <div class="panel-content">
+        <div class="step-actions">
+            <span class="chip">Draft response</span>
+            <span class="chip">Set reminder</span>
+            <span class="chip">Review sources</span>
+        </div>
+    </div>
+</details>
+
+<details class="panel-card">
+    <summary>🕒 TIMELINE</summary>
+    <div class="panel-content">
+        <div class="timeline-bar">
+            <div class="timeline-dot">13-JUN</div>
+            <div class="timeline-dot">14-JUN</div>
+            <div class="timeline-dot">15-JUN</div>
+            <div class="timeline-dot">20-JUN</div>
+        </div>
+        <div class="source-tags" id="sourceTags">
+            <span class="source-tag">No sources yet</span>
+        </div>
+    </div>
+</details>
