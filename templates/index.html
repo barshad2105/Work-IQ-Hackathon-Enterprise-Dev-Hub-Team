@@ -762,6 +762,92 @@
             transform: scale(1);
         }
 
+        /* Compact filter mode tabs */
+        .filter-mode-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .filter-mode-tab {
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #e8ebf7;
+            color: #555;
+            border: 1px solid #d0d7f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .filter-mode-tab:hover {
+            background: #dfe4f0;
+            border-color: #bcc5e3;
+        }
+
+        .filter-mode-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Filter mode content visibility */
+        .filter-mode-content {
+            display: none;
+        }
+
+        .filter-mode-content.active {
+            display: block;
+        }
+
+        /* Compact filter action buttons */
+        .filter-btn-sm {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            background: #667eea !important;
+            color: white !important;
+            border: 1px solid #667eea !important;
+            border-radius: 4px !important;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn-sm:hover {
+            background: #5568d3 !important;
+            border-color: #5568d3 !important;
+        }
+
+        .filter-btn-sm:active {
+            transform: scale(0.98);
+        }
+
+        /* Work In Progress section styling */
+        .wip-section {
+            background-color: #f5f5f5 !important;
+            border-color: #d0d0d0 !important;
+            opacity: 0.85;
+        }
+
+        .wip-section summary {
+            color: #888 !important;
+            font-weight: 500 !important;
+        }
+
+        .wip-content {
+            background-color: #fafafa !important;
+            color: #666 !important;
+        }
+
+        .wip-content canvas {
+            opacity: 0.8;
+            filter: grayscale(20%);
+        }
+
         .clear-btn {
             background: #999;
         }
@@ -846,6 +932,54 @@
             .input-group {
                 flex-direction: column;
             }
+        }
+
+        /* ===== CONNECTOR STYLES ===== */
+        #connectorAuthModal {
+            display: none !important;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #connectorAuthModal[style*="display: flex"] {
+            display: flex !important;
+        }
+
+        .connector-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .connector-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .connector-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .connector-filters label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .connector-filters input[type="checkbox"] {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -1029,6 +1163,9 @@
     </div>
     </div>
 
+    <!-- Load orchestrator functions before initialization -->
+    <script src="/static/orchestrator.js"></script>
+    
     <script>
         const messagesDiv = document.getElementById('messages');
         const messageInput = document.getElementById('messageInput');
@@ -1077,10 +1214,103 @@
             personaStatus.style.display = message ? 'inline' : 'none';
         }
 
+        async function loadFlyoutPanel() {
+            try {
+                const response = await fetch('/flyout-panel');
+                if (!response.ok) {
+                    console.error('[FLYOUT] Failed to load panel:', response.statusText);
+                    return false;
+                }
+                const html = await response.text();
+                sidePanel.innerHTML = html;
+                
+                // Re-attach event listeners to newly loaded elements
+                reattachPanelListeners();
+                console.log('[FLYOUT] Panel loaded and listeners re-attached');
+                return true;
+            } catch (error) {
+                console.error('[FLYOUT] Error loading panel:', error.message);
+                return false;
+            }
+        }
+
+        function reattachPanelListeners() {
+            // Re-attach listeners to newly loaded flyout panel elements
+            let personaSelect = document.getElementById('personaSelect');
+            const faqChips = document.querySelectorAll('.faq-chip');
+
+            console.log('[FLYOUT] Reattaching listeners...', { personaSelect: !!personaSelect, faqChips: faqChips.length });
+
+            // **CRITICAL**: Re-attach persona select change listener
+            if (personaSelect) {
+                // Remove old listeners first by cloning (required to remove event listeners)
+                const newPersonaSelect = personaSelect.cloneNode(true);
+                personaSelect.replaceWith(newPersonaSelect);
+                
+                // Update reference to the new cloned element
+                personaSelect = document.getElementById('personaSelect');
+                if (personaSelect) {
+                    personaSelect.addEventListener('change', () => {
+                        const selected = personaSelect.value;
+                        console.log('[PERSONA] Changed to:', selected);
+                        if (selected) {
+                            changePersona(selected);
+                        }
+                    });
+                    console.log('[FLYOUT] Persona listener attached to cloned element');
+                }
+            }
+
+            // FAQ chips - add click to populate message input
+            faqChips.forEach((chip) => {
+                chip.addEventListener('click', () => {
+                    messageInput.value = chip.textContent;
+                    messageInput.focus();
+                });
+            });
+
+            // Set up filter mode tab switching
+            const filterModeTabs = document.querySelectorAll('.filter-mode-tab');
+            const modeToContentId = {
+                'by-source': 'filterBySource',
+                'by-duration': 'filterByDuration'
+            };
+            
+            filterModeTabs.forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    const mode = tab.dataset.mode;
+                    
+                    // Update active tab styling
+                    filterModeTabs.forEach((t) => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Hide all content sections
+                    const filterContents = document.querySelectorAll('.filter-mode-content');
+                    filterContents.forEach((content) => content.classList.remove('active'));
+                    
+                    // Show the selected content section
+                    const contentId = modeToContentId[mode];
+                    const activeContent = document.getElementById(contentId);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                        console.log('[FILTER] Tab switched:', mode, '-> showing:', contentId);
+                    } else {
+                        console.warn('[FILTER] Content not found:', contentId);
+                    }
+                });
+            });
+
+            console.log('[FLYOUT] All listeners re-attached successfully');
+        }
+
         function toggleSidePanel(forceOpen = null) {
             const shouldOpen = forceOpen === null ? sidePanel.classList.contains('hidden') : forceOpen;
             sidePanel.classList.toggle('hidden', !shouldOpen);
             if (shouldOpen) {
+                // Load flyout panel content if not already loaded
+                if (sidePanel.children.length === 0) {
+                    loadFlyoutPanel();
+                }
                 sidePanel.querySelectorAll('details').forEach((details) => {
                     details.open = false;
                 });
@@ -1214,12 +1444,19 @@
 
         async function loadPersonas() {
             try {
+                // Always look up personaSelect fresh - it may have been cloned
+                const select = document.getElementById('personaSelect');
+                if (!select) {
+                    console.error('[PERSONAS] personaSelect element not found');
+                    return;
+                }
+
                 const response = await fetch(`${API_BASE}/api/personas`, { credentials: 'include' });
                 const data = await parseJsonSafely(response);
 
                 if (!response.ok || data.__parseError || !data.success) {
-                    personaSelect.innerHTML = '<option value="">Default persona</option>';
-                    personaSelect.disabled = true;
+                    select.innerHTML = '<option value="">Default persona</option>';
+                    select.disabled = true;
                     if (response.status === 404) {
                         setPersonaStatus('Backend is old. Restart app to enable persona switch.', true);
                     } else {
@@ -1232,23 +1469,29 @@
                 const active = data.active_persona || 'all';
 
                 const options = [{ id: 'all', label: 'All access (admin/unscoped)' }, ...personas];
-                personaSelect.innerHTML = options
+                select.innerHTML = options
                     .map((p) => `<option value="${p.id}">${p.label || p.id}${p.role ? ` - ${p.role}` : ''}</option>`)
                     .join('');
 
-                personaSelect.value = active;
-                personaSelect.disabled = false;
+                select.value = active;
+                select.disabled = false;
                 setPersonaStatus('');
+                console.log('[PERSONAS] Loaded', personas.length, 'personas');
             } catch (error) {
-                personaSelect.innerHTML = '<option value="">Default persona</option>';
-                personaSelect.disabled = true;
+                const select = document.getElementById('personaSelect');
+                if (select) {
+                    select.innerHTML = '<option value="">Default persona</option>';
+                    select.disabled = true;
+                }
                 setPersonaStatus('Persona API not reachable', true);
             }
         }
 
         async function changePersona(newPersona) {
             try {
-                personaSelect.disabled = true;
+                const select = document.getElementById('personaSelect');
+                if (select) select.disabled = true;
+                
                 setPersonaStatus('');
 
                 const response = await fetch(`${API_BASE}/api/persona`, {
@@ -1266,10 +1509,22 @@
                 }
 
                 setPersonaStatus('');
+                
+                // Reload ACL and re-render panels for new persona
+                console.log('[UI] Persona changed to:', newPersona);
+                if (typeof loadFeatureACL === 'function') {
+                    await loadFeatureACL();
+                    // Re-check feature visibility
+                    if (typeof updateFeatureVisibility === 'function') {
+                        updateFeatureVisibility();
+                    }
+                }
+                
             } catch (error) {
                 setPersonaStatus(`Switch failed: ${error.message}`, true);
             } finally {
-                personaSelect.disabled = false;
+                const select = document.getElementById('personaSelect');
+                if (select) select.disabled = false;
             }
         }
 
@@ -1580,15 +1835,367 @@
         updateSourceTags([]);
         toggleSidePanel(false);
 
+        // Deferred initialization - don't block page load
         (async () => {
-            const connected = await detectApiBase();
-            if (!connected) {
-                personaSelect.innerHTML = '<option value="">Default persona</option>';
-                personaSelect.disabled = true;
-                setPersonaStatus('Persona API not reachable', true);
+            try {
+                console.log('[INIT] Starting deferred initialization...');
+                
+                // Detect API with timeout
+                const connected = await Promise.race([
+                    detectApiBase(),
+                    new Promise((_, reject) => setTimeout(() => reject(new Error('API detection timeout')), 3000))
+                ]);
+                
+                if (!connected) {
+                    console.warn('[INIT] API detection failed');
+                }
+
+        // ===== DATA CONNECTORS MANAGEMENT =====
+        let availableConnectors = [];
+        let selectedConnectors = new Set();
+
+        async function loadConnectors() {
+            try {
+                const response = await fetch(`${API_BASE}/api/connectors`);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    console.error('[CONNECTORS] Failed to load:', data.error);
+                    return;
+                }
+
+                availableConnectors = data.connectors || [];
+                console.log('[CONNECTORS] Loaded:', availableConnectors.length, 'connectors');
+                
+                renderConnectorsUI();
+            } catch (error) {
+                console.error('[CONNECTORS] Error loading connectors:', error);
+            }
+        }
+
+        function renderConnectorsUI() {
+            const connectorsLoading = document.getElementById('connectorsLoading');
+            const connectorsList = document.getElementById('connectorsList');
+            const connectorsContainer = document.getElementById('connectorsContainer');
+            const connectorSelector = document.getElementById('connectorSelector');
+
+            if (!connectorsLoading || !connectorsList || !connectorsContainer || !connectorSelector) {
+                console.warn('[CONNECTORS UI] Elements not found in DOM');
                 return;
             }
-            loadPersonas();
+
+            connectorsLoading.style.display = 'none';
+            connectorsList.style.display = 'block';
+
+            // Populate selector dropdown
+            const options = availableConnectors.map((c) => 
+                `<option value="${escapeHtml(c.connector_id)}">${escapeHtml(c.connector_name)}</option>`
+            ).join('');
+            connectorSelector.innerHTML = '<option value="">-- Choose a connector --</option>' + options;
+
+            // Render all connectors list
+            if (availableConnectors.length === 0) {
+                connectorsContainer.innerHTML = '<div style="text-align: center; color: #999; font-size: 12px; padding: 16px;">No connectors available</div>';
+            } else {
+                connectorsContainer.innerHTML = availableConnectors
+                    .map((connector) => {
+                        const isAuthenticated = connector.authenticated === true;
+                        const statusIcon = isAuthenticated ? '✅' : '⚪';
+                        const statusText = isAuthenticated ? 'Authenticated' : 'Not configured';
+                        const statusColor = isAuthenticated ? '#4CAF50' : '#FFC107';
+
+                        return `
+                            <div style="padding: 10px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: #333; font-size: 12px;">${escapeHtml(connector.connector_name)}</div>
+                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">
+                                        <span style="color: ${statusColor};">${statusIcon} ${statusText}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 6px;">
+                                    <button type="button" class="connector-auth-btn" data-connector-id="${escapeHtml(connector.connector_id)}" title="Configure" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px;">⚙️</button>
+                                    <button type="button" class="connector-resources-btn" data-connector-id="${escapeHtml(connector.connector_id)}" title="View resources" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px;">📋</button>
+                                </div>
+                            </div>
+                        `;
+                    })
+                    .join('');
+            }
+
+            // Attach event listeners
+            document.querySelectorAll('.connector-auth-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    showConnectorAuthModal(btn.dataset.connectorId);
+                });
+            });
+
+            document.querySelectorAll('.connector-resources-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    showConnectorResources(btn.dataset.connectorId);
+                });
+            });
+
+            // Handle connector selector change
+            connectorSelector.addEventListener('change', (e) => {
+                const connectorId = e.target.value;
+                showSelectedConnectorDetails(connectorId);
+            });
+
+            // Handle create custom connector button
+            document.getElementById('createCustomConnectorBtn')?.addEventListener('click', showCreateCustomConnectorModal);
+        }
+
+        function showSelectedConnectorDetails(connectorId) {
+            const detailsDiv = document.getElementById('selectedConnectorDetails');
+            const contentDiv = document.getElementById('connectorDetailContent');
+
+            if (!connectorId) {
+                detailsDiv.style.display = 'none';
+                return;
+            }
+
+            const connector = availableConnectors.find((c) => c.connector_id === connectorId);
+            if (!connector) return;
+
+            const isAuthenticated = connector.authenticated === true;
+            const statusIcon = isAuthenticated ? '✅' : '⚪';
+            const statusColor = isAuthenticated ? '#4CAF50' : '#FFC107';
+
+            contentDiv.innerHTML = `
+                <div style="margin-bottom: 8px;">
+                    <div style="font-weight: 600; color: #333; font-size: 12px;">${escapeHtml(connector.connector_name)}</div>
+                    <div style="font-size: 11px; color: #666; margin-top: 2px;">
+                        Type: <strong>${escapeHtml(connector.connector_type)}</strong>
+                    </div>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <span style="color: ${statusColor}; font-weight: 600; font-size: 11px;">${statusIcon} ${isAuthenticated ? 'Authenticated' : 'Not Configured'}</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                    <button type="button" class="connector-detail-auth" data-id="${escapeHtml(connector.connector_id)}" style="flex: 1; padding: 6px; background: #e3f2fd; border: 1px solid #2196F3; border-radius: 3px; color: #1976D2; font-size: 11px; font-weight: 600; cursor: pointer;">Configure</button>
+                    <button type="button" class="connector-detail-resources" data-id="${escapeHtml(connector.connector_id)}" style="flex: 1; padding: 6px; background: #f3e5f5; border: 1px solid #9c27b0; border-radius: 3px; color: #7b1fa2; font-size: 11px; font-weight: 600; cursor: pointer;">Resources</button>
+                </div>
+            `;
+
+            detailsDiv.style.display = 'block';
+
+            // Attach event listeners
+            document.querySelector('.connector-detail-auth')?.addEventListener('click', () => {
+                showConnectorAuthModal(connectorId);
+            });
+
+            document.querySelector('.connector-detail-resources')?.addEventListener('click', () => {
+                showConnectorResources(connectorId);
+            });
+        }
+
+        function showCreateCustomConnectorModal() {
+            const modal = document.getElementById('createCustomConnectorModal');
+            const form = document.getElementById('createCustomConnectorForm');
+            const closeBtn = document.getElementById('createCustomModalCloseBtn');
+            const cancelBtn = document.getElementById('createCustomModalCancelBtn');
+
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const customConnectorData = {
+                    connector_name: formData.get('connector_name'),
+                    api_url: formData.get('api_url'),
+                    auth_type: formData.get('auth_type'),
+                    description: formData.get('description')
+                };
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/connectors/create-custom`, {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(customConnectorData)
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        addMessage(`✅ Custom connector "${customConnectorData.connector_name}" created successfully!`, 'assistant');
+                        modal.style.display = 'none';
+                        form.reset();
+                        await loadConnectors();
+                    } else {
+                        addMessage(`❌ Error creating connector: ${data.error}`, 'error');
+                    }
+                } catch (error) {
+                    addMessage(`❌ Error: ${error.message}`, 'error');
+                }
+            };
+
+            closeBtn.onclick = () => { modal.style.display = 'none'; };
+            cancelBtn.onclick = () => { modal.style.display = 'none'; };
+        }
+
+        async function showConnectorAuthModal(connectorId) {
+            const connector = availableConnectors.find((c) => c.connector_id === connectorId);
+            if (!connector) return;
+
+            const modal = document.getElementById('connectorAuthModal');
+            const title = document.getElementById('authModalTitle');
+            const form = document.getElementById('connectorAuthForm');
+            const fieldsDiv = document.getElementById('authFormFields');
+
+            title.textContent = `Configure ${connector.connector_name}`;
+
+            // Determine which fields to show based on auth type
+            const authType = connector.auth_type || 'api_key';
+            let fieldsHtml = '';
+
+            const fieldConfig = {
+                api_key: [
+                    { name: 'api_key', label: 'API Key', type: 'password', placeholder: 'Enter API key' }
+                ],
+                bearer_token: [
+                    { name: 'token', label: 'Bearer Token', type: 'password', placeholder: 'Enter token' }
+                ],
+                oauth2: [
+                    { name: 'client_id', label: 'Client ID', type: 'text', placeholder: 'OAuth Client ID' },
+                    { name: 'client_secret', label: 'Client Secret', type: 'password', placeholder: 'OAuth Secret' },
+                    { name: 'tenant_id', label: 'Tenant ID (Optional)', type: 'text', placeholder: 'For Azure/Microsoft services' }
+                ],
+                basic_auth: [
+                    { name: 'username', label: 'Username', type: 'text', placeholder: 'Username' },
+                    { name: 'password', label: 'Password', type: 'password', placeholder: 'Password' }
+                ],
+                service_account: [
+                    { name: 'service_account_json', label: 'Service Account JSON', type: 'textarea', placeholder: 'Paste JSON key file contents' }
+                ],
+                aws_iam: [
+                    { name: 'access_key_id', label: 'Access Key ID', type: 'text', placeholder: 'AWS Access Key' },
+                    { name: 'secret_access_key', label: 'Secret Access Key', type: 'password', placeholder: 'AWS Secret' }
+                ]
+            };
+
+            const fields = fieldConfig[authType] || fieldConfig['api_key'];
+
+            fieldsHtml = fields
+                .map((field) => {
+                    if (field.type === 'textarea') {
+                        return `
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <label style="font-size: 12px; font-weight: 500; color: #333;">${escapeHtml(field.label)}</label>
+                                <textarea name="${field.name}" placeholder="${field.placeholder}" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; font-size: 11px; min-height: 100px; resize: vertical;"></textarea>
+                            </div>
+                        `;
+                    }
+                    return `
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <label style="font-size: 12px; font-weight: 500; color: #333;">${escapeHtml(field.label)}</label>
+                            <input type="${field.type}" name="${field.name}" placeholder="${field.placeholder}" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                        </div>
+                    `;
+                })
+                .join('');
+
+            fieldsDiv.innerHTML = fieldsHtml;
+
+            // Handle form submission
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const credentials = Object.fromEntries(formData);
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/connectors/${connectorId}/authenticate`, {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ credentials })
+                    });
+
+                    const result = await response.json();
+                    if (result.success && result.authenticated) {
+                        addMessage(`✅ ${connector.connector_name} authenticated successfully!`, 'info');
+                        modal.style.display = 'none';
+                        await loadConnectors(); // Reload to show updated status
+                    } else {
+                        addMessage(`❌ Authentication failed for ${connector.connector_name}`, 'error');
+                    }
+                } catch (error) {
+                    addMessage(`❌ Error authenticating connector: ${error.message}`, 'error');
+                }
+            };
+
+            document.getElementById('authModalCloseBtn').onclick = () => { modal.style.display = 'none'; };
+            document.getElementById('authModalCancelBtn').onclick = () => { modal.style.display = 'none'; };
+
+            modal.style.display = 'flex';
+        }
+
+        async function showConnectorResources(connectorId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/connectors/${connectorId}/resources`);
+                const data = await response.json();
+
+                if (!data.success) {
+                    addMessage(`❌ Failed to load resources: ${data.error}`, 'error');
+                    return;
+                }
+
+                const resourceList = data.resources
+                    .map((r) => `• ${escapeHtml(r)}`)
+                    .join('\n');
+
+                addMessage(
+                    `📋 **${data.connector_name}** supports these resources:\n\n${resourceList}`,
+                    'assistant'
+                );
+            } catch (error) {
+                addMessage(`❌ Error loading resources: ${error.message}`, 'error');
+            }
+        }
+
+        // Add CSS for connector buttons
+        const connectorStyles = `
+            .connector-btn {
+                background: #f0f0f0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 6px 10px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .connector-btn:hover {
+                background: #e0e0e0;
+            }
+        `;
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = connectorStyles;
+        document.head.appendChild(styleSheet);
+
+                console.log('[INIT] API connected:', window.API_BASE);
+                console.log('[INIT] Loading panel and personas...');
+                
+                // Load flyout panel FIRST so elements exist
+                const panelLoaded = await loadFlyoutPanel();
+                
+                // Then load personas into the newly loaded elements
+                await loadPersonas();
+
+                // Load connectors
+                await loadConnectors();
+                
+                // Finally initialize orchestrator
+                if (typeof window.initPanelOrchestrator === 'function') {
+                    await initPanelOrchestrator();
+                    console.log('[INIT] Orchestrator initialized');
+                }
+                
+                console.log('[INIT] Initialization complete');
+            } catch (error) {
+                console.error('[INIT] Error:', error.message);
+            }
         })();
     </script>
 </body>

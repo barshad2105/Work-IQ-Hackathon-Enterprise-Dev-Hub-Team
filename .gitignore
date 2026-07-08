@@ -35,3 +35,8 @@ Thumbs.db
 
 # Maintainer-only architecture diagram — kept local like the Architecture Guide.
 /architecture/
+
+# Local planning docs (keep local, never check in)
+/PANEL_BUILD_PLAN.md
+/REQUIREMENTS.md
+/requirement.md

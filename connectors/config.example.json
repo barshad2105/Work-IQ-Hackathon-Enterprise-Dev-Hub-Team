@@ -1,0 +1,185 @@
+{
+  "connectors": [
+    {
+      "id": "msgraph_primary",
+      "type": "msgraph",
+      "enabled": true,
+      "auth": {
+        "type": "oauth2",
+        "tenant_id": "${WORKIQ_AZURE_TENANT}",
+        "client_id": "${WORKIQ_AZURE_CLIENT_ID}",
+        "client_secret": "${WORKIQ_AZURE_CLIENT_SECRET}"
+      },
+      "metadata": {
+        "name": "Microsoft Graph - Primary Tenant",
+        "priority": 10
+      }
+    },
+    {
+      "id": "gcp_workspace",
+      "type": "gcp",
+      "enabled": false,
+      "auth": {
+        "type": "service_account",
+        "service_account_json": "${GCP_SERVICE_ACCOUNT_JSON}"
+      },
+      "config": {
+        "project_id": "${GCP_PROJECT_ID}",
+        "resources": ["gmail_messages", "calendar_events", "drive_files"]
+      },
+      "metadata": {
+        "name": "Google Workspace",
+        "priority": 5
+      }
+    },
+    {
+      "id": "aws_primary",
+      "type": "aws",
+      "enabled": false,
+      "auth": {
+        "type": "aws_iam",
+        "access_key_id": "${AWS_ACCESS_KEY_ID}",
+        "secret_access_key": "${AWS_SECRET_ACCESS_KEY}"
+      },
+      "config": {
+        "region": "us-east-1",
+        "resources": ["s3_objects", "dynamodb_items", "cloudwatch_logs"]
+      },
+      "metadata": {
+        "name": "AWS Services",
+        "priority": 5
+      }
+    },
+    {
+      "id": "linkedin_network",
+      "type": "social_media",
+      "enabled": false,
+      "auth": {
+        "type": "oauth2",
+        "client_id": "${LINKEDIN_CLIENT_ID}",
+        "client_secret": "${LINKEDIN_CLIENT_SECRET}"
+      },
+      "config": {
+        "platform": "linkedin"
+      },
+      "metadata": {
+        "name": "LinkedIn",
+        "priority": 3
+      }
+    },
+    {
+      "id": "twitter_stream",
+      "type": "social_media",
+      "enabled": false,
+      "auth": {
+        "type": "bearer_token",
+        "bearer_token": "${TWITTER_BEARER_TOKEN}"
+      },
+      "config": {
+        "platform": "twitter"
+      },
+      "metadata": {
+        "name": "Twitter/X",
+        "priority": 3
+      }
+    },
+    {
+      "id": "salesforce_crm",
+      "type": "custom_api",
+      "enabled": false,
+      "auth": {
+        "type": "oauth2",
+        "token_url": "https://login.salesforce.com/services/oauth2/token",
+        "client_id": "${SALESFORCE_CLIENT_ID}",
+        "client_secret": "${SALESFORCE_CLIENT_SECRET}"
+      },
+      "config": {
+        "base_url": "https://yourinstance.salesforce.com/services/data/v57.0",
+        "resources": {
+          "opportunities": {
+            "endpoint": "/query?q=SELECT+Id,Name,Amount+FROM+Opportunity",
+            "field_mapping": {
+              "id": "Id",
+              "title": "Name",
+              "amount": "Amount"
+            }
+          },
+          "accounts": {
+            "endpoint": "/query?q=SELECT+Id,Name,Industry+FROM+Account",
+            "field_mapping": {
+              "id": "Id",
+              "title": "Name",
+              "industry": "Industry"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "name": "Salesforce CRM",
+        "priority": 8
+      }
+    },
+    {
+      "id": "internal_api",
+      "type": "custom_api",
+      "enabled": false,
+      "auth": {
+        "type": "api_key",
+        "header_name": "X-API-Key",
+        "api_key": "${INTERNAL_API_KEY}"
+      },
+      "config": {
+        "base_url": "https://api.internal.company.com/v1",
+        "resources": {
+          "projects": {
+            "endpoint": "/projects?skip={skip}&limit={top}",
+            "field_mapping": {
+              "id": "projectId",
+              "title": "projectName",
+              "status": "currentStatus"
+            }
+          },
+          "tasks": {
+            "endpoint": "/tasks?skip={skip}&limit={top}",
+            "field_mapping": {
+              "id": "taskId",
+              "title": "taskName",
+              "assigned_to": "assignee"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "name": "Internal API - Projects",
+        "priority": 6
+      }
+    },
+    {
+      "id": "jira_cloud",
+      "type": "custom_api",
+      "enabled": false,
+      "auth": {
+        "type": "basic_auth",
+        "username": "${JIRA_USERNAME}",
+        "password": "${JIRA_API_TOKEN}"
+      },
+      "config": {
+        "base_url": "https://yourcompany.atlassian.net/rest/api/2",
+        "resources": {
+          "issues": {
+            "endpoint": "/search?jql=assignee=currentUser()&maxResults={top}&startAt={skip}",
+            "field_mapping": {
+              "id": "key",
+              "title": "fields.summary",
+              "status": "fields.status.name"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "name": "Jira Cloud",
+        "priority": 7
+      }
+    }
+  ]
+}
