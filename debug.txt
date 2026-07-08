@@ -1,2 +1,0 @@
-[INDEX] Serving C:\WORK\Work_IQ_New\Work-IQ-Hackathon-Enterprise-Dev-Hub-Team\templates\index.html
-[INDEX] File size: 62735 bytes
