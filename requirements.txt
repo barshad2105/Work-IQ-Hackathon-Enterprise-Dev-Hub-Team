@@ -19,5 +19,14 @@ python-dotenv>=1.0.0
 # Additional dependencies from simulator
 requests>=2.31.0
 
+# Data Connector Framework - extensible data source integration
+aiohttp>=3.8.0  # Async HTTP client for custom API connectors
+
+# Optional cloud SDK dependencies (install only if needed)
+# google-cloud-storage>=2.0.0  # GCP connector
+# boto3>=1.28.0                # AWS connector
+# tweepy>=4.14.0               # Twitter/X connector
+# linkedin-api>=2.0.0          # LinkedIn connector
+
 # Development dependencies (optional)
 # pytest>=7.0.0

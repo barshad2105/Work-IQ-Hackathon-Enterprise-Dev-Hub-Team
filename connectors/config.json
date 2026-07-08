@@ -1,0 +1,103 @@
+{
+  "connectors": [
+    {
+      "connector_id": "msgraph_primary",
+      "connector_type": "MSGRAPH",
+      "enabled": true,
+      "auth_config": {
+        "auth_type": "OAUTH2",
+        "credentials": {
+          "client_id": "${AZURE_CLIENT_ID}",
+          "client_secret": "${AZURE_CLIENT_SECRET}",
+          "tenant_id": "${AZURE_TENANT_ID}"
+        }
+      },
+      "metadata": {
+        "priority": 1,
+        "description": "Microsoft 365 data (emails, meetings, files, Teams)"
+      }
+    },
+    {
+      "connector_id": "custom_api_salesforce",
+      "connector_type": "CUSTOM_API",
+      "enabled": false,
+      "auth_config": {
+        "auth_type": "OAUTH2",
+        "credentials": {
+          "client_id": "${SALESFORCE_CLIENT_ID}",
+          "client_secret": "${SALESFORCE_CLIENT_SECRET}",
+          "token_url": "https://login.salesforce.com/services/oauth2/token"
+        }
+      },
+      "custom_config": {
+        "base_url": "https://your-org.salesforce.com",
+        "resources": {
+          "accounts": {
+            "endpoint": "/services/data/v57.0/query",
+            "method": "GET",
+            "query_param": "q",
+            "field_mapping": {
+              "Id": "id",
+              "Name": "name",
+              "Type": "type"
+            }
+          },
+          "opportunities": {
+            "endpoint": "/services/data/v57.0/query",
+            "method": "GET",
+            "query_param": "q",
+            "field_mapping": {
+              "Id": "id",
+              "Name": "name",
+              "Amount": "amount",
+              "StageName": "stage"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "priority": 2,
+        "description": "Salesforce CRM data (accounts, opportunities, contacts)"
+      }
+    },
+    {
+      "connector_id": "custom_api_internal",
+      "connector_type": "CUSTOM_API",
+      "enabled": false,
+      "auth_config": {
+        "auth_type": "API_KEY",
+        "credentials": {
+          "api_key": "${INTERNAL_API_KEY}",
+          "header_name": "X-API-Key"
+        }
+      },
+      "custom_config": {
+        "base_url": "https://internal-api.company.com",
+        "resources": {
+          "projects": {
+            "endpoint": "/api/v1/projects",
+            "method": "GET",
+            "field_mapping": {
+              "project_id": "id",
+              "project_name": "name",
+              "status": "status"
+            }
+          },
+          "tasks": {
+            "endpoint": "/api/v1/tasks",
+            "method": "GET",
+            "field_mapping": {
+              "task_id": "id",
+              "task_title": "title",
+              "assigned_to": "owner"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "priority": 3,
+        "description": "Internal company API"
+      }
+    }
+  ]
+}
