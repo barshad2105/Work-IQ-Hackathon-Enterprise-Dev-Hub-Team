@@ -1,0 +1,26 @@
+{
+  "connector_name": "WhatsApp",
+  "records": [
+    {
+      "id": "wa-001",
+      "chat": "Ops War Room",
+      "sender": "Marco Reyes",
+      "date": "2026-07-16T05:10:00Z",
+      "text": "Hotfix deployed, watching telemetry for 30 mins"
+    },
+    {
+      "id": "wa-002",
+      "chat": "Field Engineers",
+      "sender": "Aisha Khan",
+      "date": "2026-07-16T05:18:00Z",
+      "text": "Site B confirms no further checkout failures"
+    },
+    {
+      "id": "wa-003",
+      "chat": "Ops War Room",
+      "sender": "Helen Cho",
+      "date": "2026-07-16T05:22:00Z",
+      "text": "Keep comms cadence at 15 mins until stable"
+    }
+  ]
+}

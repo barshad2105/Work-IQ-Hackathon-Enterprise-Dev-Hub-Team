@@ -1,0 +1,31 @@
+{
+  "connector_name": "Instagram",
+  "records": [
+    {
+      "id": "ig-001",
+      "type": "post",
+      "handle": "@workiq.ai",
+      "date": "2026-07-15T16:15:00Z",
+      "caption": "New dashboard tiles are now live",
+      "metrics": {
+        "likes": 392,
+        "comments": 41,
+        "saves": 67
+      }
+    },
+    {
+      "id": "ig-002",
+      "type": "dm",
+      "from": "@northbridge_ops",
+      "date": "2026-07-16T01:52:00Z",
+      "snippet": "Please share the proactive checks explainer"
+    },
+    {
+      "id": "ig-003",
+      "type": "story_mention",
+      "from": "@contoso_precision",
+      "date": "2026-07-16T04:16:00Z",
+      "snippet": "Tagged WorkIQ in production monitoring story"
+    }
+  ]
+}

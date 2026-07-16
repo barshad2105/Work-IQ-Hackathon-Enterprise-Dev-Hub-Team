@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 20px;
+            padding: 10px;
         }
 
         .bg-watermark {
@@ -28,34 +28,41 @@
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
+            display: block;
+        }
+
+        .bg-watermark-grid {
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            grid-auto-rows: 110px;
+        }
+
+        .bg-watermark-tile {
+            border: 1px solid rgba(39, 84, 112, 0.56);
             display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            transform: rotate(-28deg) scale(1.28);
-            transform-origin: center;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: clamp(16px, 1.1vw, 22px);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: 0.4px;
+            color: rgba(20, 20, 20, 0.9);
+            background: rgba(255, 255, 255, 0.05);
+            white-space: normal;
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+            padding: 0 10px;
         }
 
-        .bg-watermark::before {
-            content: "";
-            position: absolute;
-            inset: -30%;
-            background: repeating-linear-gradient(-28deg, rgba(141, 116, 80, 0.14) 0 1px, transparent 1px 78px);
-        }
-
-        .bg-watermark-track {
-            position: relative;
-            white-space: nowrap;
-            font-size: 30px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: rgba(114, 89, 55, 0.34);
-            text-transform: uppercase;
-            line-height: 1;
-            padding-left: 4vw;
+        .bg-watermark-tile:nth-child(2n) {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .app-shell {
-            width: min(1120px, 96vw);
+            width: min(1560px, 99vw);
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -205,6 +212,7 @@
             min-height: 0;
             display: flex;
             overflow: visible;
+            gap: 12px;
         }
 
         .chat-main {
@@ -212,9 +220,19 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
+            transition: flex-basis 0.25s ease;
         }
 
-        .side-panel-toggle {
+        .workspace-tabs {
+            display: inline-flex;
+            gap: 6px;
+            padding: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .workspace-tab-btn {
             padding: 8px 12px;
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
@@ -222,30 +240,135 @@
             border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
+            cursor: pointer;
         }
 
-        .side-panel-toggle:hover {
+        .workspace-tab-btn:hover {
             background: rgba(255, 255, 255, 0.3);
         }
 
-        .side-panel {
-            --side-panel-width: 392px;
-            width: var(--side-panel-width);
-            border-left: 1px solid #e3e3e3;
-            background: #f7f9fc;
-            overflow-y: auto;
+        .workspace-tab-btn.active {
+            background: rgba(255, 255, 255, 0.92);
+            color: #3b4fa7;
+            border-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .dashboard-summary, .dashboard-matrix {
+            display: grid;
+            gap: 8px;
+        }
+
+        .dashboard-kpi,
+        .dashboard-matrix-card {
+            border: 1px solid #dce2f5;
+            border-radius: 8px;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .dashboard-kpi-label,
+        .dashboard-matrix-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #5a6699;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .dashboard-kpi-value,
+        .dashboard-matrix-count {
+            font-size: 22px;
+            font-weight: 800;
+            color: #344486;
+            margin-top: 4px;
+        }
+
+        .dashboard-kpi-target,
+        .dashboard-matrix-meta {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #8a93b4;
+        }
+
+        .dashboard-empty,
+        .dashboard-loading {
+            border: 1px dashed #dce2f5;
+            border-radius: 8px;
             padding: 12px;
-            display: flex;
-            flex-direction: column;
+            color: #7d86a8;
+            background: #fafbff;
+        }
+
+        .side-panel {
+            background: #f7f9fc;
+            overflow: auto;
+            padding: 12px;
+            display: none;
             gap: 10px;
-            position: absolute;
-            top: 0;
-            right: calc(-1 * var(--side-panel-width));
-            height: 100%;
             border: 1px solid #d9dff1;
             border-radius: 10px;
             box-shadow: 0 12px 30px rgba(39, 46, 88, 0.28);
-            z-index: 6;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        .chat-container.options-tab-active .chat-main,
+        .chat-container.settings-tab-active .chat-main,
+        .chat-container.dashboard-tab-active .chat-main {
+            flex: none;
+            max-width: none;
+            width: auto;
+        }
+
+        .chat-container.options-tab-active .side-panel,
+        .chat-container.settings-tab-active .side-panel,
+        .chat-container.dashboard-tab-active .side-panel {
+            flex: none;
+            max-width: none;
+            width: auto;
+            display: block;
+            column-gap: 10px;
+        }
+
+        .chat-container.options-tab-active {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: stretch;
+        }
+
+        .chat-container.settings-tab-active {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: stretch;
+        }
+
+        .chat-container.dashboard-tab-active {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: stretch;
+        }
+
+        .chat-container.options-tab-active .side-panel {
+            column-count: 3;
+        }
+
+        .chat-container.settings-tab-active .side-panel {
+            column-count: 1;
+        }
+
+        .chat-container.dashboard-tab-active .side-panel {
+            column-count: 1;
+        }
+
+        .chat-container.options-tab-active .side-panel > *,
+        .chat-container.settings-tab-active .side-panel > *,
+        .chat-container.dashboard-tab-active .side-panel > * {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 10px;
+            vertical-align: top;
+            break-inside: avoid;
+            -webkit-column-break-inside: avoid;
         }
 
         .left-trace-flyout {
@@ -341,6 +464,11 @@
             display: none;
         }
 
+        .chat-container.options-tab-active .side-panel.hidden,
+        .chat-container.settings-tab-active .side-panel.hidden {
+            display: block;
+        }
+
         .panel-card {
             border: 1px solid #dde3ef;
             border-radius: 10px;
@@ -357,6 +485,81 @@
             color: #3859d6;
             background: #f4f7ff;
             border-bottom: 1px solid #e7ecfa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .panel-summary-text {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .panel-hide-btn {
+            border: 1px solid #d4dbf3;
+            background: #ffffff;
+            color: #6f7fb5;
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            line-height: 1;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .panel-hide-btn:hover {
+            background: #eef2ff;
+            color: #3d54ae;
+            border-color: #bcc9f3;
+        }
+
+        .hidden-panels-dock {
+            margin-top: 10px;
+            padding: 8px;
+            border: 1px dashed #d7deef;
+            border-radius: 8px;
+            background: #f8faff;
+        }
+
+        .hidden-panels-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #7a86a8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .hidden-panels-list {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .hidden-panel-chip {
+            padding: 3px 7px;
+            border: 1px solid #d4dbf3;
+            background: #ffffff;
+            color: #4f5f95;
+            font-size: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            line-height: 1.2;
+        }
+
+        .hidden-panel-chip:hover {
+            background: #eef2ff;
+            color: #34489a;
+        }
+
+        .hidden-panels-empty {
+            font-size: 10px;
+            color: #9aa4bf;
         }
 
         .panel-card summary::-webkit-details-marker {
@@ -565,6 +768,10 @@
             justify-content: flex-start;
         }
 
+        .message.background {
+            justify-content: flex-start;
+        }
+
         .message-content {
             max-width: 70%;
             padding: 12px 16px;
@@ -596,6 +803,10 @@
             background: linear-gradient(145deg, #ffe7ef, #ffd9e6);
         }
 
+        .message-avatar.background {
+            background: linear-gradient(145deg, #e3fff3, #ccf4e3);
+        }
+
         .response-body p {
             margin: 0 0 10px 0;
         }
@@ -624,6 +835,28 @@
             background: #f0f0f0;
             color: #333;
             border-bottom-left-radius: 4px;
+        }
+
+        .message.background .message-content {
+            background: #e9fff6;
+            color: #164c39;
+            border-left: 4px solid #1f9d72;
+            border-bottom-left-radius: 4px;
+        }
+
+        .background-update-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(31, 157, 114, 0.14);
+            color: #1f7d5c;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            text-transform: uppercase;
         }
 
         .message.error .message-content {
@@ -898,14 +1131,26 @@
 
             .side-panel {
                 width: 100%;
-                max-height: 40%;
-                border-left: none;
-                border-top: 1px solid #e3e3e3;
-                right: 0;
-                top: auto;
-                bottom: 0;
-                height: 62%;
-                border-radius: 0;
+                max-width: 100%;
+                column-count: 1;
+            }
+
+            .chat-container.options-tab-active,
+            .chat-container.settings-tab-active,
+            .chat-container.dashboard-tab-active {
+                flex-direction: column;
+                display: flex;
+            }
+
+            .chat-container.options-tab-active .chat-main,
+            .chat-container.options-tab-active .side-panel,
+            .chat-container.settings-tab-active .chat-main,
+            .chat-container.settings-tab-active .side-panel,
+            .chat-container.dashboard-tab-active .chat-main,
+            .chat-container.dashboard-tab-active .side-panel {
+                flex: 1 1 auto;
+                max-width: 100%;
+                width: auto;
             }
 
             .left-trace-flyout {
@@ -985,12 +1230,7 @@
 </head>
 <body>
     <div class="bg-watermark" aria-hidden="true">
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
-        <div class="bg-watermark-track">Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon   Work IQ Hackathon</div>
+        <div class="bg-watermark-grid" id="bgWatermarkGrid"></div>
     </div>
     <div class="app-shell">
         <div class="workspace-banner" aria-label="Team banner">
@@ -1011,21 +1251,13 @@
             <h1>🤖 Work IQ AI Agent</h1>
             <p>Ask questions about your work context</p>
             <div class="header-controls">
-                <div class="header-controls-main">
-                    <div class="transport-group" role="radiogroup" aria-label="Connectivity mode">
-                        <label class="transport-option" for="transportMcp">
-                            <input type="radio" id="transportMcp" name="transportMode" value="MCP" checked>
-                            MCP
-                        </label>
-                        <label class="transport-option" for="transportA2a">
-                            <input type="radio" id="transportA2a" name="transportMode" value="A2A">
-                            A2A
-                        </label>
-                    </div>
-                </div>
-
                 <div class="header-controls-actions">
-                    <button type="button" id="panelToggleBtn" class="side-panel-toggle">More options</button>
+                    <div class="workspace-tabs" role="tablist" aria-label="Workspace tabs">
+                        <button type="button" id="chatTabBtn" class="workspace-tab-btn active" role="tab" aria-selected="true">Chat</button>
+                        <button type="button" id="dashboardTabBtn" class="workspace-tab-btn" role="tab" aria-selected="false">Dashboard</button>
+                        <button type="button" id="optionsTabBtn" class="workspace-tab-btn" role="tab" aria-selected="false">Options</button>
+                        <button type="button" id="settingsTabBtn" class="workspace-tab-btn" role="tab" aria-selected="false">Settings</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1173,7 +1405,11 @@
         const clearBtn = document.getElementById('clearBtn');
         const personaSelect = document.getElementById('personaSelect');
         const personaStatus = document.getElementById('personaStatus');
-        const panelToggleBtn = document.getElementById('panelToggleBtn');
+        const chatTabBtn = document.getElementById('chatTabBtn');
+        const dashboardTabBtn = document.getElementById('dashboardTabBtn');
+        const optionsTabBtn = document.getElementById('optionsTabBtn');
+        const settingsTabBtn = document.getElementById('settingsTabBtn');
+        const chatContainer = document.querySelector('.chat-container');
         const sidePanel = document.getElementById('sidePanel');
         const recentQuestionsList = document.getElementById('recentQuestionsList');
         const suggestionsList = document.getElementById('suggestionsList');
@@ -1191,6 +1427,41 @@
         let API_BASE = '';
         let assistantResponseCount = 0;
         const recentQuestions = [];
+        let watermarkResizeTimer = null;
+
+        function renderWatermarkTiles() {
+            const grid = document.getElementById('bgWatermarkGrid');
+            if (!grid) {
+                return;
+            }
+
+            const tileWidth = 320;
+            const tileHeight = 110;
+            const cols = Math.max(1, Math.ceil(window.innerWidth / tileWidth));
+            const rows = Math.max(1, Math.ceil(window.innerHeight / tileHeight) + 1);
+            const totalTiles = cols * rows;
+
+            grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+            grid.style.gridAutoRows = `${tileHeight}px`;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < totalTiles; i += 1) {
+                const tile = document.createElement('div');
+                tile.className = 'bg-watermark-tile';
+                tile.textContent = 'Microsoft Work IQ Hackathon';
+                fragment.appendChild(tile);
+            }
+
+            grid.replaceChildren(fragment);
+        }
+
+        renderWatermarkTiles();
+        window.addEventListener('resize', () => {
+            if (watermarkResizeTimer) {
+                clearTimeout(watermarkResizeTimer);
+            }
+            watermarkResizeTimer = setTimeout(renderWatermarkTiles, 120);
+        });
 
         async function parseJsonSafely(response) {
             const raw = await response.text();
@@ -1214,11 +1485,12 @@
             personaStatus.style.display = message ? 'inline' : 'none';
         }
 
-        async function loadFlyoutPanel() {
+        async function loadPanelFragment(panelName) {
             try {
-                const response = await fetch('/flyout-panel');
+                const route = panelName === 'settings' ? '/settings-panel' : panelName === 'dashboard' ? '/dashboard-panel' : '/flyout-panel';
+                const response = await fetch(route);
                 if (!response.ok) {
-                    console.error('[FLYOUT] Failed to load panel:', response.statusText);
+                    console.error('[PANEL] Failed to load panel:', response.statusText);
                     return false;
                 }
                 const html = await response.text();
@@ -1226,12 +1498,20 @@
                 
                 // Re-attach event listeners to newly loaded elements
                 reattachPanelListeners();
-                console.log('[FLYOUT] Panel loaded and listeners re-attached');
+                console.log('[PANEL] Panel loaded and listeners re-attached:', panelName);
                 return true;
             } catch (error) {
-                console.error('[FLYOUT] Error loading panel:', error.message);
+                console.error('[PANEL] Error loading panel:', error.message);
                 return false;
             }
+        }
+
+        async function loadFlyoutPanel() {
+            return loadPanelFragment('options');
+        }
+
+        async function loadDashboardPanel() {
+            return loadPanelFragment('dashboard');
         }
 
         function reattachPanelListeners() {
@@ -1300,22 +1580,210 @@
                 });
             });
 
+            setupPanelVisibilityControls();
+            setupDashboardControls();
+            if (typeof window.setupMonitoringControls === 'function') {
+                window.setupMonitoringControls();
+            }
+
             console.log('[FLYOUT] All listeners re-attached successfully');
         }
 
-        function toggleSidePanel(forceOpen = null) {
-            const shouldOpen = forceOpen === null ? sidePanel.classList.contains('hidden') : forceOpen;
-            sidePanel.classList.toggle('hidden', !shouldOpen);
-            if (shouldOpen) {
-                // Load flyout panel content if not already loaded
-                if (sidePanel.children.length === 0) {
-                    loadFlyoutPanel();
-                }
-                sidePanel.querySelectorAll('details').forEach((details) => {
-                    details.open = false;
-                });
+        function setupPanelVisibilityControls() {
+            const dock = document.getElementById('hiddenPanelsDock');
+            const list = document.getElementById('hiddenPanelsList');
+            if (!dock || !list) {
+                return;
             }
-            panelToggleBtn.textContent = shouldOpen ? 'Hide options' : 'More options';
+
+            const panels = sidePanel.querySelectorAll('details.panel-card');
+
+            const renderHiddenPanels = () => {
+                const hiddenPanels = Array.from(panels).filter((panel) => panel.dataset.userHidden === 'true');
+                if (!hiddenPanels.length) {
+                    list.innerHTML = '<span class="hidden-panels-empty">No hidden blocks</span>';
+                    return;
+                }
+
+                list.innerHTML = hiddenPanels
+                    .map((panel) => {
+                        const label = panel.dataset.panelLabel || 'Panel';
+                        return `<button type="button" class="hidden-panel-chip" data-restore-panel="${escapeHtml(panel.dataset.panelId || '')}" title="Unhide">↺ ${escapeHtml(label)}</button>`;
+                    })
+                    .join('');
+
+                list.querySelectorAll('[data-restore-panel]').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const panelId = btn.getAttribute('data-restore-panel');
+                        const panel = sidePanel.querySelector(`details.panel-card[data-panel-id="${panelId}"]`);
+                        if (!panel) return;
+                        panel.style.display = 'block';
+                        delete panel.dataset.userHidden;
+                        renderHiddenPanels();
+                    });
+                });
+            };
+
+            panels.forEach((panel, index) => {
+                const summary = panel.querySelector(':scope > summary');
+                if (!summary) {
+                    return;
+                }
+
+                if (!panel.dataset.panelId) {
+                    panel.dataset.panelId = `panel-${index}`;
+                }
+
+                if (!summary.querySelector('.panel-summary-text')) {
+                    const summaryText = document.createElement('span');
+                    summaryText.className = 'panel-summary-text';
+                    while (summary.firstChild) {
+                        summaryText.appendChild(summary.firstChild);
+                    }
+                    summary.appendChild(summaryText);
+                }
+
+                const textEl = summary.querySelector('.panel-summary-text');
+                const panelLabel = (textEl ? textEl.textContent : summary.textContent || '').trim();
+                panel.dataset.panelLabel = panelLabel;
+
+                if (!summary.querySelector('.panel-hide-btn')) {
+                    const hideBtn = document.createElement('button');
+                    hideBtn.type = 'button';
+                    hideBtn.className = 'panel-hide-btn';
+                    hideBtn.title = `Hide ${panelLabel}`;
+                    hideBtn.setAttribute('aria-label', `Hide ${panelLabel}`);
+                    hideBtn.textContent = '✕';
+
+                    hideBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        panel.style.display = 'none';
+                        panel.dataset.userHidden = 'true';
+                        renderHiddenPanels();
+                    });
+
+                    summary.appendChild(hideBtn);
+                }
+            });
+
+            renderHiddenPanels();
+        }
+
+        function setupDashboardControls() {
+            const applyButton = document.getElementById('applyDashboardFilterBtn');
+            if (!applyButton || applyButton.dataset.bound === 'true') {
+                return;
+            }
+
+            applyButton.dataset.bound = 'true';
+            applyButton.addEventListener('click', () => {
+                loadDashboardData();
+            });
+        }
+
+        async function setActiveWorkspaceTab(tabName) {
+            const showPanel = tabName === 'dashboard' || tabName === 'options' || tabName === 'settings';
+
+            chatTabBtn.classList.toggle('active', tabName === 'chat');
+            dashboardTabBtn.classList.toggle('active', tabName === 'dashboard');
+            optionsTabBtn.classList.toggle('active', tabName === 'options');
+            settingsTabBtn.classList.toggle('active', tabName === 'settings');
+            chatTabBtn.setAttribute('aria-selected', tabName === 'chat' ? 'true' : 'false');
+            dashboardTabBtn.setAttribute('aria-selected', tabName === 'dashboard' ? 'true' : 'false');
+            optionsTabBtn.setAttribute('aria-selected', tabName === 'options' ? 'true' : 'false');
+            settingsTabBtn.setAttribute('aria-selected', tabName === 'settings' ? 'true' : 'false');
+
+            chatContainer.classList.toggle('dashboard-tab-active', tabName === 'dashboard');
+            chatContainer.classList.toggle('options-tab-active', tabName === 'options');
+            chatContainer.classList.toggle('settings-tab-active', tabName === 'settings');
+            sidePanel.classList.toggle('hidden', !showPanel);
+
+            if (showPanel) {
+                if (sidePanel.children.length === 0) {
+                    await loadPanelFragment(tabName);
+                } else {
+                    const currentMode = sidePanel.dataset.panelMode || '';
+                    if (currentMode !== tabName) {
+                        await loadPanelFragment(tabName);
+                    }
+                }
+                sidePanel.dataset.panelMode = tabName;
+                if (tabName === 'dashboard') {
+                    await loadDashboardData();
+                }
+                if (tabName === 'settings' && typeof window.loadConnectors === 'function') {
+                    await window.loadConnectors();
+                }
+                sidePanel.querySelectorAll('details').forEach((details, index) => {
+                    details.open = tabName === 'dashboard' && index === 0;
+                });
+            } else {
+                sidePanel.dataset.panelMode = '';
+                sidePanel.innerHTML = '';
+            }
+        }
+
+        async function loadDashboardData() {
+            const dashboardSummary = document.getElementById('dashboardSummary');
+            const dashboardMatrix = document.getElementById('dashboardMatrix');
+            const dashboardRangeLabel = document.getElementById('dashboardRangeLabel');
+            const dashboardStatus = document.getElementById('dashboardStatus');
+            if (!dashboardSummary || !dashboardMatrix || !dashboardRangeLabel || !dashboardStatus) {
+                return;
+            }
+
+            const startInput = document.getElementById('dashboardStartDate');
+            const endInput = document.getElementById('dashboardEndDate');
+            const startDate = startInput && startInput.value ? startInput.value : '';
+            const endDate = endInput && endInput.value ? endInput.value : '';
+
+            dashboardStatus.textContent = 'Loading dashboard...';
+            dashboardSummary.innerHTML = '<div class="dashboard-loading">Loading overall source metrics...</div>';
+            dashboardMatrix.innerHTML = '<div class="dashboard-loading">Loading matrix...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/agent/interactive-dashboard`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ start_date: startDate, end_date: endDate })
+                });
+                const data = await parseJsonSafely(response);
+
+                if (!response.ok || data.__parseError || !data.success) {
+                    dashboardStatus.textContent = 'Dashboard unavailable';
+                    dashboardSummary.innerHTML = '<div class="dashboard-empty">No dashboard data available.</div>';
+                    dashboardMatrix.innerHTML = '<div class="dashboard-empty">No matrix data available.</div>';
+                    return;
+                }
+
+                const dashboard = data.dashboard || {};
+                dashboardRangeLabel.textContent = startDate || endDate ? `${startDate || 'start'} to ${endDate || 'today'}` : 'All dates';
+                dashboardStatus.textContent = dashboard.health_status || 'On Track';
+
+                const sourceCounts = Array.isArray(dashboard.source_matrix) ? dashboard.source_matrix : [];
+                const kpis = Array.isArray(dashboard.kpis) ? dashboard.kpis : [];
+                dashboardSummary.innerHTML = kpis.map((kpi) => `
+                    <div class="dashboard-kpi">
+                        <div class="dashboard-kpi-label">${escapeHtml(kpi.label || '')}</div>
+                        <div class="dashboard-kpi-value">${escapeHtml(kpi.value || '')}</div>
+                        <div class="dashboard-kpi-target">Target ${escapeHtml(kpi.target || '')}</div>
+                    </div>
+                `).join('');
+
+                dashboardMatrix.innerHTML = sourceCounts.map((source) => `
+                    <div class="dashboard-matrix-card">
+                        <div class="dashboard-matrix-title">${escapeHtml(source.label || source.kind || 'Source')}</div>
+                        <div class="dashboard-matrix-count">${escapeHtml(String(source.count ?? 0))}</div>
+                        <div class="dashboard-matrix-meta">${escapeHtml(source.last_updated || 'No recent date')}</div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                dashboardStatus.textContent = 'Dashboard error';
+                dashboardSummary.innerHTML = `<div class="dashboard-empty">${escapeHtml(error.message)}</div>`;
+                dashboardMatrix.innerHTML = '<div class="dashboard-empty">Could not load matrix.</div>';
+            }
         }
 
         function renderRecentQuestions() {
@@ -1588,18 +2056,28 @@
         }
 
         // Add message to chat
-        function addMessage(text, type, citations = [], trace = null) {
+        function addMessage(text, type, citations = [], trace = null, meta = {}) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
 
             const avatarDiv = document.createElement('div');
-            const avatarType = type === 'user' ? 'user' : 'assistant';
+            const avatarType = type === 'user' ? 'user' : type === 'background' ? 'background' : 'assistant';
             avatarDiv.className = `message-avatar ${avatarType}`;
-            avatarDiv.textContent = type === 'user' ? '👤' : '🤖';
+            avatarDiv.textContent = type === 'user' ? '👤' : type === 'background' ? '🛰️' : '🤖';
             
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
-            if (type === 'assistant') {
+            if (type === 'background') {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'background-update-note';
+                noteDiv.textContent = meta.label || 'Background update check';
+                contentDiv.appendChild(noteDiv);
+
+                const responseBodyDiv = document.createElement('div');
+                responseBodyDiv.className = 'response-body';
+                responseBodyDiv.innerHTML = renderStructuredResponse(text);
+                contentDiv.appendChild(responseBodyDiv);
+            } else if (type === 'assistant') {
                 const responseBodyDiv = document.createElement('div');
                 responseBodyDiv.className = 'response-body';
                 responseBodyDiv.innerHTML = renderStructuredResponse(text);
@@ -1608,7 +2086,7 @@
                 contentDiv.textContent = text;
             }
 
-            if (type === 'assistant' && Array.isArray(citations) && citations.length > 0) {
+            if ((type === 'assistant' || type === 'background') && Array.isArray(citations) && citations.length > 0) {
                 const toggleBtn = document.createElement('button');
                 toggleBtn.type = 'button';
                 toggleBtn.className = 'sources-toggle';
@@ -1803,7 +2281,10 @@
                 changePersona(selected);
             }
         });
-        panelToggleBtn.addEventListener('click', () => toggleSidePanel());
+        chatTabBtn.addEventListener('click', () => setActiveWorkspaceTab('chat'));
+        dashboardTabBtn.addEventListener('click', () => setActiveWorkspaceTab('dashboard'));
+        optionsTabBtn.addEventListener('click', () => setActiveWorkspaceTab('options'));
+        settingsTabBtn.addEventListener('click', () => setActiveWorkspaceTab('settings'));
         traceCloseBtn.addEventListener('click', closeTraceFlyout);
 
         suggestionsList.addEventListener('click', (e) => {
@@ -1833,7 +2314,7 @@
         renderRecentQuestions();
         updateProgress();
         updateSourceTags([]);
-        toggleSidePanel(false);
+        setActiveWorkspaceTab('chat');
 
         // Deferred initialization - don't block page load
         (async () => {
@@ -1853,8 +2334,235 @@
         // ===== DATA CONNECTORS MANAGEMENT =====
         let availableConnectors = [];
         let selectedConnectors = new Set();
+        let extraEntraLogins = [];
+        let customApiConnectors = [];
+            let monitoringEnabled = false;
+            let monitoringFrequencyMinutes = 15;
+            let monitoringInstructions = '';
+            let monitoringIntervalId = null;
+            let monitoringCheckInFlight = false;
+            let monitoringLastCheckedAt = '';
+
+        const ENTRA_LOGINS_STORAGE_KEY = 'workiq.extraEntraLogins';
+        const CUSTOM_API_CONNECTORS_STORAGE_KEY = 'workiq.customApiConnectors';
+            const MONITORING_STORAGE_KEY = 'workiq.backgroundMonitoring';
+
+        const prebuiltConnectorPlaceholders = [
+            { id: 'google_drive', name: 'Google Drive', icon: '🗂️' },
+            { id: 'linkedin', name: 'LinkedIn', icon: '💼' },
+            { id: 'whatsapp', name: 'WhatsApp', icon: '🟢' },
+            { id: 'facebook', name: 'Facebook', icon: '📘' },
+            { id: 'instagram', name: 'Instagram', icon: '📷' }
+        ];
+
+        function loadConnectorLocalState() {
+            try {
+                const rawLogins = localStorage.getItem(ENTRA_LOGINS_STORAGE_KEY);
+                const rawApiConnectors = localStorage.getItem(CUSTOM_API_CONNECTORS_STORAGE_KEY);
+
+                extraEntraLogins = rawLogins ? JSON.parse(rawLogins) : [];
+                customApiConnectors = rawApiConnectors ? JSON.parse(rawApiConnectors) : [];
+            } catch (error) {
+                console.warn('[CONNECTORS] Failed to read local connector state:', error.message);
+                extraEntraLogins = [];
+                customApiConnectors = [];
+            }
+        }
+
+        function saveConnectorLocalState() {
+            localStorage.setItem(ENTRA_LOGINS_STORAGE_KEY, JSON.stringify(extraEntraLogins));
+            localStorage.setItem(CUSTOM_API_CONNECTORS_STORAGE_KEY, JSON.stringify(customApiConnectors));
+        }
+
+        loadMonitoringState();
+
+        function loadMonitoringState() {
+            try {
+                const rawMonitoring = localStorage.getItem(MONITORING_STORAGE_KEY);
+                if (rawMonitoring) {
+                    const parsed = JSON.parse(rawMonitoring);
+                    monitoringEnabled = Boolean(parsed.enabled);
+                    monitoringFrequencyMinutes = Math.max(1, parseInt(parsed.frequency_minutes, 10) || 15);
+                    monitoringInstructions = typeof parsed.instructions === 'string' ? parsed.instructions : '';
+                    monitoringLastCheckedAt = typeof parsed.last_checked_at === 'string' ? parsed.last_checked_at : '';
+                }
+            } catch (error) {
+                console.warn('[MONITORING] Failed to read local monitoring state:', error.message);
+                monitoringEnabled = false;
+                monitoringFrequencyMinutes = 15;
+                monitoringInstructions = '';
+                monitoringLastCheckedAt = '';
+            }
+
+            renderMonitoringControls();
+            if (monitoringEnabled) {
+                startMonitoringPolling();
+            }
+        }
+
+        function saveMonitoringState() {
+            localStorage.setItem(MONITORING_STORAGE_KEY, JSON.stringify({
+                enabled: monitoringEnabled,
+                frequency_minutes: monitoringFrequencyMinutes,
+                instructions: monitoringInstructions,
+                last_checked_at: monitoringLastCheckedAt,
+            }));
+        }
+
+        function renderMonitoringControls() {
+            const frequencyInput = document.getElementById('monitoringFrequencyInput');
+            const instructionsInput = document.getElementById('monitoringInstructionsInput');
+            const toggleButton = document.getElementById('monitoringToggleBtn');
+            const statusText = document.getElementById('monitoringStatusText');
+            const lastCheckText = document.getElementById('monitoringLastCheckText');
+
+            if (frequencyInput) {
+                frequencyInput.value = String(monitoringFrequencyMinutes || 15);
+            }
+            if (instructionsInput) {
+                instructionsInput.value = monitoringInstructions || '';
+            }
+            if (toggleButton) {
+                toggleButton.textContent = monitoringEnabled ? 'Stop' : 'Activate';
+                toggleButton.style.background = monitoringEnabled ? '#b54747' : '#2d5f8f';
+                toggleButton.style.borderColor = monitoringEnabled ? '#b54747' : '#2d5f8f';
+            }
+            if (statusText) {
+                statusText.textContent = monitoringEnabled
+                    ? `Active every ${monitoringFrequencyMinutes} min`
+                    : 'Inactive';
+            }
+            if (lastCheckText) {
+                lastCheckText.textContent = monitoringLastCheckedAt
+                    ? `Last check: ${new Date(monitoringLastCheckedAt).toLocaleString()}`
+                    : 'No background checks run yet';
+            }
+        }
+
+        function stopMonitoringPolling() {
+            if (monitoringIntervalId) {
+                clearInterval(monitoringIntervalId);
+                monitoringIntervalId = null;
+            }
+        }
+
+        function startMonitoringPolling() {
+            stopMonitoringPolling();
+            if (!monitoringEnabled) {
+                renderMonitoringControls();
+                saveMonitoringState();
+                return;
+            }
+
+            const frequency = Math.max(1, parseInt(monitoringFrequencyMinutes, 10) || 15);
+            monitoringFrequencyMinutes = frequency;
+            saveMonitoringState();
+            renderMonitoringControls();
+
+            monitoringIntervalId = setInterval(() => {
+                runMonitoringCheck(false);
+            }, frequency * 60 * 1000);
+        }
+
+        async function runMonitoringCheck(announce = true) {
+            if (!monitoringEnabled || monitoringCheckInFlight) {
+                return;
+            }
+
+            monitoringCheckInFlight = true;
+            try {
+                const promptLines = [
+                    'Background update check.',
+                    `Instructions: ${monitoringInstructions || 'Highlight important new updates, blockers, approvals, risks, or follow-ups since the last check.'}`,
+                    'Return a concise update summary that can be posted into chat.',
+                ];
+
+                const response = await fetch(`${API_BASE || ''}/api/chat`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: promptLines.join('\n'),
+                        transport: getSelectedTransport(),
+                    }),
+                });
+
+                const data = await parseJsonSafely(response);
+                if (data.__parseError || !response.ok) {
+                    if (announce) {
+                        addMessage(`Background update check failed: ${data.error || 'Unknown error'}`, 'error');
+                    }
+                    return;
+                }
+
+                monitoringLastCheckedAt = new Date().toISOString();
+                saveMonitoringState();
+                renderMonitoringControls();
+
+                const label = `Background update check · ${new Date(monitoringLastCheckedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                addMessage(data.response || 'Background check returned no content.', 'background', data.citations || [], data.trace || null, { label });
+            } catch (error) {
+                if (announce) {
+                    addMessage(`Background update check failed: ${error.message}`, 'error');
+                }
+            } finally {
+                monitoringCheckInFlight = false;
+            }
+        }
+
+        function setupMonitoringControls() {
+            const frequencyInput = document.getElementById('monitoringFrequencyInput');
+            const instructionsInput = document.getElementById('monitoringInstructionsInput');
+            const toggleButton = document.getElementById('monitoringToggleBtn');
+
+            if (!frequencyInput || !instructionsInput || !toggleButton) {
+                return;
+            }
+
+            if (toggleButton.dataset.bound === 'true') {
+                renderMonitoringControls();
+                return;
+            }
+
+            toggleButton.dataset.bound = 'true';
+
+            frequencyInput.addEventListener('change', () => {
+                const nextFrequency = Math.max(1, parseInt(frequencyInput.value, 10) || 15);
+                monitoringFrequencyMinutes = nextFrequency;
+                saveMonitoringState();
+                if (monitoringEnabled) {
+                    startMonitoringPolling();
+                } else {
+                    renderMonitoringControls();
+                }
+            });
+
+            instructionsInput.addEventListener('input', () => {
+                monitoringInstructions = instructionsInput.value || '';
+                saveMonitoringState();
+            });
+
+            toggleButton.addEventListener('click', async () => {
+                monitoringEnabled = !monitoringEnabled;
+                saveMonitoringState();
+                renderMonitoringControls();
+
+                if (monitoringEnabled) {
+                    startMonitoringPolling();
+                    await runMonitoringCheck(true);
+                } else {
+                    stopMonitoringPolling();
+                }
+            });
+
+            renderMonitoringControls();
+        }
+
+        window.setupMonitoringControls = setupMonitoringControls;
 
         async function loadConnectors() {
+            loadConnectorLocalState();
+
             try {
                 const response = await fetch(`${API_BASE}/api/connectors`);
                 const data = await response.json();
@@ -1870,7 +2578,244 @@
                 renderConnectorsUI();
             } catch (error) {
                 console.error('[CONNECTORS] Error loading connectors:', error);
+                availableConnectors = [];
+                renderConnectorsUI();
             }
+        }
+
+        window.loadConnectors = loadConnectors;
+
+        function renderEntraLoginsUI() {
+            const loginsList = document.getElementById('entraLoginsList');
+            const addLoginBtn = document.getElementById('addEntraLoginBtn');
+            const loginInput = document.getElementById('entraLoginInput');
+            const tenantInput = document.getElementById('entraTenantInput');
+
+            if (!loginsList || !addLoginBtn || !loginInput || !tenantInput) {
+                return;
+            }
+
+            const renderList = () => {
+                if (!extraEntraLogins.length) {
+                    loginsList.innerHTML = '<span style="font-size: 11px; color: #99a1bc;">No additional Entra ID logins added</span>';
+                    return;
+                }
+
+                loginsList.innerHTML = extraEntraLogins
+                    .map((item) => {
+                        const tenantText = item.tenant ? ` (${escapeHtml(item.tenant)})` : '';
+                        return `<span style="display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; color: #3f4e9d; border: 1px solid #d5dcf5; border-radius: 999px; padding: 3px 8px; font-size: 11px;">${escapeHtml(item.login)}${tenantText}<button type="button" data-remove-entra="${escapeHtml(item.id)}" style="border: none; background: transparent; color: #5968a8; cursor: pointer; font-size: 12px; line-height: 1;">x</button></span>`;
+                    })
+                    .join('');
+
+                loginsList.querySelectorAll('[data-remove-entra]').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        extraEntraLogins = extraEntraLogins.filter((entry) => entry.id !== btn.getAttribute('data-remove-entra'));
+                        saveConnectorLocalState();
+                        renderList();
+                    });
+                });
+            };
+
+            addLoginBtn.onclick = () => {
+                const login = (loginInput.value || '').trim();
+                const tenant = (tenantInput.value || '').trim();
+
+                if (!login) {
+                    addMessage('Please provide an Entra ID login.', 'error');
+                    loginInput.focus();
+                    return;
+                }
+
+                const exists = extraEntraLogins.some((entry) => entry.login.toLowerCase() === login.toLowerCase());
+                if (exists) {
+                    addMessage('This Entra ID login is already added.', 'info');
+                    return;
+                }
+
+                extraEntraLogins.push({
+                    id: `entra-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+                    login,
+                    tenant
+                });
+
+                saveConnectorLocalState();
+                renderList();
+                loginInput.value = '';
+                tenantInput.value = '';
+            };
+
+            renderList();
+        }
+
+        function renderCustomApiConnectorsUI() {
+            const list = document.getElementById('customApiConnectorsList');
+            const addBtn = document.getElementById('addApiConnectorBtn');
+            if (!list || !addBtn) {
+                return;
+            }
+
+            const renderList = () => {
+                if (!customApiConnectors.length) {
+                    list.innerHTML = '<div style="font-size: 11px; color: #99a1bc;">No custom API connectors added yet</div>';
+                    return;
+                }
+
+                list.innerHTML = customApiConnectors
+                    .map((connector) => `
+                        <div style="border: 1px solid #d9dfef; border-radius: 6px; background: #fff; padding: 8px;">
+                            <div style="display: flex; justify-content: space-between; gap: 8px;">
+                                <div style="min-width: 0;">
+                                    <div style="font-size: 12px; font-weight: 700; color: #333;">${escapeHtml(connector.connector_name)}</div>
+                                    <div style="font-size: 11px; color: #586187; margin-top: 2px; word-break: break-all;">${escapeHtml(connector.api_endpoint)}</div>
+                                    <div style="font-size: 10px; color: #7a84a9; margin-top: 4px;">${escapeHtml(connector.auth_type)} | credential: ${escapeHtml(connector.credential_ref)}</div>
+                                </div>
+                                <button type="button" data-remove-api-connector="${escapeHtml(connector.id)}" style="height: 22px; border: 1px solid #d8ddf0; border-radius: 4px; background: #f8f9ff; color: #5f6c9b; font-size: 11px; cursor: pointer;">Remove</button>
+                            </div>
+                        </div>
+                    `)
+                    .join('');
+
+                list.querySelectorAll('[data-remove-api-connector]').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        customApiConnectors = customApiConnectors.filter((entry) => entry.id !== btn.getAttribute('data-remove-api-connector'));
+                        saveConnectorLocalState();
+                        renderList();
+                    });
+                });
+            };
+
+            addBtn.onclick = () => {
+                showAddApiConnectorModal(renderList);
+            };
+
+            renderList();
+        }
+
+        function renderPrebuiltConnectorPlaceholdersUI() {
+            const container = document.getElementById('prebuiltConnectorPlaceholders');
+            if (!container) {
+                return;
+            }
+
+            container.innerHTML = prebuiltConnectorPlaceholders
+                .map((item) => `
+                    <div style="border: 1px solid #d9dfef; border-radius: 6px; padding: 8px; background: #fff; display: flex; align-items: center; justify-content: space-between; gap: 7px;">
+                        <div style="display: flex; align-items: center; gap: 7px; min-width: 0;">
+                            <span style="width: 22px; height: 22px; border-radius: 5px; background: #eef2ff; color: #4e5eb4; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;">${item.icon}</span>
+                            <div>
+                                <div style="font-size: 11px; font-weight: 700; color: #3f4c83;">${escapeHtml(item.name)}</div>
+                                <div style="font-size: 10px; color: #99a1bc;">Mock data mode</div>
+                            </div>
+                        </div>
+                        <button type="button" data-prebuilt-activate="${escapeHtml(item.id)}" style="border: 1px solid #cfd8ff; background: #eef3ff; color: #4454a6; border-radius: 4px; padding: 4px 8px; font-size: 10px; font-weight: 700; cursor: pointer;">Activate</button>
+                    </div>
+                `)
+                .join('');
+
+            container.querySelectorAll('[data-prebuilt-activate]').forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                    const connectorId = btn.getAttribute('data-prebuilt-activate');
+                    if (!connectorId) {
+                        return;
+                    }
+                    await activatePrebuiltConnectorMock(connectorId);
+                });
+            });
+        }
+
+        async function activatePrebuiltConnectorMock(connectorId) {
+            const output = document.getElementById('prebuiltConnectorMockData');
+            if (output) {
+                output.innerHTML = '<span style="color:#7884af;">Loading mock data...</span>';
+            }
+
+            try {
+                const response = await fetch(`${API_BASE || ''}/api/connectors/mock-data/${encodeURIComponent(connectorId)}`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                const data = await parseJsonSafely(response);
+
+                if (data.__parseError || !response.ok || !data.success) {
+                    if (output) {
+                        output.innerHTML = `<span style="color:#b54d4d;">Failed to load test data: ${escapeHtml(data.error || 'unknown error')}</span>`;
+                    }
+                    addMessage(`Failed to activate mock connector ${connectorId}.`, 'error');
+                    return;
+                }
+
+                const records = Array.isArray(data.records) ? data.records : [];
+                const preview = records.slice(0, 3);
+
+                if (output) {
+                    output.innerHTML = `
+                        <div style="font-size:11px;font-weight:700;color:#344486;margin-bottom:6px;">${escapeHtml(data.connector_name || connectorId)} test data (${records.length})</div>
+                        ${preview.map((item) => `<pre style="margin:0 0 6px 0;padding:6px;border:1px solid #e5e9f7;border-radius:4px;background:#f8faff;max-height:120px;overflow:auto;white-space:pre-wrap;word-break:break-word;">${escapeHtml(JSON.stringify(item, null, 2))}</pre>`).join('')}
+                        ${records.length > preview.length ? `<div style="font-size:10px;color:#7c86aa;">Showing ${preview.length} of ${records.length} records</div>` : ''}
+                    `;
+                }
+
+                addMessage(`Loaded test data for ${data.connector_name || connectorId}.`, 'info');
+            } catch (error) {
+                if (output) {
+                    output.innerHTML = `<span style="color:#b54d4d;">Failed to load test data: ${escapeHtml(error.message)}</span>`;
+                }
+                addMessage(`Failed to activate mock connector ${connectorId}: ${error.message}`, 'error');
+            }
+        }
+
+        function showAddApiConnectorModal(onAdded) {
+            const modal = document.getElementById('addApiConnectorModal');
+            const form = document.getElementById('addApiConnectorForm');
+            const closeBtn = document.getElementById('apiConnectorModalCloseBtn');
+            const cancelBtn = document.getElementById('apiConnectorModalCancelBtn');
+
+            if (!modal || !form || !closeBtn || !cancelBtn) {
+                return;
+            }
+
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+
+                const connectorName = (formData.get('connector_name') || '').toString().trim();
+                const apiEndpoint = (formData.get('api_endpoint') || '').toString().trim();
+                const authType = (formData.get('auth_type') || '').toString().trim();
+                const credentialRef = (formData.get('credential_ref') || '').toString().trim();
+                const credentialSecret = (formData.get('credential_secret') || '').toString();
+
+                if (!connectorName || !apiEndpoint || !authType || !credentialRef || !credentialSecret) {
+                    addMessage('Please fill all required API connector fields.', 'error');
+                    return;
+                }
+
+                customApiConnectors.push({
+                    id: `api-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+                    connector_name: connectorName,
+                    api_endpoint: apiEndpoint,
+                    auth_type: authType,
+                    credential_ref: credentialRef,
+                    has_secret: true,
+                    created_at: new Date().toISOString()
+                });
+
+                saveConnectorLocalState();
+                modal.style.display = 'none';
+                form.reset();
+                if (typeof onAdded === 'function') {
+                    onAdded();
+                }
+                addMessage(`API connector "${connectorName}" added.`, 'info');
+            };
+
+            closeBtn.onclick = () => { modal.style.display = 'none'; };
+            cancelBtn.onclick = () => { modal.style.display = 'none'; };
         }
 
         function renderConnectorsUI() {
@@ -1880,12 +2825,16 @@
             const connectorSelector = document.getElementById('connectorSelector');
 
             if (!connectorsLoading || !connectorsList || !connectorsContainer || !connectorSelector) {
-                console.warn('[CONNECTORS UI] Elements not found in DOM');
                 return;
             }
 
             connectorsLoading.style.display = 'none';
             connectorsList.style.display = 'block';
+
+            renderEntraLoginsUI();
+            renderCustomApiConnectorsUI();
+            renderPrebuiltConnectorPlaceholdersUI();
+            setupMonitoringControls();
 
             // Populate selector dropdown
             const options = availableConnectors.map((c) => 

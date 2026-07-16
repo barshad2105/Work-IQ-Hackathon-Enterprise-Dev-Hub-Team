@@ -1,0 +1,29 @@
+{
+  "connector_name": "Google Drive",
+  "records": [
+    {
+      "id": "gd-001",
+      "type": "file",
+      "name": "Q3_Planning_Deck.pptx",
+      "owner": "alex@contoso.com",
+      "last_modified": "2026-07-15T09:42:00Z",
+      "summary": "Quarterly roadmap and budget assumptions"
+    },
+    {
+      "id": "gd-002",
+      "type": "folder",
+      "name": "Customer_Onboarding",
+      "owner": "ops@contoso.com",
+      "last_modified": "2026-07-14T15:10:00Z",
+      "item_count": 37
+    },
+    {
+      "id": "gd-003",
+      "type": "file",
+      "name": "Risk_Register.xlsx",
+      "owner": "pm@contoso.com",
+      "last_modified": "2026-07-16T05:25:00Z",
+      "summary": "Top project risks and mitigation owners"
+    }
+  ]
+}

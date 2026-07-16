@@ -1,0 +1,31 @@
+{
+  "connector_name": "Facebook",
+  "records": [
+    {
+      "id": "fb-001",
+      "type": "post",
+      "page": "WorkIQ Updates",
+      "date": "2026-07-15T20:00:00Z",
+      "engagement": {
+        "likes": 184,
+        "comments": 26,
+        "shares": 11
+      },
+      "summary": "Release notes for monitoring improvements"
+    },
+    {
+      "id": "fb-002",
+      "type": "comment",
+      "author": "Contoso Manufacturing",
+      "date": "2026-07-16T02:40:00Z",
+      "summary": "Can you publish a short setup guide for proactive checks?"
+    },
+    {
+      "id": "fb-003",
+      "type": "message",
+      "sender": "Meridian Team",
+      "date": "2026-07-16T04:05:00Z",
+      "summary": "Requesting support for social connector rollout"
+    }
+  ]
+}

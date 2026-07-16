@@ -640,6 +640,20 @@ def flyout_panel():
     return send_file(panel_path, mimetype='text/html')
 
 
+@app.route("/settings-panel", methods=["GET"])
+def settings_panel():
+    """Serve the settings tab content (loaded dynamically)."""
+    panel_path = os.path.join(os.path.dirname(__file__), 'templates', 'settings-panel.html')
+    return send_file(panel_path, mimetype='text/html')
+
+
+@app.route("/dashboard-panel", methods=["GET"])
+def dashboard_panel():
+    """Serve the dashboard tab content (loaded dynamically)."""
+    panel_path = os.path.join(os.path.dirname(__file__), 'templates', 'dashboard-panel.html')
+    return send_file(panel_path, mimetype='text/html')
+
+
 @app.route("/api/personas", methods=["GET", "OPTIONS"])
 def get_personas():
     """Return available simulator personas and the active selection."""
@@ -921,6 +935,44 @@ def status():
 
 
 # ===== Data Connector Endpoints =====
+
+MOCK_CONNECTOR_FILES = {
+    "google_drive": "google_drive.json",
+    "linkedin": "linkedin.json",
+    "whatsapp": "whatsapp.json",
+    "facebook": "facebook.json",
+    "instagram": "instagram.json",
+}
+
+
+@app.route("/api/connectors/mock-data/<connector_id>", methods=["GET", "OPTIONS"])
+def connector_mock_data(connector_id: str):
+    """Return connector test data from local JSON fixtures for demo-mode activations."""
+    try:
+        if request.method == "OPTIONS":
+            return ("", 204)
+
+        fixture_name = MOCK_CONNECTOR_FILES.get((connector_id or "").strip().lower())
+        if not fixture_name:
+            return jsonify({"success": False, "error": f"No mock data configured for connector: {connector_id}"}), 404
+
+        fixture_path = Path(__file__).resolve().parent / "simulator" / "mock_connectors" / fixture_name
+        if not fixture_path.exists():
+            return jsonify({"success": False, "error": f"Mock data file missing: {fixture_name}"}), 404
+
+        with open(fixture_path, "r", encoding="utf-8") as fh:
+            payload = json.load(fh)
+
+        return jsonify({
+            "success": True,
+            "connector_id": connector_id,
+            "connector_name": payload.get("connector_name", connector_id),
+            "records": payload.get("records", []),
+            "generated_at": datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 @app.route("/api/connectors", methods=["GET", "OPTIONS"])
 def list_connectors():
@@ -1481,14 +1533,89 @@ def _generate_progress_tracking(sc_name: str) -> dict:
     }
 
 
-def _generate_interactive_dashboard(sc_name: str) -> dict:
+def _parse_dashboard_date(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            return datetime.fromisoformat(f"{value}T00:00:00+00:00")
+        except ValueError:
+            return None
+
+
+def _record_date(record: dict) -> datetime | None:
+    for field in ("date", "created_at", "updated_at", "timestamp", "sent_at", "modified"):
+        value = record.get(field)
+        if isinstance(value, str):
+            parsed = _parse_dashboard_date(value)
+            if parsed:
+                return parsed
+    return None
+
+
+def _count_source_records(records: list[dict], start_dt: datetime | None, end_dt: datetime | None) -> tuple[int, str]:
+    if not records:
+        return 0, "No recent date"
+
+    filtered_dates: list[datetime] = []
+    for record in records:
+        record_dt = _record_date(record)
+        if record_dt is None:
+            continue
+        if start_dt and record_dt < start_dt:
+            continue
+        if end_dt and record_dt > end_dt:
+            continue
+        filtered_dates.append(record_dt)
+
+    if start_dt or end_dt:
+        count = len(filtered_dates)
+        latest = max(filtered_dates).isoformat().replace("+00:00", "Z") if filtered_dates else "No recent date"
+        return count, latest
+
+    dated_records = [dt for dt in (_record_date(record) for record in records) if dt is not None]
+    latest = max(dated_records).isoformat().replace("+00:00", "Z") if dated_records else "No recent date"
+    return len(records), latest
+
+
+def _generate_interactive_dashboard(sc_name: str, start_date: str | None = None, end_date: str | None = None) -> dict:
+    start_dt = _parse_dashboard_date(start_date) if start_date else None
+    end_dt = _parse_dashboard_date(end_date) if end_date else None
+    if end_dt is not None:
+        end_dt = end_dt.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+    source_counts: list[dict] = []
+    if sim_scenario:
+        source_specs = [
+            ("emails", "Emails", sim_scenario.emails),
+            ("meetings", "Meetings", sim_scenario.meetings),
+            ("teams_messages", "Teams Messages", sim_scenario.teams_messages),
+            ("files", "Files", sim_scenario.files),
+            ("onenote_pages", "OneNote Pages", sim_scenario.onenote_pages),
+        ]
+        for kind, label, records in source_specs:
+            count, latest = _count_source_records(records, start_dt, end_dt)
+            source_counts.append({"kind": kind, "label": label, "count": count, "last_updated": latest})
+        source_counts.append({"kind": "tables", "label": "Tables", "count": len(sim_scenario.tables), "last_updated": "Recent"})
+    else:
+        source_counts = [
+            {"kind": "emails", "label": "Emails", "count": 0, "last_updated": "No recent date"},
+            {"kind": "meetings", "label": "Meetings", "count": 0, "last_updated": "No recent date"},
+            {"kind": "teams_messages", "label": "Teams Messages", "count": 0, "last_updated": "No recent date"},
+            {"kind": "files", "label": "Files", "count": 0, "last_updated": "No recent date"},
+            {"kind": "onenote_pages", "label": "OneNote Pages", "count": 0, "last_updated": "No recent date"},
+            {"kind": "tables", "label": "Tables", "count": 0, "last_updated": "No recent date"},
+        ]
+
     kpis = [
-        {"label": "Overall Progress", "value": "72%", "target": "80%", "status": "warning"},
-        {"label": "Critical Issues", "value": "0", "target": "0", "status": "success"},
-        {"label": "Team Alignment", "value": "85%", "target": ">80%", "status": "success"},
+        {"label": "Available Sources", "value": str(len(source_counts)), "target": "6", "status": "success"},
+        {"label": "Total Records", "value": str(sum(item["count"] for item in source_counts)), "target": "all", "status": "success"},
+        {"label": "Health", "value": "On Track", "target": "On Track", "status": "success"},
     ]
-    blockers = [{"title": "Generic blocker", "severity": "medium", "owner": "Team Lead", "age_days": 1}]
-    actions = [{"action": "Review metrics", "owner": "Manager", "due": "2026-07-10", "priority": "medium"}]
+    blockers = [{"title": "No active blockers", "severity": "low", "owner": "System", "age_days": 0}]
+    actions = [{"action": "Review source mix", "owner": "Admin", "due": "2026-07-10", "priority": "medium"}]
     return {
         "success": True,
         "scenario": sc_name,
@@ -1497,11 +1624,13 @@ def _generate_interactive_dashboard(sc_name: str) -> dict:
         "health_color": "green",
         "kpis": kpis,
         "kpi_summary": {"total": len(kpis), "critical": 0, "warning": 1, "success": 2},
+        "source_matrix": source_counts,
         "top_blockers": blockers,
         "blocker_count": len(blockers),
         "top_actions": actions,
         "action_count": len(actions),
         "critical_action_count": 0,
+        "date_range": {"start_date": start_date or "", "end_date": end_date or ""},
         "timestamp": datetime.utcnow().isoformat() + "Z",
     }
 
@@ -1871,7 +2000,10 @@ def interactive_dashboard():
         if not _can_access_feature("interactive_dashboard", active_persona):
             return jsonify({"success": False, "error": "Access restricted for your role"}), 403
 
-        dashboard = _generate_interactive_dashboard(_scenario_name(sim_scenario))
+        payload = request.get_json(silent=True) or {}
+        start_date = str(payload.get("start_date", "") or "")
+        end_date = str(payload.get("end_date", "") or "")
+        dashboard = _generate_interactive_dashboard(_scenario_name(sim_scenario), start_date=start_date, end_date=end_date)
 
         return jsonify({
             "success": True,

@@ -1,0 +1,27 @@
+{
+  "connector_name": "LinkedIn",
+  "records": [
+    {
+      "id": "li-001",
+      "type": "message",
+      "from": "Priya Raman",
+      "subject": "Partnership follow-up",
+      "date": "2026-07-15T18:20:00Z",
+      "snippet": "Can we align on the integration timeline this week?"
+    },
+    {
+      "id": "li-002",
+      "type": "mention",
+      "author": "NorthBridge Health",
+      "date": "2026-07-16T03:11:00Z",
+      "snippet": "Thanks @WorkIQ team for the architecture walkthrough"
+    },
+    {
+      "id": "li-003",
+      "type": "comment",
+      "author": "Dana Whitfield",
+      "date": "2026-07-16T04:30:00Z",
+      "snippet": "Shared the case study with our PMO leaders"
+    }
+  ]
+}

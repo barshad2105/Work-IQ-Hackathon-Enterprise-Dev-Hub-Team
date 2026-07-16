@@ -34,6 +34,15 @@ workiq-hackathon/
 |---|---|
 | `challenge-pack/WorkIQ-Hackathon-Challenge-Pack_14-JUN-2026.pdf` | The 6 challenges, judging criteria, capability tiers. **Read first.** |
 
+## UI Requirement Notes
+
+- Option flyout blocks must support per-block hide using a small icon in each block header.
+- Hidden blocks must appear in a compact restore strip at the bottom of the flyout.
+- Users must be able to unhide any previously hidden block from that bottom strip.
+- Data Connectors block must support adding multiple Entra ID logins for multi-domain Work IQ access.
+- Data Connectors block must support adding multiple API connectors using API endpoint and credential inputs.
+- Data Connectors block must include pre-built connector placeholders (icon-only style), including GCP and Social Media (LinkedIn).
+
 > **Setup Guide:** the participant setup guide for **real** Work IQ (Path B) is **not
 > included in this repo** — request it from the hackathon organizers.
 

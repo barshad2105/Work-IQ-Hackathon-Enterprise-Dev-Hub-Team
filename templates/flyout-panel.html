@@ -10,95 +10,6 @@
         </div>
     </div>
 </details>
-
-<details class="panel-card" open>
-    <summary>🔌 DATA CONNECTORS</summary>
-    <div class="panel-content">
-        <div id="connectorsLoading" style="text-align: center; color: #999; font-size: 12px; padding: 12px;">
-            Loading connectors...
-        </div>
-        <div id="connectorsList" style="display: none;">
-            <!-- Connector Selector -->
-            <div style="margin-bottom: 14px;">
-                <label style="font-size: 11px; font-weight: 600; color: #333; display: block; margin-bottom: 6px;">Select Connector</label>
-                <select id="connectorSelector" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; background: white; cursor: pointer;">
-                    <option value="">-- Choose a connector --</option>
-                </select>
-            </div>
-
-            <!-- Selected Connector Details -->
-            <div id="selectedConnectorDetails" style="display: none; margin-bottom: 12px; padding: 10px; background: #f5f5f5; border-radius: 4px; border-left: 3px solid #4a58c6;">
-                <div id="connectorDetailContent"></div>
-            </div>
-
-            <!-- All Connectors List -->
-            <div style="margin-bottom: 12px;">
-                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 8px;">Available Connectors</div>
-                <div id="connectorsContainer" style="max-height: 250px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 4px; background: #fafafa;">
-                    <div style="text-align: center; color: #999; font-size: 12px; padding: 16px;">Loading...</div>
-                </div>
-            </div>
-
-            <!-- Create Custom Connector -->
-            <button type="button" id="createCustomConnectorBtn" style="width: 100%; padding: 10px; background: #f0f0f0; border: 1px dashed #2196F3; border-radius: 4px; color: #2196F3; font-weight: 600; font-size: 12px; cursor: pointer; transition: background 0.2s;">
-                ➕ Create Custom Connector
-            </button>
-        </div>
-
-        <!-- Connector Authentication Modal -->
-        <div id="connectorAuthModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 8px; padding: 20px; max-width: 400px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <h3 id="authModalTitle" style="margin: 0; font-size: 16px; font-weight: 600;">Configure Connector</h3>
-                    <button type="button" id="authModalCloseBtn" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
-                </div>
-                <form id="connectorAuthForm" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div id="authFormFields"></div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <button type="submit" class="filter-btn-sm" style="flex: 1; background: #4a58c6; color: white; border-color: #4a58c6;">Authenticate</button>
-                        <button type="button" id="authModalCancelBtn" class="filter-btn-sm" style="flex: 1; background: #f0f0f0; color: #555; border-color: #ddd;">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Create Custom Connector Modal -->
-        <div id="createCustomConnectorModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 8px; padding: 20px; max-width: 450px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Create Custom Connector</h3>
-                    <button type="button" id="createCustomModalCloseBtn" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
-                </div>
-                <form id="createCustomConnectorForm" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div style="display: flex; flex-direction: column; gap: 4px;">
-                        <label style="font-size: 12px; font-weight: 500; color: #333;">Connector Name *</label>
-                        <input type="text" name="connector_name" placeholder="e.g., Salesforce CRM" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" required>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 4px;">
-                        <label style="font-size: 12px; font-weight: 500; color: #333;">API Base URL *</label>
-                        <input type="url" name="api_url" placeholder="e.g., https://api.example.com" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" required>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 4px;">
-                        <label style="font-size: 12px; font-weight: 500; color: #333;">Authentication Type *</label>
-                        <select name="auth_type" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" required>
-                            <option value="">-- Select type --</option>
-                            <option value="api_key">API Key</option>
-                            <option value="bearer_token">Bearer Token</option>
-                            <option value="oauth2">OAuth 2.0</option>
-                            <option value="basic_auth">Basic Auth</option>
-                        </select>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 4px;">
-                        <label style="font-size: 12px; font-weight: 500; color: #333;">Description</label>
-                        <textarea name="description" placeholder="What does this connector do?" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; min-height: 60px; resize: vertical;"></textarea>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 12px;">
-                        <button type="submit" class="filter-btn-sm" style="flex: 1; background: #4CAF50; color: white; border-color: #4CAF50;">Create Connector</button>
-                        <button type="button" id="createCustomModalCancelBtn" class="filter-btn-sm" style="flex: 1; background: #f0f0f0; color: #555; border-color: #ddd;">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 </details>
 
@@ -398,3 +309,10 @@
         </div>
     </div>
 </details>
+
+<div id="hiddenPanelsDock" class="hidden-panels-dock">
+    <div class="hidden-panels-label">Hidden blocks (tap to restore)</div>
+    <div id="hiddenPanelsList" class="hidden-panels-list">
+        <span class="hidden-panels-empty">No hidden blocks</span>
+    </div>
+</div>
