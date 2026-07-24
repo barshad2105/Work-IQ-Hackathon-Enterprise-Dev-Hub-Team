@@ -72,6 +72,7 @@ def ask_work_iq(question: str, fileUrls: list[str] | None = None) -> str:
     This mirrors the real Work IQ `ask_work_iq` contract exactly so the simulator is a
     drop-in backend; `fileUrls` is accepted for contract parity (unused in the sim).
     """
+    print(f"[MCP-TOOL] ask_work_iq called | question: {question[:100]}", file=sys.stderr)
     result = engine.ask(SCENARIO, question, persona_id=PERSONA)
     payload = {
         "response": result["response"],
@@ -85,6 +86,7 @@ def ask_work_iq(question: str, fileUrls: list[str] | None = None) -> str:
 def fetch(table: str, filter: dict[str, Any] | None = None) -> str:
     """Read rows from a Work IQ Tools-backed table (e.g. the Dataverse milestone
     tracker). Optionally filter by exact field match. Returns JSON list of rows."""
+    print(f"[MCP-TOOL] fetch called | table: {table} | filter: {filter}", file=sys.stderr)
     try:
         rows = engine.fetch(SCENARIO, table, filter)
     except ValueError as e:
@@ -98,10 +100,12 @@ def create_entity(table: str, record: dict[str, Any]) -> str:
     item in the Dataverse milestone tracker. Idempotent: re-creating the same logical
     row (same id, or same milestone+owner) returns the existing row instead of
     duplicating. Returns JSON describing whether a row was created."""
+    print(f"[MCP-TOOL] create_entity called | table: {table} | record: {record}", file=sys.stderr)
     try:
-        res = engine.create_entity(SCENARIO, table, record, persist=False)
+        res = engine.create_entity(SCENARIO, table, record, persist=True)
     except ValueError as e:
         return _table_error(e)
+    print(f"[MCP-TOOL] create_entity result: {res}", file=sys.stderr)
     return json.dumps(res, indent=2)
 
 
@@ -109,10 +113,12 @@ def create_entity(table: str, record: dict[str, Any]) -> str:
 def update_entity(table: str, id: str, patch: dict[str, Any]) -> str:
     """Patch fields on an existing row (by id) in a Work IQ Tools-backed table — e.g.
     move a milestone date or change a status. Returns JSON describing the update."""
+    print(f"[MCP-TOOL] update_entity called | table: {table} | id: {id} | patch: {patch}", file=sys.stderr)
     try:
-        res = engine.update_entity(SCENARIO, table, id, patch, persist=False)
+        res = engine.update_entity(SCENARIO, table, id, patch, persist=True)
     except ValueError as e:
         return _table_error(e)
+    print(f"[MCP-TOOL] update_entity result: {res}", file=sys.stderr)
     return json.dumps(res, indent=2)
 
 
